@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'FLCharts'
   s.version          = '1.0.0'
-  s.summary          = 'A short description of FLCharts.'
+  s.summary          = 'Customizable iOS Charts built in Swift.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,10 +18,11 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  Easy to use and highly customizable charts for iOS. Use your own bar view.
+                        DESC
 
   s.homepage         = 'https://github.com/francescoleoni98/FLCharts'
+  s.swift_versions   = '5.0'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'francescoleoni98' => 'leoni.francesco98@gmail.it' }

@@ -31,7 +31,7 @@ pod 'FLCharts'
  - Fully customizable (bar colors, axes color, background, average value, dashed lines, ...)
 
 
-## Docs
+## Docs
 
 You can build FLCharts documentation directly in XCode.
 In XCode go to `Product -> Build Documentation`, once XCode has finished building, the documentation will appear.
