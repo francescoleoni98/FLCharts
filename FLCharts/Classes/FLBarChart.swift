@@ -23,6 +23,10 @@ import UIKit
 //            childView.view.heightAnchor.constraint(equalToConstant: 150)
 //        ])
 
+
+// Legenda
+// Predefined cart styles
+
 /// A bar chart that displays one or more bars.
 /// It takes a ``BaseChartBar`` in the initializer that allows to provide a custom bar cell.
 public class FLBarChart: UIView {    
