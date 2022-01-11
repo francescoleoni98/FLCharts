@@ -39,14 +39,14 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
 ## Examples
 
- - **Bar Chart**
  ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/base_chart.jpg)
+ - **Bar Chart**
 
- - **Multivalue Bar Chart**
  ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/multiple_value_chart.jpg)
+ - **Multivalue Bar Chart**
 
- - **Highlighted Bar**
  ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
+ - **Highlighted Bar**
 
 ## Author
 
