@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '11.0'
+
+target 'FLCharts_Example' do
+  pod 'FLCharts', :path => '../'
+
+  target 'FLCharts_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

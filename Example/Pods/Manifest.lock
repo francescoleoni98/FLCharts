@@ -1,0 +1,16 @@
+PODS:
+  - FLCharts (1.0.0)
+
+DEPENDENCIES:
+  - FLCharts (from `../`)
+
+EXTERNAL SOURCES:
+  FLCharts:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FLCharts: 4aed26cc0b8ed7c2d419de6589e7d069573b23f9
+
+PODFILE CHECKSUM: 3f19723b47edded14770f9cd429c4ca10c789891
+
+COCOAPODS: 1.11.2
