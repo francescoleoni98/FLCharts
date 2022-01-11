@@ -5,13 +5,11 @@
 [![License](https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts)
 [![Platform](https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
 * Xcode 11 / Swift 5
 * iOS >= 11.0
+
 
 ## Installation
 
@@ -20,6 +18,7 @@ FLCharts is available through [CocoaPods](https://cocoapods.org). To install it,
 ```ruby
 pod 'FLCharts'
 ```
+
 
 ## Features
 
@@ -31,14 +30,23 @@ pod 'FLCharts'
  - Limit lines (providing additional information, maximums, ...)
  - Fully customizable (bar colors, axes color, background, average value, dashed lines, ...)
 
-## Documentation
+
+## Docs
 
 You can build FLCharts documentation directly in XCode.
 In XCode go to `Product -> Build Documentation`, once XCode has finished building, the documentation will appear.
 
+
 ## Examples
 
  - **Bar Chart**
+ ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/base_chart.jpg)
+
+ - **Multivalue Bar Chart**
+ ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/multiple_value_chart.jpg)
+
+ - **Highlighted Bar**
+ ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
 
 ## Author
 
