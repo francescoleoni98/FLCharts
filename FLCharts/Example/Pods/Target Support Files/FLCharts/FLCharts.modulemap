@@ -1,0 +1,6 @@
+framework module FLCharts {
+  umbrella header "FLCharts-umbrella.h"
+
+  export *
+  module * { export * }
+}

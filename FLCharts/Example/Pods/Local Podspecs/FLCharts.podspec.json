@@ -1,0 +1,22 @@
+{
+  "name": "FLCharts",
+  "version": "0.1.0",
+  "summary": "A short description of FLCharts.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/francescoleoni98/FLCharts",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "francescoleoni98": "francesco.leoni@abenergie.it"
+  },
+  "source": {
+    "git": "https://github.com/francescoleoni98/FLCharts.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "FLCharts/Classes/**/*"
+}
