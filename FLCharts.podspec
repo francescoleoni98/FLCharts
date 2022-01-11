@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FLCharts'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Customizable iOS Charts built in Swift.'
 
 # This description is used to generate tags and improve search results.
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/francescoleoni98/FLCharts'
   s.swift_versions   = '5.0'
-s.screenshots     = 'https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/base_chart.jpg', 'https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/multiple_value_chart.jpg', 'https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg'
+s.screenshots     = 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/base_chart.jpg', 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/highlightedview_chart.jpg', 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/multiple_value_chart.jpg'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'francescoleoni98' => 'leoni.francesco98@gmail.it' }
   s.source           = { :git => 'https://github.com/francescoleoni98/FLCharts.git', :tag => s.version.to_s }
