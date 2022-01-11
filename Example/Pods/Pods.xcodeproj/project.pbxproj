@@ -7,26 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B081ED8B528CF55942C3573B4E3933C /* FLBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CD6C6DDCE83118C412D8EC2F6807A /* FLBarChart.swift */; };
-		5E1D8269ADE8A60A91170ECCF1E18C55 /* ChartConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73156DDDAB612B11B5EF26ACE59B3CF4 /* ChartConfig.swift */; };
-		67FC6B5477CF24826FE2C0CBFCF9AA95 /* HighlightingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31966602613B8E0C955FCBB86713BAA /* HighlightingCollectionView.swift */; };
 		71202B06CF789C8A66014DCB3D52392E /* Pods-FLCharts_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 05D1BFDE31F6CF2362E88552E7FC532F /* Pods-FLCharts_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		80107E5CF36E247AAF584C1B6910BA83 /* Pods-FLCharts_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F48296A3168569D0471555FDDA58E9 /* Pods-FLCharts_Tests-dummy.m */; };
-		8765ACF80B23B41FEFE03955E060334B /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091022FE0449FB89DD449677FBEA96C /* ChartData.swift */; };
 		8EA8C2AC826A25A4585A071CDEA525A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		9112B29B4260161CD8BC3BF0F08B1FAE /* BarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0D0175C9FCEB76AA49E82B0BA7D2F0 /* BarData.swift */; };
-		A3D3C93B96D152328DEE04C88E30CCB8 /* UnclippedTopCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F236E669C74A96F0994980F4716E52E /* UnclippedTopCollectionView.swift */; };
+		A5805E5C278DFCBD00ED3C7E /* ChartConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E4D278DFCBD00ED3C7E /* ChartConfig.swift */; };
+		A5805E5D278DFCBD00ED3C7E /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E4E278DFCBD00ED3C7E /* ChartData.swift */; };
+		A5805E5E278DFCBD00ED3C7E /* BarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E4F278DFCBD00ED3C7E /* BarData.swift */; };
+		A5805E5F278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E50278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift */; };
+		A5805E60278DFCBD00ED3C7E /* BarHighlightedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */; };
+		A5805E61278DFCBD00ED3C7E /* HighlightedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E53278DFCBD00ED3C7E /* HighlightedView.swift */; };
+		A5805E62278DFCBD00ED3C7E /* HighlightingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */; };
+		A5805E63278DFCBD00ED3C7E /* BaseChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E56278DFCBD00ED3C7E /* BaseChartBar.swift */; };
+		A5805E64278DFCBD00ED3C7E /* MultipleValuesChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E57278DFCBD00ED3C7E /* MultipleValuesChartBar.swift */; };
+		A5805E65278DFCBD00ED3C7E /* FLBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E58278DFCBD00ED3C7E /* FLBarChart.swift */; };
+		A5805E66278DFCBD00ED3C7E /* Chart+XT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */; };
+		A5805E67278DFCBD00ED3C7E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E5B278DFCBD00ED3C7E /* Formatters.swift */; };
 		A5B79F895FCB88A37A2E9AC837FB9A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1A278DC390BB724D53D8FF8B17E925 /* FLCharts-dummy.m */; };
-		B23D3BA57335F81C9B887D6BADC44B88 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2330FF7C4AA4179DE8DFC40D873489 /* Formatters.swift */; };
 		B2F7F8F64B2D87913925912CFEA0D003 /* Pods-FLCharts_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E00B9E4618E9179FF87D0DA4351441 /* Pods-FLCharts_Example-dummy.m */; };
-		B91A97776B87295C1114A4CA47746B86 /* BarHighlightedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9638061F586B41FDB720C3159C5600 /* BarHighlightedView.swift */; };
 		D80529A00D3407A2D3297719DA7463C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		D988CA3C46281A9B73678EA06C776D36 /* HighlightedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD798CBC867CB80DFA57B67565D8FD77 /* HighlightedView.swift */; };
 		DCAB4066E7083C08E6E193FA53AE4054 /* Pods-FLCharts_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A6FA6E3D5FF72E271062D3BE25C2A2B /* Pods-FLCharts_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E8E9EAD2C8C671D0E339020585AAF92A /* MultipleValuesChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854EBED10E7636E084EA756711EAABFD /* MultipleValuesChartBar.swift */; };
-		EB987DC59195E0C7959AD4BFE95294CE /* Chart+XT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EAA18965824383572AE6E84E8CB59C /* Chart+XT.swift */; };
-		EDA65292637AD2E7F3D3CB730319174A /* BaseChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420BA234494F117BA95259E235B8FD7A /* BaseChartBar.swift */; };
 		FC10E7A817F669FB7557571C0FC561E1 /* FLCharts-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 71A81DA3FFC7FBDCD1A1AFC23F01E2C2 /* FLCharts-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -53,43 +53,43 @@
 		0940B406B3369774AC41C3387FD56340 /* Pods-FLCharts_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		11C1F65F1947293DCFB7CF10BFAD6069 /* Pods-FLCharts_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FLCharts_Tests.modulemap"; sourceTree = "<group>"; };
 		18F48296A3168569D0471555FDDA58E9 /* Pods-FLCharts_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FLCharts_Tests-dummy.m"; sourceTree = "<group>"; };
-		1C5CD6C6DDCE83118C412D8EC2F6807A /* FLBarChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FLBarChart.swift; path = FLCharts/Classes/FLBarChart.swift; sourceTree = "<group>"; };
-		1F236E669C74A96F0994980F4716E52E /* UnclippedTopCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnclippedTopCollectionView.swift; path = FLCharts/Classes/UnclippedTopCollectionView.swift; sourceTree = "<group>"; };
-		29EA9702BE7D13CDB53A19BF6A288614 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		29EA9702BE7D13CDB53A19BF6A288614 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3A6FA6E3D5FF72E271062D3BE25C2A2B /* Pods-FLCharts_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FLCharts_Tests-umbrella.h"; sourceTree = "<group>"; };
-		40A80D4ED52713538F97BD5413337F42 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		420BA234494F117BA95259E235B8FD7A /* BaseChartBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseChartBar.swift; sourceTree = "<group>"; };
+		40A80D4ED52713538F97BD5413337F42 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		57297937CB72D3AA11DA9F640AD2C8C5 /* FLCharts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FLCharts.release.xcconfig; sourceTree = "<group>"; };
 		57AF735E1CED9909786D136B27C4A06D /* FLCharts.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FLCharts.modulemap; sourceTree = "<group>"; };
 		60180AE3CA3DECCB7468AF3D3287F3DC /* Pods-FLCharts_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FLCharts_Example.modulemap"; sourceTree = "<group>"; };
 		60E00B9E4618E9179FF87D0DA4351441 /* Pods-FLCharts_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FLCharts_Example-dummy.m"; sourceTree = "<group>"; };
-		6E0D0175C9FCEB76AA49E82B0BA7D2F0 /* BarData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BarData.swift; sourceTree = "<group>"; };
 		71A81DA3FFC7FBDCD1A1AFC23F01E2C2 /* FLCharts-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FLCharts-umbrella.h"; sourceTree = "<group>"; };
 		72193022CA02A9B417CB4FC2E4407207 /* Pods-FLCharts_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FLCharts_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		73156DDDAB612B11B5EF26ACE59B3CF4 /* ChartConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChartConfig.swift; sourceTree = "<group>"; };
-		854EBED10E7636E084EA756711EAABFD /* MultipleValuesChartBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MultipleValuesChartBar.swift; sourceTree = "<group>"; };
 		88C0F3A25F50F5356A04B375329948AE /* Pods-FLCharts_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FLCharts_Example.release.xcconfig"; sourceTree = "<group>"; };
 		94AAA43DBC7EAED487B465BE51A33A3C /* Pods-FLCharts_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Tests-Info.plist"; sourceTree = "<group>"; };
 		9527E68E94E9B200DBFB0B2C30D08AB4 /* Pods-FLCharts_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FLCharts_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A5805E4D278DFCBD00ED3C7E /* ChartConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartConfig.swift; sourceTree = "<group>"; };
+		A5805E4E278DFCBD00ED3C7E /* ChartData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
+		A5805E4F278DFCBD00ED3C7E /* BarData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarData.swift; sourceTree = "<group>"; };
+		A5805E50278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnclippedTopCollectionView.swift; sourceTree = "<group>"; };
+		A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarHighlightedView.swift; sourceTree = "<group>"; };
+		A5805E53278DFCBD00ED3C7E /* HighlightedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightedView.swift; sourceTree = "<group>"; };
+		A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightingCollectionView.swift; sourceTree = "<group>"; };
+		A5805E56278DFCBD00ED3C7E /* BaseChartBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChartBar.swift; sourceTree = "<group>"; };
+		A5805E57278DFCBD00ED3C7E /* MultipleValuesChartBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleValuesChartBar.swift; sourceTree = "<group>"; };
+		A5805E58278DFCBD00ED3C7E /* FLBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLBarChart.swift; sourceTree = "<group>"; };
+		A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chart+XT.swift"; sourceTree = "<group>"; };
+		A5805E5B278DFCBD00ED3C7E /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		AB1EF2F93402FE5DBE1AECA32835C9B4 /* FLCharts-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FLCharts-Info.plist"; sourceTree = "<group>"; };
-		AF2330FF7C4AA4179DE8DFC40D873489 /* Formatters.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		B04525E6A72F9A18C15CE447092C8DD4 /* Pods-FLCharts_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Example-Info.plist"; sourceTree = "<group>"; };
 		B9340D83C773BD9B12F17DF8882D38A1 /* Pods-FLCharts_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FLCharts_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		BD798CBC867CB80DFA57B67565D8FD77 /* HighlightedView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HighlightedView.swift; sourceTree = "<group>"; };
 		BDF855E01E1B29B0F49C7C26443D5AEA /* Pods-FLCharts_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FLCharts_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		C091022FE0449FB89DD449677FBEA96C /* ChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		C0DAEAEE63D8DF030AC0F61E5995222C /* FLCharts-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FLCharts-prefix.pch"; sourceTree = "<group>"; };
-		C31966602613B8E0C955FCBB86713BAA /* HighlightingCollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HighlightingCollectionView.swift; path = FLCharts/Classes/HighlightingCollectionView.swift; sourceTree = "<group>"; };
 		CC2D516F7E2D0049C5CA7B6111E65CA0 /* Pods-FLCharts_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FLCharts_Example-frameworks.sh"; sourceTree = "<group>"; };
 		CEF262F8CA84B7A998BF740C97FFE1FF /* Pods-FLCharts_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FLCharts_Example"; path = Pods_FLCharts_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55DCF01D85B5EA0D8A4C9F113E7341B /* Pods-FLCharts_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		D5EAA18965824383572AE6E84E8CB59C /* Chart+XT.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Chart+XT.swift"; sourceTree = "<group>"; };
-		DA9638061F586B41FDB720C3159C5600 /* BarHighlightedView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BarHighlightedView.swift; sourceTree = "<group>"; };
 		E5E0189C009C880B155E28AB73EBFC88 /* FLCharts */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FLCharts; path = FLCharts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC8707620DFD93931DD3EEC6C296276 /* Pods-FLCharts_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FLCharts_Tests"; path = Pods_FLCharts_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5B17496CD4B25C87B64589EB9CCAE9D /* FLCharts.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FLCharts.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		F5B17496CD4B25C87B64589EB9CCAE9D /* FLCharts.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = FLCharts.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F8D2F4E341C830B73C1694B3200AF82B /* FLCharts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FLCharts.debug.xcconfig; sourceTree = "<group>"; };
 		FA1A278DC390BB724D53D8FF8B17E925 /* FLCharts-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FLCharts-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,51 +122,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E704359ABA13891533E333BFC860B99 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				D5EAA18965824383572AE6E84E8CB59C /* Chart+XT.swift */,
-				AF2330FF7C4AA4179DE8DFC40D873489 /* Formatters.swift */,
-			);
-			name = Helpers;
-			path = FLCharts/Classes/Helpers;
-			sourceTree = "<group>";
-		};
 		1D92C962BFF83812ACBD1F1BD34BD8EF /* FLCharts */ = {
 			isa = PBXGroup;
 			children = (
-				1C5CD6C6DDCE83118C412D8EC2F6807A /* FLBarChart.swift */,
-				C31966602613B8E0C955FCBB86713BAA /* HighlightingCollectionView.swift */,
-				1F236E669C74A96F0994980F4716E52E /* UnclippedTopCollectionView.swift */,
-				2026B5EF5D34C2723C054E2710F4D743 /* Bar */,
-				0E704359ABA13891533E333BFC860B99 /* Helpers */,
-				203C187B3E00D9DE554C25D2C81D03A1 /* HighlightView */,
-				6FD1E828D81DC1D9733EAA902E678B03 /* Models */,
+				A5805E4A278DFCBD00ED3C7E /* Sources */,
 				473AF42A4338C18DFEC87EFE29AD1A39 /* Pod */,
 				6BBDA6E425F337E93E11218210D743C3 /* Support Files */,
 			);
 			name = FLCharts;
 			path = ../..;
-			sourceTree = "<group>";
-		};
-		2026B5EF5D34C2723C054E2710F4D743 /* Bar */ = {
-			isa = PBXGroup;
-			children = (
-				420BA234494F117BA95259E235B8FD7A /* BaseChartBar.swift */,
-				854EBED10E7636E084EA756711EAABFD /* MultipleValuesChartBar.swift */,
-			);
-			name = Bar;
-			path = FLCharts/Classes/Bar;
-			sourceTree = "<group>";
-		};
-		203C187B3E00D9DE554C25D2C81D03A1 /* HighlightView */ = {
-			isa = PBXGroup;
-			children = (
-				DA9638061F586B41FDB720C3159C5600 /* BarHighlightedView.swift */,
-				BD798CBC867CB80DFA57B67565D8FD77 /* HighlightedView.swift */,
-			);
-			name = HighlightView;
-			path = FLCharts/Classes/HighlightView;
 			sourceTree = "<group>";
 		};
 		389D75863C3605A62971050119411186 /* Products */ = {
@@ -212,17 +176,6 @@
 			path = "Example/Pods/Target Support Files/FLCharts";
 			sourceTree = "<group>";
 		};
-		6FD1E828D81DC1D9733EAA902E678B03 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				6E0D0175C9FCEB76AA49E82B0BA7D2F0 /* BarData.swift */,
-				73156DDDAB612B11B5EF26ACE59B3CF4 /* ChartConfig.swift */,
-				C091022FE0449FB89DD449677FBEA96C /* ChartData.swift */,
-			);
-			name = Models;
-			path = FLCharts/Classes/Models;
-			sourceTree = "<group>";
-		};
 		83176289B602C60FC9052A258B5D76FF /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +198,65 @@
 			);
 			name = "Pods-FLCharts_Tests";
 			path = "Target Support Files/Pods-FLCharts_Tests";
+			sourceTree = "<group>";
+		};
+		A5805E4A278DFCBD00ED3C7E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A5805E4B278DFCBD00ED3C7E /* FLCharts */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		A5805E4B278DFCBD00ED3C7E /* FLCharts */ = {
+			isa = PBXGroup;
+			children = (
+				A5805E58278DFCBD00ED3C7E /* FLBarChart.swift */,
+				A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */,
+				A5805E50278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift */,
+				A5805E55278DFCBD00ED3C7E /* Bar */,
+				A5805E59278DFCBD00ED3C7E /* Helpers */,
+				A5805E51278DFCBD00ED3C7E /* HighlightView */,
+				A5805E4C278DFCBD00ED3C7E /* Models */,
+			);
+			path = FLCharts;
+			sourceTree = "<group>";
+		};
+		A5805E4C278DFCBD00ED3C7E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5805E4D278DFCBD00ED3C7E /* ChartConfig.swift */,
+				A5805E4E278DFCBD00ED3C7E /* ChartData.swift */,
+				A5805E4F278DFCBD00ED3C7E /* BarData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A5805E51278DFCBD00ED3C7E /* HighlightView */ = {
+			isa = PBXGroup;
+			children = (
+				A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */,
+				A5805E53278DFCBD00ED3C7E /* HighlightedView.swift */,
+			);
+			path = HighlightView;
+			sourceTree = "<group>";
+		};
+		A5805E55278DFCBD00ED3C7E /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				A5805E56278DFCBD00ED3C7E /* BaseChartBar.swift */,
+				A5805E57278DFCBD00ED3C7E /* MultipleValuesChartBar.swift */,
+			);
+			path = Bar;
+			sourceTree = "<group>";
+		};
+		A5805E59278DFCBD00ED3C7E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */,
+				A5805E5B278DFCBD00ED3C7E /* Formatters.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -452,19 +464,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9112B29B4260161CD8BC3BF0F08B1FAE /* BarData.swift in Sources */,
-				B91A97776B87295C1114A4CA47746B86 /* BarHighlightedView.swift in Sources */,
-				EDA65292637AD2E7F3D3CB730319174A /* BaseChartBar.swift in Sources */,
-				EB987DC59195E0C7959AD4BFE95294CE /* Chart+XT.swift in Sources */,
-				5E1D8269ADE8A60A91170ECCF1E18C55 /* ChartConfig.swift in Sources */,
-				8765ACF80B23B41FEFE03955E060334B /* ChartData.swift in Sources */,
-				3B081ED8B528CF55942C3573B4E3933C /* FLBarChart.swift in Sources */,
+				A5805E62278DFCBD00ED3C7E /* HighlightingCollectionView.swift in Sources */,
+				A5805E67278DFCBD00ED3C7E /* Formatters.swift in Sources */,
+				A5805E65278DFCBD00ED3C7E /* FLBarChart.swift in Sources */,
+				A5805E60278DFCBD00ED3C7E /* BarHighlightedView.swift in Sources */,
+				A5805E5C278DFCBD00ED3C7E /* ChartConfig.swift in Sources */,
+				A5805E61278DFCBD00ED3C7E /* HighlightedView.swift in Sources */,
+				A5805E5F278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift in Sources */,
+				A5805E5D278DFCBD00ED3C7E /* ChartData.swift in Sources */,
 				A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */,
-				B23D3BA57335F81C9B887D6BADC44B88 /* Formatters.swift in Sources */,
-				D988CA3C46281A9B73678EA06C776D36 /* HighlightedView.swift in Sources */,
-				67FC6B5477CF24826FE2C0CBFCF9AA95 /* HighlightingCollectionView.swift in Sources */,
-				E8E9EAD2C8C671D0E339020585AAF92A /* MultipleValuesChartBar.swift in Sources */,
-				A3D3C93B96D152328DEE04C88E30CCB8 /* UnclippedTopCollectionView.swift in Sources */,
+				A5805E63278DFCBD00ED3C7E /* BaseChartBar.swift in Sources */,
+				A5805E64278DFCBD00ED3C7E /* MultipleValuesChartBar.swift in Sources */,
+				A5805E66278DFCBD00ED3C7E /* Chart+XT.swift in Sources */,
+				A5805E5E278DFCBD00ED3C7E /* BarData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,8 +722,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
