@@ -6,7 +6,7 @@
 //  Copyright © 2021 Francesco Leoni All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public struct ChartData: Equatable {
     

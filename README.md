@@ -1,10 +1,21 @@
-# FLCharts
+<p align="center">
+  <img src="https://raw.githubusercontent.com/hackiftekhar/IQKeyboardManager/master/Demo/Resources/icon.png" alt="Icon"/>
+</p>
+<H1 align="center">FLCharts</H1>
 
-[![CI Status](https://img.shields.io/travis/francescoleoni98/FLCharts.svg?style=flat)](https://travis-ci.org/francescoleoni98/FLCharts)
+<div style="justify-content: center; padding: 10px; display: flex" >
+  <img style="padding: 5px" src="https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat"
+  alt="FLCharts version"/>
+   <img style="padding: 5px" src="https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat"
+  alt="FLCharts licence"/>
+    <img style="padding: 5px" src="https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat"
+  alt="FLCharts platforms"/>
+</div>
+  
+<!--[![CI Status](https://img.shields.io/travis/francescoleoni98/FLCharts.svg?style=flat)](https://travis-ci.org/francescoleoni98/FLCharts) 
 [![Version](https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts)
 [![License](https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts)
-[![Platform](https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts)
-
+[![Platform](https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts) -->
 
 ## Requirements
 * Xcode 11 / Swift 5
