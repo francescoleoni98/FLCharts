@@ -29,17 +29,18 @@ class ViewController: UIViewController {
                                                         BarData(name: "dec", values: [54])], unitOfMeasure: "scm"))
 //        data.showAverageLine = true
         data.highlighView = BarHighlightedView()
-        data.shouldScroll = false
+        data.shouldScroll = true
         data.showTicks = false
-        data.config = ChartConfig(deltaY: 25, barSpacing: 10)
+        data.showAverageLine = true
+        data.config = ChartConfig(deltaY: 25, barSpacing: 8)
         
         view.addSubview(data)
         data.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             data.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            data.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            data.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -10),
             data.heightAnchor.constraint(equalToConstant: 170),
-            data.widthAnchor.constraint(equalToConstant: 300),
+            data.widthAnchor.constraint(equalToConstant: 320)
         ])
     }
     
