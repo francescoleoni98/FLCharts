@@ -1,21 +1,30 @@
 <p align="center">
-  <img style="width: 130px" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="FLCharts icon"/>
+  <img style="align: center; width: 130px" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="FLCharts icon"/>
 </p>
-<H1 align="center">FLCharts</H1>
 
-<div style="display: flex" >
-  <img style="padding: 10px" src="https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat" alt="FLCharts version"/>
-  <img style="padding: 10px" src="https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat" alt="FLCharts licence"/>
-  <img style="padding: 10px" src="https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat" alt="FLCharts platforms"/>
-</div>
+# FLCharts
 
+![Version](https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat) ![Platforms](https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat) ![License](https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat) ![Swift](https://img.shields.io/badge/swift-5.0-brightgreen.svg) ![Xcode 11.0+](https://img.shields.io/badge/Xcode-11.0%2B-blue.svg) ![iOS 11.0+](https://img.shields.io/badge/iOS-11.0%2B-blue.svg) [![SPM](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 
-## Requirements
+FLCharts is an easy-to-use library to build highly customizable bar charts. It allows you to create your own chart bar `UIView` and use it to display data in the chart.
+<br>
+Additionally FLCharts allows you to provide a custom `HighlightedView` to show the highlighted bar contents on top of the chart.
+
+# Table of Contents
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Features](#features)
+* [Docs](#docs)
+* [Examples](#examples)
+* [Animations](#animations)
+* [License](#license)
+
+## Requirements <a name="requirements"></a>
 * Xcode 11 / Swift 5
 * iOS >= 11.0
 
 
-## Installation
+## Installation <a name="installation"></a>
 
 FLCharts is available through [CocoaPods](https://cocoapods.org). To install it, add the following line to your Podfile:
 
@@ -24,7 +33,7 @@ pod 'FLCharts'
 ```
 
 
-## Features
+## Features <a name="features"></a>
 
  - Dragging / Panning (with touch-gesture)
  - Customizable Axes (both x and y axis)
@@ -35,14 +44,14 @@ pod 'FLCharts'
  - Fully customizable (bar colors, axes color, background, average value, dashed lines, ...)
 
 
-## Docs
+## Docs <a name="docs"></a>
 
 You can build FLCharts documentation directly in XCode.
 </br>
 In XCode go to `Product -> Build Documentation`, once XCode has finished building, the documentation will appear.
 
 
-## Examples
+## Examples <a name="examples"></a>
 
  - **Bar Chart**
 
@@ -61,7 +70,7 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
  ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/average_line.jpg)
 
 
-## Animations
+## Animations <a name="animations"></a>
 
 - **Panning while highlighted**
 
@@ -83,6 +92,6 @@ Francesco Leoni | leoni.francesco98@gmail.it
 francescoleoni98 | https://github.com/francescoleoni98
 
 
-## License
+## License <a name="license"></a>
 
 FLCharts is available under the MIT license. See the LICENSE file for more info.
