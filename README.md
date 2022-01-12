@@ -56,6 +56,10 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
 
+ - **Average view**
+
+ ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/average_line.jpg)
+
 
 ## Animations
 
@@ -66,6 +70,11 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 - **Chart animation**
 
  ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/GIFs/start_bars_animation.gif)
+
+- **Scrolling behaviour with average and highlighted views**
+
+ ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/GIFs/scrolling_behaviour.gif)
+
 
 ## Author
 
