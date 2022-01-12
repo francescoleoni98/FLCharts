@@ -1,15 +1,12 @@
 <p align="center">
-  <img style="width: 130px" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="Icon"/>
+  <img style="width: 130px" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="FLCharts icon"/>
 </p>
 <H1 align="center">FLCharts</H1>
 
-<div style="justify-content: center; padding: 10px; display: flex" >
-  <img style="padding: 5px" src="https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat"
-  alt="FLCharts version"/>
-   <img style="padding: 5px" src="https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat"
-  alt="FLCharts licence"/>
-    <img style="padding: 5px" src="https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat"
-  alt="FLCharts platforms"/>
+<div style="display: flex" >
+  <img style="padding: 10px" src="https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat" alt="FLCharts version"/>
+  <img style="padding: 10px" src="https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat" alt="FLCharts licence"/>
+  <img style="padding: 10px" src="https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat" alt="FLCharts platforms"/>
 </div>
 
 
@@ -41,6 +38,7 @@ pod 'FLCharts'
 ## Docs
 
 You can build FLCharts documentation directly in XCode.
+</br>
 In XCode go to `Product -> Build Documentation`, once XCode has finished building, the documentation will appear.
 
 
@@ -61,7 +59,8 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
 ## Author
 
-Francesco Leoni | leoni.francesco98@gmail.it
+Francesco Leoni | leoni.francesco98@gmail.it 
+</br>
 francescoleoni98 | https://github.com/francescoleoni98
 
 
