@@ -9,40 +9,48 @@
 import UIKit
 
 /// A bar cell which allows to display multiple values in one bar.
-public class MultipleValuesChartBar: BaseChartBar {
+public final class MultipleValuesChartBar: UIView, ChartBar {
     
+    public var config: ChartConfig?
+
     private let barStackView = UIStackView()
     
-    public override func prepareForReuse() {
-        super.prepareForReuse()
+    public func prepareForReuse() {
         for subview in barStackView.arrangedSubviews {
             barStackView.removeArrangedSubview(subview)
         }
     }
     
-    public override func configureViews() {
-        barView.addSubview(barStackView)
+    public func configureViews() {
+        addSubview(barStackView)
         barStackView.spacing = 0
         barStackView.axis = .vertical
         barStackView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
-            barStackView.topAnchor.constraint(equalTo: barView.topAnchor),
-            barStackView.leadingAnchor.constraint(equalTo: barView.leadingAnchor),
-            barStackView.bottomAnchor.constraint(equalTo: barView.bottomAnchor),
-            barStackView.trailingAnchor.constraint(equalTo: barView.trailingAnchor)
+            barStackView.topAnchor.constraint(equalTo: topAnchor),
+            barStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            barStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            barStackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
-    public override func configureBar(for barHeight: CGFloat, barData: BarData) {
+    public func configureBar(for barHeight: CGFloat, barData: BarData) {
+        guard let config = config else {
+            print("No chart configuration is present.")
+            return
+        }
+
         let totalValue = barData.total
 
         for (index, value) in barData.values.reversed().enumerated() {
+            precondition(config.barColors.count - 1 >= index, "Not enough colors in ChartConfig.barColors.")
+
             let view = UIView()
             view.backgroundColor = config.barColors[index]
 
             let percentageOfTotal = value / totalValue
-            let viewHeight = self.heightConstraint.constant * percentageOfTotal
+            let viewHeight = barHeight * percentageOfTotal
 
             barStackView.addArrangedSubview(view)
             view.heightAnchor.constraint(equalToConstant: viewHeight).isActive = true

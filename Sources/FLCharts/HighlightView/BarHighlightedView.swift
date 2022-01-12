@@ -9,7 +9,7 @@
 import UIKit
 
 /// A simple highlighted view that displays the value of the currently highlighted chart bar.
-public class BarHighlightedView: UIView, HighlightedView {
+public final class BarHighlightedView: UIView, HighlightedView {
     
     public var dataValue: String?
     

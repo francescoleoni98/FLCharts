@@ -17,11 +17,13 @@
 		A5805E60278DFCBD00ED3C7E /* BarHighlightedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */; };
 		A5805E61278DFCBD00ED3C7E /* HighlightedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E53278DFCBD00ED3C7E /* HighlightedView.swift */; };
 		A5805E62278DFCBD00ED3C7E /* HighlightingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */; };
-		A5805E63278DFCBD00ED3C7E /* BaseChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E56278DFCBD00ED3C7E /* BaseChartBar.swift */; };
+		A5805E63278DFCBD00ED3C7E /* ChartBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E56278DFCBD00ED3C7E /* ChartBarCell.swift */; };
 		A5805E64278DFCBD00ED3C7E /* MultipleValuesChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E57278DFCBD00ED3C7E /* MultipleValuesChartBar.swift */; };
 		A5805E65278DFCBD00ED3C7E /* FLBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E58278DFCBD00ED3C7E /* FLBarChart.swift */; };
 		A5805E66278DFCBD00ED3C7E /* Chart+XT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */; };
 		A5805E67278DFCBD00ED3C7E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E5B278DFCBD00ED3C7E /* Formatters.swift */; };
+		A5805E6C278EF00400ED3C7E /* PlainChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E6B278EF00400ED3C7E /* PlainChartBar.swift */; };
+		A5805E6E278EF08800ED3C7E /* ChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E6D278EF08800ED3C7E /* ChartBar.swift */; };
 		A5B79F895FCB88A37A2E9AC837FB9A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1A278DC390BB724D53D8FF8B17E925 /* FLCharts-dummy.m */; };
 		B2F7F8F64B2D87913925912CFEA0D003 /* Pods-FLCharts_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E00B9E4618E9179FF87D0DA4351441 /* Pods-FLCharts_Example-dummy.m */; };
@@ -74,11 +76,13 @@
 		A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarHighlightedView.swift; sourceTree = "<group>"; };
 		A5805E53278DFCBD00ED3C7E /* HighlightedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightedView.swift; sourceTree = "<group>"; };
 		A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightingCollectionView.swift; sourceTree = "<group>"; };
-		A5805E56278DFCBD00ED3C7E /* BaseChartBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseChartBar.swift; sourceTree = "<group>"; };
+		A5805E56278DFCBD00ED3C7E /* ChartBarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartBarCell.swift; sourceTree = "<group>"; };
 		A5805E57278DFCBD00ED3C7E /* MultipleValuesChartBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleValuesChartBar.swift; sourceTree = "<group>"; };
 		A5805E58278DFCBD00ED3C7E /* FLBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLBarChart.swift; sourceTree = "<group>"; };
 		A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Chart+XT.swift"; sourceTree = "<group>"; };
 		A5805E5B278DFCBD00ED3C7E /* Formatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		A5805E6B278EF00400ED3C7E /* PlainChartBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainChartBar.swift; sourceTree = "<group>"; };
+		A5805E6D278EF08800ED3C7E /* ChartBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBar.swift; sourceTree = "<group>"; };
 		AB1EF2F93402FE5DBE1AECA32835C9B4 /* FLCharts-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FLCharts-Info.plist"; sourceTree = "<group>"; };
 		B04525E6A72F9A18C15CE447092C8DD4 /* Pods-FLCharts_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Example-Info.plist"; sourceTree = "<group>"; };
 		B9340D83C773BD9B12F17DF8882D38A1 /* Pods-FLCharts_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FLCharts_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -235,8 +239,8 @@
 		A5805E51278DFCBD00ED3C7E /* HighlightView */ = {
 			isa = PBXGroup;
 			children = (
-				A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */,
 				A5805E53278DFCBD00ED3C7E /* HighlightedView.swift */,
+				A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */,
 			);
 			path = HighlightView;
 			sourceTree = "<group>";
@@ -244,7 +248,9 @@
 		A5805E55278DFCBD00ED3C7E /* Bar */ = {
 			isa = PBXGroup;
 			children = (
-				A5805E56278DFCBD00ED3C7E /* BaseChartBar.swift */,
+				A5805E56278DFCBD00ED3C7E /* ChartBarCell.swift */,
+				A5805E6D278EF08800ED3C7E /* ChartBar.swift */,
+				A5805E6B278EF00400ED3C7E /* PlainChartBar.swift */,
 				A5805E57278DFCBD00ED3C7E /* MultipleValuesChartBar.swift */,
 			);
 			path = Bar;
@@ -467,13 +473,15 @@
 				A5805E62278DFCBD00ED3C7E /* HighlightingCollectionView.swift in Sources */,
 				A5805E67278DFCBD00ED3C7E /* Formatters.swift in Sources */,
 				A5805E65278DFCBD00ED3C7E /* FLBarChart.swift in Sources */,
+				A5805E6C278EF00400ED3C7E /* PlainChartBar.swift in Sources */,
 				A5805E60278DFCBD00ED3C7E /* BarHighlightedView.swift in Sources */,
 				A5805E5C278DFCBD00ED3C7E /* ChartConfig.swift in Sources */,
 				A5805E61278DFCBD00ED3C7E /* HighlightedView.swift in Sources */,
 				A5805E5F278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift in Sources */,
 				A5805E5D278DFCBD00ED3C7E /* ChartData.swift in Sources */,
 				A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */,
-				A5805E63278DFCBD00ED3C7E /* BaseChartBar.swift in Sources */,
+				A5805E63278DFCBD00ED3C7E /* ChartBarCell.swift in Sources */,
+				A5805E6E278EF08800ED3C7E /* ChartBar.swift in Sources */,
 				A5805E64278DFCBD00ED3C7E /* MultipleValuesChartBar.swift in Sources */,
 				A5805E66278DFCBD00ED3C7E /* Chart+XT.swift in Sources */,
 				A5805E5E278DFCBD00ED3C7E /* BarData.swift in Sources */,

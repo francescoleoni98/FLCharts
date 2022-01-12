@@ -1,5 +1,5 @@
 //
-//  BaseChartBar.swift
+//  ChartBarCell.swift
 //  FLCharts
 //
 //  Created by Francesco Leoni on 09/01/22.
@@ -9,15 +9,15 @@
 import UIKit
 
 /// The base chart bar cell.
-/// If you need a different bar style, create a custom class that inherits from ``BaseChartBar`` and override ``configureViews()``.
-open class BaseChartBar: UICollectionViewCell {
+/// If you need a different bar style, create a custom class that inherits from ``ChartBarCell`` and override ``configureViews()``.
+final class ChartBarCell: UICollectionViewCell {
     
     static var identifier = "ChartBarCell"
             
     public var barData: BarData?
     public var config: ChartConfig!
     
-    internal var barView = UIView()
+    internal var barView: ChartBar!
     private let xAxisLine = UIView()
     let xAxisLabel = UILabel()
     
@@ -25,14 +25,15 @@ open class BaseChartBar: UICollectionViewCell {
     
     // MARK: - Configurations
         
-    open override func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         heightConstraint.isActive = false
+        barView.prepareForReuse()
     }
     
-    public func configure(with config: ChartConfig) {
-        self.config = config
-        
+    public func configure(withBar bar: ChartBar) {
+        self.barView = bar
+
         addSubview(xAxisLine)
         xAxisLine.backgroundColor = config.axesColor
         xAxisLine.translatesAutoresizingMaskIntoConstraints = false
@@ -70,33 +71,28 @@ open class BaseChartBar: UICollectionViewCell {
         }
 
         addSubview(barView)
+        barView.config = config
         barView.clipsToBounds = true
         barView.translatesAutoresizingMaskIntoConstraints = false
+        barView.configureViews()
+        
+        let halfSpacing = config.barSpacing / 2
         
         NSLayoutConstraint.activate([
-            barView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: config.barSpacing / 2),
+            barView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: halfSpacing),
             barView.bottomAnchor.constraint(equalTo: xAxisLine.topAnchor, constant: 0),
-            barView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(config.barSpacing / 2))
+            barView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -halfSpacing)
         ])
-        
+                
         heightConstraint = barView.heightAnchor.constraint(equalToConstant: 0)
         heightConstraint.isActive = true
-        
-        configureViews()
     }
     
-    /// Override this method in a subclass to customize additional views.
-    open func configureViews() { }
-    
-    /// Override this method in a subclass to configure custom views based on the bar height.
-    /// - note: This method is called one the bar has set its height.
-    open func configureBar(for barHeight: CGFloat, barData: BarData) { }
-
     public func setBarHeight(_ constant: CGFloat, barData: BarData, animated: Bool = false) {
         self.xAxisLabel.text = barData.name
         self.barData = barData
         
-        let barHeight = (self.frame.height - config.margin.vertical) * constant
+        let barHeight = (frame.height - config.margin.vertical) * constant
                         
         let minVal = min(barHeight, frame.width - config.barSpacing)
         
@@ -117,17 +113,20 @@ open class BaseChartBar: UICollectionViewCell {
             }
         }
         
-        barView.backgroundColor = config.barColors.first
+        let barColors = config.barColors
+        let lastIndex = barData.values.count - 1
+        let lastColor = barColors.count - 1 >= lastIndex ? barColors[lastIndex] : barColors.first
+        barView.backgroundColor = lastColor
         
         if animated {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.heightConstraint.constant = barHeight
                 UIView.animateContraints(for: self, damping: 0.6, response: 0.7)
-                self.configureBar(for: barHeight, barData: barData)
+                self.barView.configureBar(for: barHeight, barData: barData)
             }
         } else {
-            self.heightConstraint.constant = barHeight
-            self.configureBar(for: barHeight, barData: barData)
+            heightConstraint.constant = barHeight
+            barView.configureBar(for: barHeight, barData: barData)
         }
     }
 }

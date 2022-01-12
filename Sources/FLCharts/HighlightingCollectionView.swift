@@ -120,7 +120,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
     // MARK: - Highlighting methods
     
     private func collectionView(didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? BaseChartBar, let barData = cell.barData,
+        if let cell = collectionView.cellForItem(at: indexPath) as? ChartBarCell, let barData = cell.barData,
            let highlightedView = highlightedView, let lineIndicatorView = lineIndicatorView {
             
             let cellFrame = cell.convert(cell.bounds, to: self.mockView)

@@ -8,27 +8,8 @@
 
 import UIKit
 
-// Cubic line ----------------------
-
-//        let data = ChartData(points: values.map { $0.total })
-//        let frame = CGRect(x: margin + axesLineWidth, y: topMargin, width: chartWidth, height: chartHeight)
-//        let childView = UIHostingController(rootView: Line(data: data, frame: frame, minDataValue: 0))
-//        addSubview(childView.view)
-//        childView.view.frame = frame
-//        childView.view.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            childView.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
-//            childView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-//            childView.view.widthAnchor.constraint(equalToConstant: 300),
-//            childView.view.heightAnchor.constraint(equalToConstant: 150)
-//        ])
-
-
-// Legenda
-// Predefined cart styles
-
 /// A bar chart that displays one or more bars.
-/// It takes a ``BaseChartBar`` in the initializer that allows to provide a custom bar cell.
+/// It takes a ``ChartBarCell`` in the initializer that allows to provide a custom bar cell.
 public class FLBarChart: UIView {    
     
     private let collectionView = HighlightingCollectionView()
@@ -44,13 +25,6 @@ public class FLBarChart: UIView {
     public var config: ChartConfig {
         get { collectionView.config }
         set { collectionView.config = newValue }
-    }
-
-    /// The view to display when a bar is highlighted.
-    public var highlighView: HighlightedView? {
-        didSet {
-            collectionView.highlightedView = highlighView
-        }
     }
     
     /// The granularity of the X axis.
@@ -106,22 +80,20 @@ public class FLBarChart: UIView {
     private var chartData: ChartData
 
     /// The bar view to use in the chart.
-    private var cell: BaseChartBar.Type = BaseChartBar.self
+    private var bar: ChartBar.Type = PlainChartBar.self
         
     // MARK: - Inits
-    
+        
     /// Creates a bar chart with the provided chart data.
-    public init(data: ChartData) {
+    ///
+    /// If you need a different bar style provide a ``ChartBar``.
+    ///
+    /// If you need a highlight behaviour provide a ``HighlightedView``.
+    public init(data: ChartData, bar: ChartBar.Type = PlainChartBar.self, highlightView: HighlightedView? = nil) {
         self.chartData = data
         super.init(frame: .zero)
-        commonInit(data: data)
-    }
-    
-    /// Creates a bar chart with the provided chart data and bar cell.
-    public init(bar: BaseChartBar.Type, data: ChartData) {
-        self.chartData = data
-        super.init(frame: .zero)
-        self.cell = bar
+        self.bar = bar
+        self.collectionView.highlightedView = highlightView
         commonInit(data: data)
     }
     
@@ -157,7 +129,7 @@ public class FLBarChart: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(cell.self, forCellWithReuseIdentifier: cell.identifier)
+        collectionView.register(ChartBarCell.self, forCellWithReuseIdentifier: ChartBarCell.identifier)
         
         addSubview(collectionView)
         collectionViewTrailing = collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
@@ -347,8 +319,9 @@ extension FLBarChart: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cell.identifier, for: indexPath) as! BaseChartBar
-        cell.configure(with: config)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChartBarCell.identifier, for: indexPath) as! ChartBarCell
+        cell.config = config
+        cell.configure(withBar: bar.init())
 
         if let max = chartData.maxBarData {
             let barData = values[indexPath.item]
