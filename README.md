@@ -57,6 +57,16 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
  ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
 
 
+## Animations
+
+- **Panning while highlighted**
+
+ ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/GIFs/highlighted_pan_animation.gif)
+
+- **Chart animation**
+
+ ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/GIFs/start_bars_animation.gif)
+
 ## Author
 
 Francesco Leoni | leoni.francesco98@gmail.it 
