@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/hackiftekhar/IQKeyboardManager/master/Demo/Resources/icon.png" alt="Icon"/>
+  <img style="width: 130px" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="Icon"/>
 </p>
 <H1 align="center">FLCharts</H1>
 
@@ -11,11 +11,7 @@
     <img style="padding: 5px" src="https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat"
   alt="FLCharts platforms"/>
 </div>
-  
-<!--[![CI Status](https://img.shields.io/travis/francescoleoni98/FLCharts.svg?style=flat)](https://travis-ci.org/francescoleoni98/FLCharts) 
-[![Version](https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts)
-[![License](https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts)
-[![Platform](https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat)](https://cocoapods.org/pods/FLCharts) -->
+
 
 ## Requirements
 * Xcode 11 / Swift 5
@@ -62,9 +58,12 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
 
+
 ## Author
 
-francescoleoni98, leoni.francesco98@gmail.it
+Francesco Leoni | leoni.francesco98@gmail.it
+francescoleoni98 | https://github.com/francescoleoni98
+
 
 ## License
 
