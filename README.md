@@ -1,5 +1,5 @@
 <p align="center">
-  <img style="align: center; width: 130px" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="FLCharts icon"/>
+  <img style="align: center" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="FLCharts icon"/>
 </p>
 
 # FLCharts
