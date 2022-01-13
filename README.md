@@ -45,6 +45,24 @@ pod 'FLCharts'
  - Scroll through chart while highlighted to change highlighted bar
  - Fully customizable (bar colors, axes color, background, average value, dashed lines, ...)
 
+## Configurations
+
+FLChart is highly customizable. You can choose which property to modify through the FLBarChart.config property.
+
+```swift
+let barConfig = FLBarConfig(colors: [.red, .blue, .green],
+                            radius: .capsule,
+                            spacing: 10)
+                            
+let axisLabelConfig = FLAxisLabelConfig(color: .black,
+                                        font: .preferredFont(forTextStyle: .body))
+
+let config = ChartConfig(bar: barConfig,
+                         axesLabels: axisLabelConfig)
+                         
+chart.config.dashedLines.color = .darkGray
+```
+
 
 ## Docs <a name="docs"></a>
 
