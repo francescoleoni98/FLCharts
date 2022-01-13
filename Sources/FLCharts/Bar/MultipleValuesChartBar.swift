@@ -44,10 +44,10 @@ public final class MultipleValuesChartBar: UIView, ChartBar {
         let totalValue = barData.total
 
         for (index, value) in barData.values.reversed().enumerated() {
-            precondition(config.barColors.count - 1 >= index, "Not enough colors in ChartConfig.barColors.")
+            precondition(config.bar.colors.count - 1 >= index, "Not enough colors in ChartConfig.barColors.")
 
             let view = UIView()
-            view.backgroundColor = config.barColors[index]
+            view.backgroundColor = config.bar.colors[index]
 
             let percentageOfTotal = value / totalValue
             let viewHeight = barHeight * percentageOfTotal

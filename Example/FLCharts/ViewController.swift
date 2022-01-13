@@ -15,29 +15,36 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = FLColors.white
         
-        let monthsData = [BarData(name: "jan", values: [33]),
-                          BarData(name: "feb", values: [56]),
-                          BarData(name: "mar", values: [72]),
-                          BarData(name: "apr", values: [42, 33]),
-                          BarData(name: "may", values: [86]),
-                          BarData(name: "jun", values: [45, 43]),
-                          BarData(name: "jul", values: [76]),
-                          BarData(name: "aug", values: [12]),
-                          BarData(name: "set", values: [66]),
-                          BarData(name: "oct", values: [74]),
-                          BarData(name: "nov", values: [25, 65]),
+        let monthsData = [BarData(name: "jan", values: [21, 33, 54]),
+                          BarData(name: "feb", values: [56, 23, 17]),
+                          BarData(name: "mar", values: [72, 13, 24]),
+                          BarData(name: "apr", values: [42, 33, 33]),
+                          BarData(name: "may", values: [86, 15, 42]),
+                          BarData(name: "jun", values: [45, 43, 55]),
+                          BarData(name: "jul", values: [76, 25, 11]),
+                          BarData(name: "aug", values: [12, 45, 42]),
+                          BarData(name: "set", values: [66, 23, 24]),
+                          BarData(name: "oct", values: [74, 11, 43]),
+                          BarData(name: "nov", values: [25, 65, 35]),
                           BarData(name: "dec", values: [54, 43, 23])]
         
         let data = ChartData(title: "Consumptions",
                              barData: monthsData,
-                             unitOfMeasure: "scm")
+                             unitOfMeasure: "kWh")
         
         let chart = FLBarChart(data: data,
                                bar: MultipleValuesChartBar.self,
                                highlightView: BarHighlightedView())
-        chart.showTicks = false
-        chart.config = ChartConfig(deltaY: 25, barSpacing: 8)
-
+        chart.showAverageLine = true
+        chart.config = ChartConfig(deltaX: 2,
+                                   deltaY: 25,
+                                   bar: FLBarConfig(colors: [
+                                    UIColor(red: 80/255, green: 214/255, blue: 182/255, alpha: 1),
+                                    UIColor(red: 255/255, green: 238/255, blue: 0/255, alpha: 1),
+                                    UIColor(red: 123/255, green: 72/255, blue: 217/255, alpha: 1)],
+                                            spacing: 12))
+        chart.config.dashedLines.color = .darkGray
+        
         let card = FLCard(chart: chart,
                           style: .rounded)
         card.showAverage = true

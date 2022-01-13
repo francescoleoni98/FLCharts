@@ -22,7 +22,7 @@ public extension FLColors {
       Bundle(for: self)
     }
     
-    static let backupLightGray = UIColor(red: 242/255, green: 242/255, blue: 246/255, alpha: 1)
-    static let backupDarkGray = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1)
+    private static let backupLightGray = UIColor(red: 242/255, green: 242/255, blue: 246/255, alpha: 1)
+    private static let backupDarkGray = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1)
 
 }

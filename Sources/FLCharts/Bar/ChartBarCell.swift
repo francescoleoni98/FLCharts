@@ -36,11 +36,11 @@ final public class ChartBarCell: UICollectionViewCell {
         self.barView = bar
 
         addSubview(xAxisLine)
-        xAxisLine.backgroundColor = config.axesColor
+        xAxisLine.backgroundColor = config.axesLines.color
         xAxisLine.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            xAxisLine.heightAnchor.constraint(equalToConstant: config.axesLineWidth),
+            xAxisLine.heightAnchor.constraint(equalToConstant: config.axesLines.lineWidth),
             xAxisLine.leadingAnchor.constraint(equalTo: leadingAnchor),
             xAxisLine.topAnchor.constraint(equalTo: bottomAnchor, constant: -config.margin.vertical),
             xAxisLine.trailingAnchor.constraint(equalTo: trailingAnchor)
@@ -48,8 +48,8 @@ final public class ChartBarCell: UICollectionViewCell {
 
         addSubview(xAxisLabel)
         xAxisLabel.textAlignment = .center
-        xAxisLabel.textColor = config.axesColor
-        xAxisLabel.font = .preferredFont(for: .footnote, weight: .medium)
+        xAxisLabel.textColor = config.axesLabels.color
+        xAxisLabel.font = config.axesLabels.font
         xAxisLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -60,12 +60,12 @@ final public class ChartBarCell: UICollectionViewCell {
         if shouldShowTicks {
             let xAxisTick = UIView()
             addSubview(xAxisTick)
-            xAxisTick.backgroundColor = config.axesColor
+            xAxisTick.backgroundColor = config.tick.color
             xAxisTick.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                xAxisTick.widthAnchor.constraint(equalToConstant: config.axesLineWidth),
-                xAxisTick.heightAnchor.constraint(equalToConstant: config.ticksHeight),
+                xAxisTick.widthAnchor.constraint(equalToConstant: config.tick.lineWidth),
+                xAxisTick.heightAnchor.constraint(equalToConstant: config.tick.lineLength),
                 xAxisTick.topAnchor.constraint(equalTo: xAxisLine.bottomAnchor),
                 xAxisTick.trailingAnchor.constraint(equalTo: trailingAnchor)
             ])
@@ -77,7 +77,7 @@ final public class ChartBarCell: UICollectionViewCell {
         barView.translatesAutoresizingMaskIntoConstraints = false
         barView.configureViews()
         
-        let halfSpacing = config.barSpacing / 2
+        let halfSpacing = config.bar.spacing / 2
         
         NSLayoutConstraint.activate([
             barView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: halfSpacing),
@@ -95,10 +95,10 @@ final public class ChartBarCell: UICollectionViewCell {
         
         let barHeight = (frame.height - config.margin.vertical) * constant
                         
-        let minVal = min(barHeight, frame.width - config.barSpacing)
+        let minVal = min(barHeight, frame.width - config.bar.spacing)
         
         if minVal > 0 {
-            switch config.barRadius {
+            switch config.bar.radius {
             case .none:
                 break
                 
@@ -114,7 +114,7 @@ final public class ChartBarCell: UICollectionViewCell {
             }
         }
         
-        let barColors = config.barColors
+        let barColors = config.bar.colors
         let lastIndex = barData.values.count - 1
         let lastColor = barColors.count - 1 >= lastIndex ? barColors[lastIndex] : barColors.first
         barView.backgroundColor = lastColor
