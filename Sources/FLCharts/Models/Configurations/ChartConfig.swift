@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// Defines the configuration of the chart.
+/// You can assign a new configurations through the chart property ``FLBarChart/config`` or modifing the subproperties. Eg. `chart.config.dashedLines.color = .darkGray`.
+///
+/// - note: The order in which you modify this properties matter. Eg. if you assign a new ``FLBarChart/config`` and then modify the property ``ChartConfig/axesLineWidth``, this will override the `lineWidth` property of ``FLAxisLineConfig`` and ``FLTickConfig``.
+/// Conversly if you modify the ``ChartConfig/axesLineWidth`` first and then assign a new ``FLAxisLineConfig``, the latter will override ``ChartConfig/axesLineWidth``.
 public struct ChartConfig {
         
     let margin: UIOffset = UIOffset(horizontal: 45, vertical: 20)
@@ -38,7 +43,7 @@ public struct ChartConfig {
     public var averageView: FLAverageViewConfig
 
     /// The width of the axes lines and ticks.
-    /// - note: If used after setting ``AxisLine`` and ``Tick``, this will override their relative property.
+    /// - note: If used after setting ``FLAxisLineConfig`` and ``FLTickConfig``, this will override their relative property.
     public var axesLineWidth: CGFloat = 1 {
         didSet {
             tick.lineWidth = axesLineWidth
@@ -47,7 +52,7 @@ public struct ChartConfig {
     }
     
     /// The color of the axes lines and ticks.
-    /// - note: If used after setting ``AxisLabel``, ``AxisLine`` and ``Tick``, this will override their relative property.
+    /// - note: If used after setting ``FLAxisLabelConfig``, ``FLAxisLineConfig`` and ``FLTickConfig``, this will override their relative property.
     public var axesColor: UIColor = FLColors.darkGray {
         didSet {
             tick.color = axesColor
