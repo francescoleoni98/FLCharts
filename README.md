@@ -15,6 +15,7 @@ Embed effortlessly your chart in a `FLCard` alogside with a title, an average vl
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Features](#features)
+* [Configurations](#configurations)
 * [Docs](#docs)
 * [Examples](#examples)
 * [Animations](#animations)
@@ -45,7 +46,7 @@ pod 'FLCharts'
  - Scroll through chart while highlighted to change highlighted bar
  - Fully customizable (bar colors, axes color, background, average value, dashed lines, ...)
 
-## Configurations
+## Configurations <a name="configurations"></a>
 
 FLChart is highly customizable. You can choose which property to modify through the FLBarChart.config property.
 
