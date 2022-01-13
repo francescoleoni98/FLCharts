@@ -1,6 +1,4 @@
-<p align="center">
-  <img style="align: center" src="https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png" alt="FLCharts icon"/>
-</p>
+![FLCharts](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCharts_icon.png)
 
 # FLCharts
 
@@ -9,6 +7,9 @@
 FLCharts is an easy-to-use library to build highly customizable bar charts. It allows you to create your own chart bar `UIView` and use it to display data in the chart.
 <br>
 Additionally FLCharts allows you to provide a custom `HighlightedView` to show the highlighted bar contents on top of the chart.
+<br>
+Embed effortlessly your chart in a `FLCard` alogside with a title, an average vlue view and additional behaviours.
+
 
 # Table of Contents
 * [Requirements](#requirements)
@@ -18,6 +19,7 @@ Additionally FLCharts allows you to provide a custom `HighlightedView` to show t
 * [Examples](#examples)
 * [Animations](#animations)
 * [License](#license)
+
 
 ## Requirements <a name="requirements"></a>
 * Xcode 11 / Swift 5
@@ -35,12 +37,12 @@ pod 'FLCharts'
 
 ## Features <a name="features"></a>
 
- - Dragging / Panning (with touch-gesture)
- - Customizable Axes (both x and y axis)
- - Highlighting values (with customizable popup-views)
- - Scroll through chart while highlighted to change highlighted bar
  - Animations for chart bars
- - Limit lines (providing additional information, maximums, ...)
+ - Customizable Axes (both x and y axis)
+ - Dragging / Panning (with touch-gesture)
+ - Highlighting values (with customizable popup-views)
+ - Create custom cards with embedded chart and more features
+ - Scroll through chart while highlighted to change highlighted bar
  - Fully customizable (bar colors, axes color, background, average value, dashed lines, ...)
 
 
@@ -68,6 +70,14 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
  - **Average view**
 
  ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/average_line.jpg)
+
+ - **Bar chart embedded in FLCard**
+
+ ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCard.jpg)
+
+ - **Dark mode**
+
+ ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/dark_mode.jpg)
 
 
 ## Animations <a name="animations"></a>

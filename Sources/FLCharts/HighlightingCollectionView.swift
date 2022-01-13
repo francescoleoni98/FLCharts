@@ -29,11 +29,15 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
     /// The view to display when a cell is highlighted.
     public var highlightedView: HighlightedView? {
         didSet {
+            guard highlightedView != nil else { return }
+
             lineIndicatorView = UIView()
             configureHighlightView()
             configureLogTapGesture()
         }
     }
+    
+    internal weak var highlightingDelegate: ChartHighlightingDelegate?
     
     // MARK: - Init
     
@@ -89,6 +93,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             collectionView.isScrollEnabled = false
             collectionView.isUserInteractionEnabled = false
             handleHighlight(at: location)
+            highlightingDelegate?.didBeginHighlighting()
             
         case .changed:
             handleHighlight(at: location)
@@ -104,6 +109,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             if let lastHighlightedIndexPath = lastHighlightedIndexPath {
                 collectionView(didUnhighlightItemAt: lastHighlightedIndexPath)
             }
+            highlightingDelegate?.didEndHighlighting()
             
         default: break
         }
@@ -127,6 +133,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
     private func collectionView(didHighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? ChartBarCell, let barData = cell.barData,
            let highlightedView = highlightedView, let lineIndicatorView = lineIndicatorView {
+            highlightingDelegate?.didHighlight(cell: cell)
             
             let cellFrame = cell.convert(cell.bounds, to: self.mockView)
             

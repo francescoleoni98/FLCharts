@@ -28,25 +28,27 @@ class ViewController: UIViewController {
                           BarData(name: "nov", values: [25, 65]),
                           BarData(name: "dec", values: [54, 43, 23])]
         
-        let data = ChartData(title: "",
+        let data = ChartData(title: "Consumptions",
                              barData: monthsData,
                              unitOfMeasure: "scm")
         
         let chart = FLBarChart(data: data,
                                bar: MultipleValuesChartBar.self,
                                highlightView: BarHighlightedView())
-        
         chart.showTicks = false
-        chart.showAverageLine = true
         chart.config = ChartConfig(deltaY: 25, barSpacing: 8)
 
-        view.addSubview(chart)
-        chart.translatesAutoresizingMaskIntoConstraints = false
+        let card = FLCard(chart: chart,
+                          style: .rounded)
+        card.showAverage = true
+        
+        view.addSubview(card)
+        card.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chart.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            chart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            chart.heightAnchor.constraint(equalToConstant: 170),
-            chart.widthAnchor.constraint(equalToConstant: 310)
+            card.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            card.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            card.heightAnchor.constraint(equalToConstant: 200),
+            card.widthAnchor.constraint(equalToConstant: 330)
         ])
     }
 }

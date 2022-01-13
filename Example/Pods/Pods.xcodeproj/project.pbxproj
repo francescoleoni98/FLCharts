@@ -26,6 +26,10 @@
 		A5805E6E278EF08800ED3C7E /* ChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E6D278EF08800ED3C7E /* ChartBar.swift */; };
 		A5805E71278F593300ED3C7E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5805E70278F593300ED3C7E /* Colors.xcassets */; };
 		A5805E73278F595F00ED3C7E /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E72278F595F00ED3C7E /* FLColors.swift */; };
+		A5805E76279032DF00ED3C7E /* FLCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E75279032DF00ED3C7E /* FLCard.swift */; };
+		A5805E7827903B5B00ED3C7E /* ChartHighlightingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E7727903B5A00ED3C7E /* ChartHighlightingDelegate.swift */; };
+		A5805E7A2790474F00ED3C7E /* FLShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E792790474F00ED3C7E /* FLShadow.swift */; };
+		A5805E7C2790476600ED3C7E /* FLCardStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E7B2790476600ED3C7E /* FLCardStyle.swift */; };
 		A5B79F895FCB88A37A2E9AC837FB9A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1A278DC390BB724D53D8FF8B17E925 /* FLCharts-dummy.m */; };
 		B2F7F8F64B2D87913925912CFEA0D003 /* Pods-FLCharts_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E00B9E4618E9179FF87D0DA4351441 /* Pods-FLCharts_Example-dummy.m */; };
@@ -87,6 +91,10 @@
 		A5805E6D278EF08800ED3C7E /* ChartBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBar.swift; sourceTree = "<group>"; };
 		A5805E70278F593300ED3C7E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A5805E72278F595F00ED3C7E /* FLColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColors.swift; sourceTree = "<group>"; };
+		A5805E75279032DF00ED3C7E /* FLCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCard.swift; sourceTree = "<group>"; };
+		A5805E7727903B5A00ED3C7E /* ChartHighlightingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHighlightingDelegate.swift; sourceTree = "<group>"; };
+		A5805E792790474F00ED3C7E /* FLShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLShadow.swift; sourceTree = "<group>"; };
+		A5805E7B2790476600ED3C7E /* FLCardStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCardStyle.swift; sourceTree = "<group>"; };
 		AB1EF2F93402FE5DBE1AECA32835C9B4 /* FLCharts-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FLCharts-Info.plist"; sourceTree = "<group>"; };
 		B04525E6A72F9A18C15CE447092C8DD4 /* Pods-FLCharts_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Example-Info.plist"; sourceTree = "<group>"; };
 		B9340D83C773BD9B12F17DF8882D38A1 /* Pods-FLCharts_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FLCharts_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -222,7 +230,9 @@
 			children = (
 				A5805E58278DFCBD00ED3C7E /* FLBarChart.swift */,
 				A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */,
+				A5805E7727903B5A00ED3C7E /* ChartHighlightingDelegate.swift */,
 				A5805E50278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift */,
+				A5805E74279032D400ED3C7E /* FLCard */,
 				A5805E55278DFCBD00ED3C7E /* Bar */,
 				A5805E59278DFCBD00ED3C7E /* Helpers */,
 				A5805E51278DFCBD00ED3C7E /* HighlightView */,
@@ -266,6 +276,7 @@
 			children = (
 				A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */,
 				A5805E5B278DFCBD00ED3C7E /* Formatters.swift */,
+				A5805E792790474F00ED3C7E /* FLShadow.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -277,6 +288,15 @@
 				A5805E72278F595F00ED3C7E /* FLColors.swift */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		A5805E74279032D400ED3C7E /* FLCard */ = {
+			isa = PBXGroup;
+			children = (
+				A5805E75279032DF00ED3C7E /* FLCard.swift */,
+				A5805E7B2790476600ED3C7E /* FLCardStyle.swift */,
+			);
+			path = FLCard;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -486,14 +506,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5805E62278DFCBD00ED3C7E /* HighlightingCollectionView.swift in Sources */,
+				A5805E7A2790474F00ED3C7E /* FLShadow.swift in Sources */,
 				A5805E67278DFCBD00ED3C7E /* Formatters.swift in Sources */,
 				A5805E65278DFCBD00ED3C7E /* FLBarChart.swift in Sources */,
 				A5805E6C278EF00400ED3C7E /* PlainChartBar.swift in Sources */,
 				A5805E60278DFCBD00ED3C7E /* BarHighlightedView.swift in Sources */,
+				A5805E7827903B5B00ED3C7E /* ChartHighlightingDelegate.swift in Sources */,
 				A5805E73278F595F00ED3C7E /* FLColors.swift in Sources */,
 				A5805E5C278DFCBD00ED3C7E /* ChartConfig.swift in Sources */,
+				A5805E7C2790476600ED3C7E /* FLCardStyle.swift in Sources */,
 				A5805E61278DFCBD00ED3C7E /* HighlightedView.swift in Sources */,
 				A5805E5F278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift in Sources */,
+				A5805E76279032DF00ED3C7E /* FLCard.swift in Sources */,
 				A5805E5D278DFCBD00ED3C7E /* ChartData.swift in Sources */,
 				A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */,
 				A5805E63278DFCBD00ED3C7E /* ChartBarCell.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 
 /// The base chart bar cell.
 /// If you need a different bar style, create a custom class that inherits from ``ChartBarCell`` and override ``configureViews()``.
-final class ChartBarCell: UICollectionViewCell {
+final public class ChartBarCell: UICollectionViewCell {
     
     static var identifier = "ChartBarCell"
             
@@ -26,7 +26,7 @@ final class ChartBarCell: UICollectionViewCell {
     
     // MARK: - Configurations
         
-    override func prepareForReuse() {
+    public override func prepareForReuse() {
         super.prepareForReuse()
         heightConstraint.isActive = false
         barView.prepareForReuse()

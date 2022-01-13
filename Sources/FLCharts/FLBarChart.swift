@@ -74,11 +74,17 @@ public class FLBarChart: UIView {
     /// The data to show in the chart.
     private var values: [BarData] = []
     
-    private var chartData: ChartData
+    public private(set) var chartData: ChartData
 
     /// The bar view to use in the chart.
     private var bar: ChartBar.Type = PlainChartBar.self
         
+    public weak var highlightingDelegate: ChartHighlightingDelegate? {
+        didSet {
+            collectionView.highlightingDelegate = highlightingDelegate
+        }
+    }
+
     // MARK: - Inits
         
     /// Creates a bar chart with the provided chart data.
@@ -99,7 +105,7 @@ public class FLBarChart: UIView {
     }
     
     private func commonInit(data: ChartData) {
-        backgroundColor = FLColors.white
+        backgroundColor = .clear
         configureCollectionView()
         self.collectionView.getChartData = { data }
         self.values = data.barData
