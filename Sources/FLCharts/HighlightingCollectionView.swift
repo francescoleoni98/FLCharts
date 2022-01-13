@@ -75,7 +75,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             lineIndicatorView.layer.cornerRadius = 1
             lineIndicatorView.frame = CGRect(x: 0, y: 0, width: 2, height: 0)
             lineIndicatorView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-            lineIndicatorView.backgroundColor = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1)
+            lineIndicatorView.backgroundColor = FLColors.darkGray
         }
     }
     
@@ -94,8 +94,13 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             handleHighlight(at: location)
             
         case .ended, .cancelled:
+            defer {
+                self.lastHighlightedIndexPath = nil
+            }
+            
             collectionView.isScrollEnabled = true
             collectionView.isUserInteractionEnabled = true
+
             if let lastHighlightedIndexPath = lastHighlightedIndexPath {
                 collectionView(didUnhighlightItemAt: lastHighlightedIndexPath)
             }

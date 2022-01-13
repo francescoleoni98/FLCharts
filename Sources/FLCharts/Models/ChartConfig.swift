@@ -40,10 +40,10 @@ public struct ChartConfig {
     public var axesLineWidth: CGFloat = 1
     
     /// The color of the axes lines.
-    public var axesColor: UIColor = UIColor(white: 0.75, alpha: 1)
+    public var axesColor: UIColor = FLColors.darkGray
 
     /// The color of the average line and label.
-    public var averageViewColor: UIColor = UIColor(white: 0.7, alpha: 1)
+    public var averageViewColor: UIColor = FLColors.darkGray
     
     /// The color of the bars. The first color corrisponds to to bottom portion of the bar.
     public var barColors: [UIColor] = [.systemBlue, .systemPink, .systemGreen]
@@ -57,16 +57,13 @@ public struct ChartConfig {
     
     /// The space between each chart bar.
     public var barSpacing: CGFloat = 5
-    
-    /// Whether the chart should show the ticks on the axes.
-    var showTicks: Bool = true
-    
+        
     public init(deltaX: Int = 3,
                 deltaY: CGFloat = 100,
                 ticksHeight: CGFloat = 5,
                 axesLineWidth: CGFloat = 1,
-                axesColor: UIColor = UIColor(white: 0.75, alpha: 1),
-                averageViewColor: UIColor = UIColor(white: 0.7, alpha: 1),
+                axesColor: UIColor = FLColors.darkGray,
+                averageViewColor: UIColor = FLColors.darkGray,
                 barColors: [UIColor] = [.systemBlue, .systemPink, .systemGreen],
                 barRadius: ChartConfig.Radius = .corners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], 3),
                 barWidth: CGFloat = 12,

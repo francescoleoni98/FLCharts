@@ -16,6 +16,7 @@ final class ChartBarCell: UICollectionViewCell {
             
     public var barData: BarData?
     public var config: ChartConfig!
+    public var shouldShowTicks: Bool = true
     
     internal var barView: ChartBar!
     private let xAxisLine = UIView()
@@ -56,7 +57,7 @@ final class ChartBarCell: UICollectionViewCell {
             xAxisLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
         
-        if config.showTicks {
+        if shouldShowTicks {
             let xAxisTick = UIView()
             addSubview(xAxisTick)
             xAxisTick.backgroundColor = config.axesColor

@@ -212,10 +212,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = P82F9TQ8U3;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = P82F9TQ8U3;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -478,6 +480,7 @@
 			baseConfigurationReference = 5E91BF509847144361B25215 /* Pods-FLCharts_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P82F9TQ8U3;
 				INFOPLIST_FILE = FLCharts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -494,6 +497,7 @@
 			baseConfigurationReference = B11CF0B09A31834E51DC648F /* Pods-FLCharts_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P82F9TQ8U3;
 				INFOPLIST_FILE = FLCharts/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -509,6 +513,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DF659D1356B2ED1064953D6A /* Pods-FLCharts_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = P82F9TQ8U3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -531,6 +536,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B768C11AE7DF043B5297C51 /* Pods-FLCharts_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = P82F9TQ8U3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

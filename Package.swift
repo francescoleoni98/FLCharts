@@ -11,7 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "FLCharts",
-            targets: ["FLCharts"]),
+            targets: ["FLCharts"])
     ],
     dependencies: [
     ],
@@ -19,6 +19,9 @@ let package = Package(
         .target(
             name: "FLCharts",
             dependencies: []),
+            resources: [
+                .process("Assets")
+            ]
     ],
     swiftLanguageVersions: [.v5]
 )

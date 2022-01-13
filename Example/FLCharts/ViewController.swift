@@ -13,6 +13,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = FLColors.white
+        
         let monthsData = [BarData(name: "jan", values: [33]),
                           BarData(name: "feb", values: [56]),
                           BarData(name: "mar", values: [72]),
@@ -37,14 +39,14 @@ class ViewController: UIViewController {
         chart.showTicks = false
         chart.showAverageLine = true
         chart.config = ChartConfig(deltaY: 25, barSpacing: 8)
-        
+
         view.addSubview(chart)
         chart.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chart.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            chart.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -10),
+            chart.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            chart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             chart.heightAnchor.constraint(equalToConstant: 170),
-            chart.widthAnchor.constraint(equalToConstant: 320)
+            chart.widthAnchor.constraint(equalToConstant: 310)
         ])
     }
 }

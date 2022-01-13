@@ -37,23 +37,20 @@ public class FLBarChart: UIView {
     /// Whether the bars are animated.
     public var animated: Bool = true
     
+    /// Whether to show the axes ticks.
+    public var showTicks: Bool = true
+
     /// Whether the chart should scroll horizontally.
     public var shouldScroll: Bool = true
 
+    /// Whether to show the dash lines.
+    public var showDashedLines: Bool = true
+    
     /// Whether to show the average line.
     public var showAverageLine: Bool = false {
         didSet {
             collectionViewTrailing.constant = showAverageLine ? -70 : 0
         }
-    }
-
-    /// Whether to show the dash lines.
-    public var showDashedLines: Bool = true
-    
-    /// Whether to show the axes ticks.
-    public var showTicks: Bool {
-        get { config.showTicks }
-        set { config.showTicks = newValue }
     }
     
     /// The height of the ticks.
@@ -102,7 +99,7 @@ public class FLBarChart: UIView {
     }
     
     private func commonInit(data: ChartData) {
-        backgroundColor = .white
+        backgroundColor = FLColors.white
         configureCollectionView()
         self.collectionView.getChartData = { data }
         self.values = data.barData
@@ -249,7 +246,7 @@ public class FLBarChart: UIView {
             /// Add label with value sopra average line
             let averageLabel = UILabel()
             averageLabel.text = String(format: "%.1f", chartData.average)
-            averageLabel.textColor = .black
+            averageLabel.textColor = FLColors.black
             averageLabel.font = .preferredFont(for: .subheadline, weight: .semibold)
             let textSize = averageLabel.intrinsicContentSize.width
             averageLabel.frame = CGRect(x: maxX - textSize - 5, y: averageLineY - 22, width: textSize, height: 20)
@@ -321,6 +318,7 @@ extension FLBarChart: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChartBarCell.identifier, for: indexPath) as! ChartBarCell
         cell.config = config
+        cell.shouldShowTicks = showTicks
         cell.configure(withBar: bar.init())
 
         if let max = chartData.maxBarData {
