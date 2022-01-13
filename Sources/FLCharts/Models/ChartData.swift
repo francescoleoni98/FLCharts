@@ -35,6 +35,12 @@ public struct ChartData: Equatable {
         return sumArray / CGFloat(barData.count)
     }
     
+    public var formattedAverage: String {
+        Formatters.toDecimals(value: NSNumber(value: average)) ?? "N/D"
+    }
+    
+    // MARK: - Init
+    
     public init(title: String, barData: [BarData], unitOfMeasure: String) {
         self.title = title
         self.barData = barData

@@ -53,22 +53,6 @@ public class FLBarChart: UIView {
         }
     }
     
-    /// The height of the ticks.
-//    public var ticksHeight: CGFloat { config.tick.lineLength }
-//
-//    
-//    public var axesColor: UIColor { config.axesColor }
-//
-//    /// The line width of the axes.
-//    public var axesLineWidth: CGFloat { config.axesLineWidth }
-//
-//    /// The width of the bar.
-//    /// - note: This value will be used only if ``shouldScroll`` is set to `true`. Else the width of the bar will be calculated based on the width of the chart.
-//    public var barWidth: CGFloat { config.barWidth }
-//
-//    /// The color of the bars. The first color corrisponds to to bottom portion of the bar.
-//    public var barColors: [UIColor] { config.barColors }
-
     private var cellWidth: CGFloat { config.bar.width + config.bar.spacing }
         
     /// The data to show in the chart.
@@ -250,7 +234,7 @@ public class FLBarChart: UIView {
             let averageLineY = yPosition(forValue: chartData.average)
             
             let averageLabel = UILabel()
-            averageLabel.text = String(format: "%.1f", chartData.average)
+            averageLabel.text = chartData.formattedAverage
             averageLabel.textColor = config.averageView.primaryColor
             averageLabel.font = config.averageView.primaryFont
             let textSize = averageLabel.intrinsicContentSize

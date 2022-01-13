@@ -12,7 +12,7 @@ enum Formatters {
     
     static func toDecimals(value: NSNumber) -> String? {
         let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 2
+        formatter.maximumFractionDigits = 1
         return formatter.string(from: value)
     }
 }

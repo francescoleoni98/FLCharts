@@ -77,7 +77,7 @@ final public class FLCard: UIView {
             
             let attributedText = NSMutableAttributedString(string: "avg. ",
                                                            attributes: [.font : UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor : FLColors.darkGray])
-            attributedText.append(NSAttributedString(string: String(format: "%.1f", chartView.chartData.average),
+            attributedText.append(NSAttributedString(string: chartView.chartData.formattedAverage,
                                                      attributes: [.font : UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor : FLColors.black]))
             addSubview(averageLabel)
             averageLabel.attributedText = attributedText
