@@ -33,8 +33,8 @@
 		A5805E7F27906FD200ED3C7E /* FLTickConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E7E27906FD200ED3C7E /* FLTickConfig.swift */; };
 		A5805E8127906FE700ED3C7E /* FLAverageViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E8027906FE700ED3C7E /* FLAverageViewConfig.swift */; };
 		A5805E8327906FF700ED3C7E /* FLDashedLineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E8227906FF700ED3C7E /* FLDashedLineConfig.swift */; };
-		A5805E852790700600ED3C7E /* FLAxisLineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E842790700600ED3C7E /* FLAxisLineConfig.swift */; };
-		A5805E872790701600ED3C7E /* FLAxisLabelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E862790701600ED3C7E /* FLAxisLabelConfig.swift */; };
+		A5805E852790700600ED3C7E /* FLAxesLineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E842790700600ED3C7E /* FLAxesLineConfig.swift */; };
+		A5805E872790701600ED3C7E /* FLAxesLabelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E862790701600ED3C7E /* FLAxesLabelConfig.swift */; };
 		A5805E892790702600ED3C7E /* FLBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E882790702600ED3C7E /* FLBarConfig.swift */; };
 		A5B79F895FCB88A37A2E9AC837FB9A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1A278DC390BB724D53D8FF8B17E925 /* FLCharts-dummy.m */; };
@@ -104,8 +104,8 @@
 		A5805E7E27906FD200ED3C7E /* FLTickConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLTickConfig.swift; sourceTree = "<group>"; };
 		A5805E8027906FE700ED3C7E /* FLAverageViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAverageViewConfig.swift; sourceTree = "<group>"; };
 		A5805E8227906FF700ED3C7E /* FLDashedLineConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLDashedLineConfig.swift; sourceTree = "<group>"; };
-		A5805E842790700600ED3C7E /* FLAxisLineConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAxisLineConfig.swift; sourceTree = "<group>"; };
-		A5805E862790701600ED3C7E /* FLAxisLabelConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAxisLabelConfig.swift; sourceTree = "<group>"; };
+		A5805E842790700600ED3C7E /* FLAxesLineConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAxesLineConfig.swift; sourceTree = "<group>"; };
+		A5805E862790701600ED3C7E /* FLAxesLabelConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAxesLabelConfig.swift; sourceTree = "<group>"; };
 		A5805E882790702600ED3C7E /* FLBarConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLBarConfig.swift; sourceTree = "<group>"; };
 		AB1EF2F93402FE5DBE1AECA32835C9B4 /* FLCharts-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FLCharts-Info.plist"; sourceTree = "<group>"; };
 		B04525E6A72F9A18C15CE447092C8DD4 /* Pods-FLCharts_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Example-Info.plist"; sourceTree = "<group>"; };
@@ -316,8 +316,8 @@
 			children = (
 				A5805E4D278DFCBD00ED3C7E /* ChartConfig.swift */,
 				A5805E8027906FE700ED3C7E /* FLAverageViewConfig.swift */,
-				A5805E862790701600ED3C7E /* FLAxisLabelConfig.swift */,
-				A5805E842790700600ED3C7E /* FLAxisLineConfig.swift */,
+				A5805E862790701600ED3C7E /* FLAxesLabelConfig.swift */,
+				A5805E842790700600ED3C7E /* FLAxesLineConfig.swift */,
 				A5805E882790702600ED3C7E /* FLBarConfig.swift */,
 				A5805E8227906FF700ED3C7E /* FLDashedLineConfig.swift */,
 				A5805E7E27906FD200ED3C7E /* FLTickConfig.swift */,
@@ -538,7 +538,7 @@
 				A5805E67278DFCBD00ED3C7E /* Formatters.swift in Sources */,
 				A5805E8127906FE700ED3C7E /* FLAverageViewConfig.swift in Sources */,
 				A5805E65278DFCBD00ED3C7E /* FLBarChart.swift in Sources */,
-				A5805E852790700600ED3C7E /* FLAxisLineConfig.swift in Sources */,
+				A5805E852790700600ED3C7E /* FLAxesLineConfig.swift in Sources */,
 				A5805E6C278EF00400ED3C7E /* PlainChartBar.swift in Sources */,
 				A5805E60278DFCBD00ED3C7E /* BarHighlightedView.swift in Sources */,
 				A5805E7827903B5B00ED3C7E /* ChartHighlightingDelegate.swift in Sources */,
@@ -552,7 +552,7 @@
 				A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */,
 				A5805E63278DFCBD00ED3C7E /* ChartBarCell.swift in Sources */,
 				A5805E6E278EF08800ED3C7E /* ChartBar.swift in Sources */,
-				A5805E872790701600ED3C7E /* FLAxisLabelConfig.swift in Sources */,
+				A5805E872790701600ED3C7E /* FLAxesLabelConfig.swift in Sources */,
 				A5805E8327906FF700ED3C7E /* FLDashedLineConfig.swift in Sources */,
 				A5805E64278DFCBD00ED3C7E /* MultipleValuesChartBar.swift in Sources */,
 				A5805E66278DFCBD00ED3C7E /* Chart+XT.swift in Sources */,

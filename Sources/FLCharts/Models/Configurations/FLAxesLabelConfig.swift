@@ -1,5 +1,5 @@
 //
-//  FLAxisLabelConfig.swift
+//  FLAxesLabelConfig.swift
 //  FLCharts
 //
 //  Created by Francesco Leoni on 13/01/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct FLAxisLabelConfig {
+public struct FLAxesLabelConfig {
     
     /// The color of the axes labels.
     public var color: UIColor = FLColors.darkGray

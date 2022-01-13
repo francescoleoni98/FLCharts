@@ -1,5 +1,5 @@
 //
-//  FLAxisLineConfig.swift
+//  FLAxesLineConfig.swift
 //  FLCharts
 //
 //  Created by Francesco Leoni on 13/01/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public struct FLAxisLineConfig {
+public struct FLAxesLineConfig {
     
     /// The color of the axes.
     public var color: UIColor = FLColors.darkGray

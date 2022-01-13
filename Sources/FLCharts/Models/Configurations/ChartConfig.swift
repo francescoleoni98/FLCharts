@@ -31,10 +31,10 @@ public struct ChartConfig {
     public var tick: FLTickConfig
         
     /// The configuration of the axes labels.
-    public var axesLabels: FLAxisLabelConfig
+    public var axesLabels: FLAxesLabelConfig
 
     /// The configuration of the axes lines.
-    public var axesLines: FLAxisLineConfig
+    public var axesLines: FLAxesLineConfig
 
     /// The configuration of the value dashed lines.
     public var dashedLines: FLDashedLineConfig
@@ -65,8 +65,8 @@ public struct ChartConfig {
                 deltaY: CGFloat = 100,
                 bar: FLBarConfig = FLBarConfig(),
                 tick: FLTickConfig = FLTickConfig(),
-                axesLabels: FLAxisLabelConfig = FLAxisLabelConfig(),
-                axesLines: FLAxisLineConfig = FLAxisLineConfig(),
+                axesLabels: FLAxesLabelConfig = FLAxesLabelConfig(),
+                axesLines: FLAxesLineConfig = FLAxesLineConfig(),
                 dashedLines: FLDashedLineConfig = FLDashedLineConfig(),
                 averageView: FLAverageViewConfig = FLAverageViewConfig(),
                 axesLineWidth: CGFloat = 1,

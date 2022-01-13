@@ -36,6 +36,7 @@ class ViewController: UIViewController {
                                bar: MultipleValuesChartBar.self,
                                highlightView: BarHighlightedView())
         chart.showAverageLine = true
+                
         chart.config = ChartConfig(deltaX: 2,
                                    deltaY: 25,
                                    bar: FLBarConfig(colors: [
