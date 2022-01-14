@@ -42,7 +42,7 @@ final public class ChartBarCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             xAxisLine.heightAnchor.constraint(equalToConstant: config.axesLines.lineWidth),
             xAxisLine.leadingAnchor.constraint(equalTo: leadingAnchor),
-            xAxisLine.topAnchor.constraint(equalTo: bottomAnchor, constant: -config.margin.vertical),
+            xAxisLine.topAnchor.constraint(equalTo: bottomAnchor, constant: -config.margin.bottom),
             xAxisLine.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
 
@@ -93,7 +93,7 @@ final public class ChartBarCell: UICollectionViewCell {
         self.xAxisLabel.text = barData.name
         self.barData = barData
         
-        let barHeight = (frame.height - config.margin.vertical) * constant
+        let barHeight = (frame.height - config.margin.bottom) * constant
                         
         let minVal = min(barHeight, frame.width - config.bar.spacing)
         

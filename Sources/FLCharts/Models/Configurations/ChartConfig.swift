@@ -15,7 +15,7 @@ import UIKit
 /// Conversly if you modify the ``ChartConfig/axesLineWidth`` first and then assign a new ``FLAxisLineConfig``, the latter will override ``ChartConfig/axesLineWidth``.
 public struct ChartConfig {
         
-    let margin: UIOffset = UIOffset(horizontal: 45, vertical: 20)
+    internal private(set) var margin: UIEdgeInsets = UIEdgeInsets(top: 5, left: 45, bottom: 25, right: 0)
 
     /// The granularity of the X axis.
     public var deltaX: Int
@@ -81,5 +81,19 @@ public struct ChartConfig {
         self.averageView = averageView
         self.axesLineWidth = axesLineWidth
         self.axesColor = axesColor
+    }
+    
+    // MARK: - Internal methods
+    
+    mutating func setMargin(for yPosition: YPosition) {
+        switch yPosition {
+        case .left:
+            margin.left = 45
+            margin.right = 0
+            
+        case .right:
+            margin.left = 0
+            margin.right = 45
+        }
     }
 }

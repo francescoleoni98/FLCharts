@@ -8,19 +8,24 @@
 
 import UIKit
 
+/// Defines a horizontal position.
+public enum YPosition {
+    case left
+    case right
+}
+
 /// A bar chart that displays one or more bars.
 /// It takes a ``ChartBarCell`` in the initializer that allows to provide a custom bar cell.
 public class FLBarChart: UIView {    
     
     private let collectionView = HighlightingCollectionView()
+    private var collectionViewTop: NSLayoutConstraint!
+    private var collectionViewLeading: NSLayoutConstraint!
     private var collectionViewTrailing: NSLayoutConstraint!
     
     /// The left-bottom margins of the chart.
-    private var margin: UIOffset { config.margin }
-    
-    /// The top margin of the chart.
-    private let topMargin: CGFloat = 5
-    
+    private var margin: UIEdgeInsets { config.margin }
+        
     /// The configuration of the chart
     public var config: ChartConfig {
         get { collectionView.config }
@@ -33,7 +38,15 @@ public class FLBarChart: UIView {
     /// The granularity of the Y axis.
     /// Eg. deltaY = 10 means that every number on the Y axes is a multiple of 10.
     public var deltaY: CGFloat { config.deltaY }
-        
+    
+    /// The position of the y axis.
+    public var yAxisPosition: YPosition = .left {
+        didSet {
+            config.setMargin(for: yAxisPosition)
+            updateCollectionConstraints()
+        }
+    }
+    
     /// Whether the bars are animated.
     public var animated: Bool = true
     
@@ -49,12 +62,10 @@ public class FLBarChart: UIView {
     /// Whether to show the average line.
     public var showAverageLine: Bool = false {
         didSet {
-            collectionViewTrailing.constant = showAverageLine ? -70 : 0
+            updateCollectionConstraints()
         }
     }
-    
-    private var cellWidth: CGFloat { config.bar.width + config.bar.spacing }
-        
+            
     /// The data to show in the chart.
     private var values: [BarData] = []
     
@@ -63,6 +74,8 @@ public class FLBarChart: UIView {
     /// The bar view to use in the chart.
     private var bar: ChartBar.Type = PlainChartBar.self
         
+    private var cellWidth: CGFloat { config.bar.width + config.bar.spacing }
+
     public weak var highlightingDelegate: ChartHighlightingDelegate? {
         didSet {
             collectionView.highlightingDelegate = highlightingDelegate
@@ -119,10 +132,13 @@ public class FLBarChart: UIView {
         collectionView.register(ChartBarCell.self, forCellWithReuseIdentifier: ChartBarCell.identifier)
         
         addSubview(collectionView)
-        collectionViewTrailing = collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        collectionViewTop = collectionView.topAnchor.constraint(equalTo: topAnchor, constant: margin.top)
+        collectionViewLeading = collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin.left + config.axesLines.lineWidth)
+        collectionViewTrailing = collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin.right)
+        
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: topMargin),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin.horizontal + config.axesLines.lineWidth),
+            collectionViewTop,
+            collectionViewLeading,
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             collectionViewTrailing
         ])
@@ -133,30 +149,38 @@ public class FLBarChart: UIView {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         drawAxes(in: context, rect: rect)
     }
-    
+
     private func drawAxes(in context: CGContext, rect: CGRect) {
         context.saveGState()
 
-        let minX = rect.minX
-        let maxX = rect.maxX
-        let minY = rect.minY + topMargin
-        let maxY = rect.maxY
-        
-        let chartWidth = maxX - margin.horizontal - minX
-        let chartHeight = maxY - margin.vertical - minY
+        let halfAxesWidth = config.axesLines.lineWidth / 2
 
-        let chartTopLeft = CGPoint(x: margin.horizontal, y: minY - (config.axesLines.lineWidth / 2))
-//        let chartTopRight = CGPoint(x: maxX, y: minY)
-        let chartBottomLeft = CGPoint(x: margin.horizontal, y: chartHeight + minY + (config.axesLines.lineWidth / 2))
-        let chartBottomRight = CGPoint(x: maxX, y: chartHeight + minY + (config.axesLines.lineWidth / 2))
+        let chartLeft = rect.minX + margin.left
+        let chartRight = rect.maxX - margin.right
+        let chartTop = rect.minY + margin.top - halfAxesWidth
+        let chartBottom = rect.maxY - margin.bottom + halfAxesWidth
+        
+        let chartWidth = chartRight - chartLeft
+        let chartHeight = chartBottom - chartTop
+        
+        let chartTopLeft = CGPoint(x: chartLeft, y: chartTop)
+        let chartTopRight = CGPoint(x: chartRight, y: chartTop)
+        let chartBottomLeft = CGPoint(x: chartLeft, y: chartBottom)
+        let chartBottomRight = CGPoint(x: chartRight, y: chartBottom)
         
         let axesLines = CGMutablePath()
         let ticksLines = CGMutablePath()
         let dashedLines = CGMutablePath()
 
-        axesLines.addLines(between: [chartTopLeft,
-                                        chartBottomLeft,
-                                        chartBottomRight])
+        if yAxisPosition == .left {
+            axesLines.addLines(between: [chartTopLeft,
+                                         chartBottomLeft,
+                                         chartBottomRight])
+        } else {
+            axesLines.addLines(between: [chartTopRight,
+                                         chartBottomRight,
+                                         chartBottomLeft])
+        }
 
         /* Labels */
         
@@ -198,65 +222,87 @@ public class FLBarChart: UIView {
         
         /* Y Axis labels and ticks */
         
-        let dataMinY: CGFloat = 0
-        let dataMaxY: CGFloat = values.max(by: { $0.total < $1.total })?.total ?? 0
+        let dataMinValue: CGFloat = 0
+        let dataMaxValue: CGFloat = chartData.maxBarData?.total ?? 0
         
-        for y in stride(from: dataMinY, through: dataMaxY, by: deltaY) {
-            
+        for y in stride(from: dataMinValue, through: dataMaxValue, by: deltaY) {
             let chartTickY = yPosition(forValue: y)
             
             if y != 0 {
                 if showTicks {
-                    ticksLines.addLines(between: [CGPoint(x: margin.horizontal - config.tick.lineLength, y: chartTickY),
-                                                  CGPoint(x: margin.horizontal, y: chartTickY)])
+                    if yAxisPosition == .left {
+                        ticksLines.addLines(between: [CGPoint(x: chartLeft - config.tick.lineLength, y: chartTickY),
+                                                      CGPoint(x: chartLeft, y: chartTickY)])
+                    } else {
+                        ticksLines.addLines(between: [CGPoint(x: chartRight + config.tick.lineLength, y: chartTickY),
+                                                      CGPoint(x: chartRight, y: chartTickY)])
+                    }
+                }
+                
+                if y != chartTop {
+                    drawLabel(text: "\(Int(y))", yPosition: chartTickY)
                 }
             }
-            
-            if y != minY, y != 0 {
-                drawLabel(text: "\(Int(y))", yPosition: chartTickY)
-            }
-            
+
             if showDashedLines {
                 let isNearZero = chartTickY < chartBottomRight.y && chartTickY > chartBottomRight.y - 5
                 if !isNearZero {
-                    dashedLines.addLines(between: [CGPoint(x: margin.horizontal, y: chartTickY),
-                                                   CGPoint(x: maxX, y: chartTickY)])
+                    dashedLines.addLines(between: [CGPoint(x: chartLeft, y: chartTickY),
+                                                   CGPoint(x: chartRight, y: chartTickY)])
                 }
             }
         }
         
+        // The max value label.
+        drawLabel(text: "\(Int(dataMaxValue))", yPosition: chartTop)
+
+        /* Ticks */
+        
         if showTicks {
-            ticksLines.addLines(between: [CGPoint(x: margin.horizontal - config.tick.lineLength, y: minY),
-                                          CGPoint(x: margin.horizontal, y: minY)])
+            if yAxisPosition == .left {
+                ticksLines.addLines(between: [CGPoint(x: chartLeft - config.tick.lineLength, y: chartTop),
+                                              CGPoint(x: chartLeft, y: chartTop)])
+            } else {
+                ticksLines.addLines(between: [CGPoint(x: chartRight + config.tick.lineLength, y: chartTop),
+                                              CGPoint(x: chartRight, y: chartTop)])
+            }
         }
+        
+        /* Average line */
         
         if showAverageLine {
             let averageLineY = yPosition(forValue: chartData.average)
+            let spacingFromLine: CGFloat = 2
             
             let averageLabel = UILabel()
             averageLabel.text = chartData.formattedAverage
             averageLabel.textColor = config.averageView.primaryColor
             averageLabel.font = config.averageView.primaryFont
-            let textSize = averageLabel.intrinsicContentSize
-            averageLabel.frame = CGRect(x: maxX - textSize.width - 5, y: averageLineY - textSize.height - 2, width: textSize.width, height: textSize.height)
+            let averageLabelSize = averageLabel.intrinsicContentSize
+            
+            averageLabel.frame = CGRect(x: xPositionForAverageLabel(averageLabel), y: averageLineY - averageLabelSize.height - spacingFromLine,
+                                        width: averageLabelSize.width, height: averageLabelSize.height)
             addSubview(averageLabel)
             
             let unitOfMeasureLabel = UILabel()
             unitOfMeasureLabel.text = "avg. \(chartData.unitOfMeasure)"
             unitOfMeasureLabel.textColor = config.averageView.secondaryColor
             unitOfMeasureLabel.font = config.averageView.secondaryFont
-            let labelSize = unitOfMeasureLabel.intrinsicContentSize
-            unitOfMeasureLabel.frame = CGRect(x: maxX - labelSize.width - 5, y: averageLineY + 2, width: labelSize.width, height: labelSize.height)
+            let unitOfMeasureLabelSize = unitOfMeasureLabel.intrinsicContentSize
+            
+            unitOfMeasureLabel.frame = CGRect(x: xPositionForAverageLabel(unitOfMeasureLabel), y: averageLineY + spacingFromLine,
+                                              width: unitOfMeasureLabelSize.width, height: unitOfMeasureLabelSize.height)
             addSubview(unitOfMeasureLabel)
-            print(labelSize.height)
+
             let line = UIView()
             line.backgroundColor = config.averageView.lineColor
-            line.frame = CGRect(x: margin.horizontal, y: averageLineY, width: chartWidth, height: config.averageView.lineWidth)
+            line.frame = CGRect(x: chartLeft, y: averageLineY, width: chartWidth, height: config.averageView.lineWidth)
             addSubview(line)
+            
+            marginForAverageView = max(averageLabelSize.width, unitOfMeasureLabelSize.width) + 15
+            updateCollectionConstraints()
         }
-        
-        drawLabel(text: "\(Int(dataMaxY))", yPosition: minY)
-        
+                
         context.setStrokeColor(config.axesLines.color.cgColor)
         context.setLineWidth(config.axesLines.lineWidth)
         context.addPath(axesLines)
@@ -278,21 +324,54 @@ public class FLBarChart: UIView {
         context.restoreGState()
         
         func yPosition(forValue value: CGFloat) -> CGFloat {
-            let percentageOfTotal = value / dataMaxY * 100
+            let percentageOfTotal = value / dataMaxValue * 100
             let viewHeight = chartHeight * percentageOfTotal / 100
-            return chartHeight - viewHeight + minY
+            return chartHeight - viewHeight + chartTop
+        }
+        
+        func drawLabel(text: String, yPosition: CGFloat) {
+            let centeringConstant: CGFloat = 4 // 2.5
+            let label = text as NSString
+            let labelSize = text.size(withSystemFontSize: config.axesLabels.font.pointSize)
+            
+            var labelXPosition: CGFloat = 0
+            
+            if yAxisPosition == .left {
+                labelXPosition = chartLeft - labelSize.width - config.tick.lineLength - centeringConstant
+            } else {
+                labelXPosition = chartRight + config.tick.lineLength + centeringConstant
+            }
+            
+            let labelDrawPoint = CGPoint(x: labelXPosition, y: yPosition - (labelSize.height / 2))
+            
+            label.draw(at: labelDrawPoint,
+                       withAttributes: [.font: config.axesLabels.font,
+                                        .foregroundColor: config.axesLabels.color])
+        }
+        
+        func xPositionForAverageLabel(_ label: UILabel) -> CGFloat {
+            if yAxisPosition == .left {
+                return chartRight - label.intrinsicContentSize.width - 5
+            } else {
+                return chartLeft + 5
+            }
         }
     }
     
-    private func drawLabel(text: String, yPosition: CGFloat) {
-        let centeringConstant: CGFloat = 4 // 2.5
-        let label = text as NSString
-        let labelSize = text.size(withSystemFontSize: config.axesLabels.font.pointSize)
-        let labelDrawPoint = CGPoint(x: margin.horizontal - labelSize.width - config.tick.lineLength - centeringConstant, y: yPosition - (labelSize.height / 2))
-        
-        label.draw(at: labelDrawPoint,
-                   withAttributes: [.font: config.axesLabels.font,
-                                    .foregroundColor: config.axesLabels.color])
+    // MARK: - Helpers
+    
+    private var marginForAverageView: CGFloat = 70
+    
+    private func updateCollectionConstraints() {
+        switch yAxisPosition {
+        case .left:
+            collectionViewLeading.constant = margin.left + config.axesLines.lineWidth
+            collectionViewTrailing.constant = showAverageLine ? -marginForAverageView - margin.right : -margin.right
+            
+        case .right:
+            collectionViewTrailing.constant = -margin.right - config.axesLines.lineWidth
+            collectionViewLeading.constant = showAverageLine ? marginForAverageView + margin.left : margin.left
+        }
     }
 }
 

@@ -49,7 +49,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
         NSLayoutConstraint.activate([
             mockView.topAnchor.constraint(equalTo: topAnchor),
             mockView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mockView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -config.margin.vertical),
+            mockView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -config.margin.bottom),
             mockView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
@@ -72,12 +72,12 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             insertSubview(lineIndicatorView, belowSubview: collectionView)
             
             highlightedView.isHidden = true
-            highlightedView.frame = CGRect(origin: CGPoint(x: 0, y: -highlightedView.intrinsicContentSize.height),
+            highlightedView.frame = CGRect(origin: CGPoint(x: 0, y: -highlightedView.intrinsicContentSize.height - 5),
                                            size: highlightedView.intrinsicContentSize)
             
             lineIndicatorView.isHidden = true
             lineIndicatorView.layer.cornerRadius = 1
-            lineIndicatorView.frame = CGRect(x: 0, y: 0, width: 2, height: 0)
+            lineIndicatorView.frame = CGRect(x: 0, y: -5, width: 2, height: 0)
             lineIndicatorView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
             lineIndicatorView.backgroundColor = FLColors.darkGray
         }
@@ -143,6 +143,8 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             highlightedView.frame.size = highlightedView.intrinsicContentSize
             highlightedView.isHidden = false
             
+            lineIndicatorView.isHidden = false
+
             UIView.animate(withDuration: 0.25) {
                 highlightedView.center.x = cellFrame.midX
                 
@@ -156,10 +158,8 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
                     highlightedView.frame.origin.x = self.mockView.frame.width - highlightedView.intrinsicContentSize.width
                 }
                 
-                lineIndicatorView.isHidden = false
                 lineIndicatorView.center.x = cellFrame.midX
-                lineIndicatorView.frame.size.height = self.collectionView.frame.height - self.config.margin.vertical - cell.barView.frame.height - 5
-                lineIndicatorView.frame.origin.y = 0
+                lineIndicatorView.frame.size.height = self.collectionView.frame.height - self.config.margin.bottom - cell.barView.frame.height
             }
             
             self.lastHighlightedIndexPath = indexPath
