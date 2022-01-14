@@ -62,7 +62,7 @@ public struct ChartConfig {
     }
             
     public init(deltaX: Int = 3,
-                deltaY: CGFloat = 100,
+                deltaY: CGFloat = 0,
                 bar: FLBarConfig = FLBarConfig(),
                 tick: FLTickConfig = FLTickConfig(),
                 axesLabels: FLAxesLabelConfig = FLAxesLabelConfig(),
@@ -85,15 +85,15 @@ public struct ChartConfig {
     
     // MARK: - Internal methods
     
-    mutating func setMargin(for yPosition: YPosition) {
+    mutating func setMargin(for yPosition: YPosition, horizontalMargin: CGFloat) {
         switch yPosition {
         case .left:
-            margin.left = 45
+            margin.left = horizontalMargin
             margin.right = 0
             
         case .right:
             margin.left = 0
-            margin.right = 45
+            margin.right = horizontalMargin
         }
     }
 }

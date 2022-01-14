@@ -24,6 +24,11 @@ public struct ChartData: Equatable {
         barData.max(by: { $0.total < $1.total })
     }
     
+    /// The y delta that specifies the y axis granulation if the user doesn't provide one.
+    public var defaultYDelta: CGFloat {
+        floor((maxBarData?.total ?? 100) / 3)
+    }
+    
     /// The average value of the chart.
     public var average: CGFloat {
         let sumArray = barData.reduce(0) { sum, newValue -> CGFloat in

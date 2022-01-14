@@ -21,7 +21,7 @@ class ViewController: UIViewController {
                           BarData(name: "apr", values: [42, 33.8, 33]),
                           BarData(name: "may", values: [86, 15, 42]),
                           BarData(name: "jun", values: [45, 43, 55]),
-                          BarData(name: "jul", values: [76, 25.5, 11]),
+                          BarData(name: "jul", values: [76, 50, 11]),
                           BarData(name: "aug", values: [12.6, 45, 42]),
                           BarData(name: "set", values: [66, 23, 24]),
                           BarData(name: "oct", values: [74, 11, 43]),
@@ -41,28 +41,27 @@ class ViewController: UIViewController {
         let chart = FLBarChart(data: data,
                                bar: MultipleValuesChartBar.self,
                                highlightView: BarHighlightedView())
-        chart.showAverageLine = true
-        chart.shouldScroll = true
                 
         chart.config = ChartConfig(deltaX: 2,
-                                   deltaY: 25,
+                                   deltaY: 30,
                                    bar: FLBarConfig(colors: [
                                     UIColor(red: 80/255, green: 214/255, blue: 182/255, alpha: 1),
                                     UIColor(red: 255/255, green: 238/255, blue: 0/255, alpha: 1),
                                     UIColor(red: 123/255, green: 72/255, blue: 217/255, alpha: 1)]))
-        chart.yAxisPosition = .right
-        
+//        chart.yAxisPosition = .right
+//        chart.showAverageLine = true
+
         let card = FLCard(chart: chart,
                           style: .rounded)
         card.showAverage = true
         
-        view.addSubview(chart)
-        chart.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(card)
+        card.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chart.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            chart.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            chart.heightAnchor.constraint(equalToConstant: 200),
-            chart.widthAnchor.constraint(equalToConstant: 330)
+            card.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            card.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            card.heightAnchor.constraint(equalToConstant: 300),
+            card.widthAnchor.constraint(equalToConstant: 330)
         ])
     }
 }
