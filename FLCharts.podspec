@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/francescoleoni98/FLCharts'
   s.swift_versions   = '5.0'
-s.screenshots     = 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/base_chart.jpg', 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/highlightedview_chart.jpg', 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/multiple_value_chart.jpg'
+  s.screenshots     = 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/base_chart.jpg', 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/highlightedview_chart.jpg', 'https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/multiple_value_chart.jpg'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'francescoleoni98' => 'leoni.francesco98@gmail.it' }
+  s.author           = { 'Francesco Leoni' => 'leoni.francesco98@gmail.it' }
   s.source           = { :git => 'https://github.com/francescoleoni98/FLCharts.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/fraleo695'
 

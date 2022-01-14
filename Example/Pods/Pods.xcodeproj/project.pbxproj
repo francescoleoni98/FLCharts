@@ -25,7 +25,6 @@
 		A5805E6C278EF00400ED3C7E /* PlainChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E6B278EF00400ED3C7E /* PlainChartBar.swift */; };
 		A5805E6E278EF08800ED3C7E /* ChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E6D278EF08800ED3C7E /* ChartBar.swift */; };
 		A5805E71278F593300ED3C7E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5805E70278F593300ED3C7E /* Colors.xcassets */; };
-		A5805E73278F595F00ED3C7E /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E72278F595F00ED3C7E /* FLColors.swift */; };
 		A5805E76279032DF00ED3C7E /* FLCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E75279032DF00ED3C7E /* FLCard.swift */; };
 		A5805E7827903B5B00ED3C7E /* ChartHighlightingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E7727903B5A00ED3C7E /* ChartHighlightingDelegate.swift */; };
 		A5805E7A2790474F00ED3C7E /* FLShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E792790474F00ED3C7E /* FLShadow.swift */; };
@@ -36,6 +35,7 @@
 		A5805E852790700600ED3C7E /* FLAxesLineConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E842790700600ED3C7E /* FLAxesLineConfig.swift */; };
 		A5805E872790701600ED3C7E /* FLAxesLabelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E862790701600ED3C7E /* FLAxesLabelConfig.swift */; };
 		A5805E892790702600ED3C7E /* FLBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E882790702600ED3C7E /* FLBarConfig.swift */; };
+		A5805E8B2791D5F200ED3C7E /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5805E72278F595F00ED3C7E /* FLColors.swift */; };
 		A5B79F895FCB88A37A2E9AC837FB9A2D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1A278DC390BB724D53D8FF8B17E925 /* FLCharts-dummy.m */; };
 		B2F7F8F64B2D87913925912CFEA0D003 /* Pods-FLCharts_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E00B9E4618E9179FF87D0DA4351441 /* Pods-FLCharts_Example-dummy.m */; };
@@ -287,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */,
+				A5805E72278F595F00ED3C7E /* FLColors.swift */,
 				A5805E5B278DFCBD00ED3C7E /* Formatters.swift */,
 				A5805E792790474F00ED3C7E /* FLShadow.swift */,
 			);
@@ -297,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				A5805E70278F593300ED3C7E /* Colors.xcassets */,
-				A5805E72278F595F00ED3C7E /* FLColors.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -531,6 +531,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5805E8B2791D5F200ED3C7E /* FLColors.swift in Sources */,
 				A5805E62278DFCBD00ED3C7E /* HighlightingCollectionView.swift in Sources */,
 				A5805E892790702600ED3C7E /* FLBarConfig.swift in Sources */,
 				A5805E7F27906FD200ED3C7E /* FLTickConfig.swift in Sources */,
@@ -542,7 +543,6 @@
 				A5805E6C278EF00400ED3C7E /* PlainChartBar.swift in Sources */,
 				A5805E60278DFCBD00ED3C7E /* BarHighlightedView.swift in Sources */,
 				A5805E7827903B5B00ED3C7E /* ChartHighlightingDelegate.swift in Sources */,
-				A5805E73278F595F00ED3C7E /* FLColors.swift in Sources */,
 				A5805E5C278DFCBD00ED3C7E /* ChartConfig.swift in Sources */,
 				A5805E7C2790476600ED3C7E /* FLCardStyle.swift in Sources */,
 				A5805E61278DFCBD00ED3C7E /* HighlightedView.swift in Sources */,
