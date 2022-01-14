@@ -181,44 +181,6 @@ public class FLBarChart: UIView {
                                          chartBottomRight,
                                          chartBottomLeft])
         }
-
-        /* Labels */
-        
-        /* X Axis labels and ticks */
-        
-        //        for (index, x) in stride(from: 0, through: chartWidth, by: BarWidth.totalWidth).enumerated() {
-        //
-        //            let percentageOfTotal = x / chartWidth * 100
-        //            let viewWidth = chartWidth * percentageOfTotal / 100
-        //            let chartTickX = margin + viewWidth + centeringConstant
-        //
-        //            if x != 0 {
-        //                let tickPoints = showTicks
-        //                    ? [CGPoint(x: chartTickX, y: chartHeight),
-        //                       CGPoint(x: chartTickX, y: chartHeight + ticksHeight)]
-        //                    : []
-        //
-        //                thinnerLines.addLines(between: tickPoints)
-        //            }
-        //
-        //            if x != minX {
-        //                var labelText = "-"
-        //
-        //                if index - 1 <= (values.count - 1) {
-        //                    labelText = values[index - 1].name
-        //                }
-        //
-        //                let label = labelText as NSString
-        //                let labelSize = labelText.size(withSystemFontSize: 15)
-        //                let labelDrawPoint = CGPoint(
-        //                    x: chartTickX - labelSize.width - ((BarWidth.totalWidth - labelSize.width) / 2),
-        //                    y: chartHeight + 10)
-        //
-        //                label.draw(at: labelDrawPoint,
-        //                           withAttributes: [.font: UIFont.systemFont(ofSize: 15),
-        //                                            .foregroundColor: axesColor])
-        //            }
-        //        }
         
         /* Y Axis labels and ticks */
         
