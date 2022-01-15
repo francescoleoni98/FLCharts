@@ -18,10 +18,10 @@ let package = Package(
     targets: [
         .target(
             name: "FLCharts",
-            dependencies: []),
+            dependencies: [],
             resources: [
                 .process("Assets")
-            ]
+            ])
     ],
     swiftLanguageVersions: [.v5]
 )
