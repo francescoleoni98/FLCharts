@@ -1,3 +1,10 @@
+## 1.1.1
+* **IMPROVEMENT:** Fixed NSLayoutConstraint+XT.swift file
+
+## 1.1.0
+* **FEATURE:** Added Legend option in FLCard
+* **IMPROVEMENT:** Fixed Package.swift file
+
 ## 1.0.6
 * **FEATURE:** Added support for DarkMode
 * **FEATURE:** Added FLCard to embed a chart inside a card along with a title and an average label

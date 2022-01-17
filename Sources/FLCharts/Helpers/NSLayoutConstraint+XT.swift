@@ -5,7 +5,7 @@
 //  Created by Francesco Leoni on 16/01/22.
 //
 
-import Foundation
+import UIKit
 
 struct LayoutDirection: OptionSet {
     let rawValue: Int
