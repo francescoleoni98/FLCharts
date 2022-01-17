@@ -18,12 +18,11 @@ public protocol ChartBar: UIView {
 
     /// Use this method in a subclass to configure custom views based on the bar height.
     /// - note: This method is called once the bar has set its height.
-    func configureBar(for barHeight: CGFloat, barData: BarData)
+    func configureBar(for barHeight: CGFloat, barData: BarData, legendKeys: [Key])
 }
 
 public extension ChartBar {
     
     func prepareForReuse() { }
     
-    func configureBar(for barHeight: CGFloat, barData: BarData) { }
 }

@@ -73,9 +73,9 @@ final public class ChartBarCell: UICollectionViewCell {
 
         addSubview(barView)
         barView.config = config
+        barView.configureViews()
         barView.clipsToBounds = true
         barView.translatesAutoresizingMaskIntoConstraints = false
-        barView.configureViews()
         
         let halfSpacing = config.bar.spacing / 2
         
@@ -89,10 +89,10 @@ final public class ChartBarCell: UICollectionViewCell {
         heightConstraint.isActive = true
     }
     
-    public func setBarHeight(_ constant: CGFloat, barData: BarData, animated: Bool = false) {
-        self.xAxisLabel.text = barData.name
+    public func setBarHeight(_ constant: CGFloat, barData: BarData, legendKeys: [Key], animated: Bool = false) {
         self.barData = barData
-        
+        self.xAxisLabel.text = barData.name
+
         let barHeight = (frame.height - config.margin.bottom) * constant
                         
         let minVal = min(barHeight, frame.width - config.bar.spacing)
@@ -113,21 +113,16 @@ final public class ChartBarCell: UICollectionViewCell {
                 barView.layer.maskedCorners = corners
             }
         }
-        
-        let barColors = config.bar.colors
-        let lastIndex = barData.values.count - 1
-        let lastColor = barColors.count - 1 >= lastIndex ? barColors[lastIndex] : barColors.first
-        barView.backgroundColor = lastColor
-        
+                
         if animated {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.heightConstraint.constant = barHeight
                 UIView.animateContraints(for: self, damping: 0.6, response: 0.7)
-                self.barView.configureBar(for: barHeight, barData: barData)
+                self.barView.configureBar(for: barHeight, barData: barData, legendKeys: legendKeys)
             }
         } else {
             heightConstraint.constant = barHeight
-            barView.configureBar(for: barHeight, barData: barData)
+            barView.configureBar(for: barHeight, barData: barData, legendKeys: legendKeys)
         }
     }
 }

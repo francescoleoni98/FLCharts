@@ -84,7 +84,7 @@ public struct ChartConfig {
     }
     
     // MARK: - Internal methods
-    
+
     mutating func setMargin(for yPosition: YPosition, horizontalMargin: CGFloat) {
         switch yPosition {
         case .left:

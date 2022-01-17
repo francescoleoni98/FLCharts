@@ -23,9 +23,6 @@ public struct FLBarConfig {
         case corners(corners: CACornerMask, CGFloat)
     }
 
-    /// The color of the bars. The first color corrisponds to to bottom portion of the bar.
-    public var colors: [UIColor]
-
     /// The style of the bars corners.
     public var radius: Radius
 
@@ -36,11 +33,9 @@ public struct FLBarConfig {
     /// The space between each chart bar.
     public var spacing: CGFloat
 
-    public init(colors: [UIColor] = [.systemBlue, .systemPink, .systemGreen],
-                radius: Radius = .corners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], 3),
+    public init(radius: Radius = .corners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], 3),
                 width: CGFloat = 12,
                 spacing: CGFloat = 5) {
-        self.colors = colors
         self.radius = radius
         self.width = width
         self.spacing = spacing

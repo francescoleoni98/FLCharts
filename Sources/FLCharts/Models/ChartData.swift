@@ -16,6 +16,9 @@ public struct ChartData: Equatable {
     /// The data of a specific bar.
     public var barData: [BarData]
     
+    /// The keys of the legend. On multi-value bars the first key corresponds to the lower part of the bar.
+    public var legendKeys: [Key]
+    
     /// The unit of measure to apply to the value of the bar.
     public var unitOfMeasure: String
     
@@ -46,9 +49,10 @@ public struct ChartData: Equatable {
     
     // MARK: - Init
     
-    public init(title: String, barData: [BarData], unitOfMeasure: String) {
+    public init(title: String, barData: [BarData], legendKeys: [Key], unitOfMeasure: String) {
         self.title = title
         self.barData = barData
+        self.legendKeys = legendKeys
         self.unitOfMeasure = unitOfMeasure
     }
 }

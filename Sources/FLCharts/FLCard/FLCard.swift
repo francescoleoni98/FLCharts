@@ -13,8 +13,18 @@ final public class FLCard: UIView {
     
     private let titleLabel = UILabel()
     private var averageLabel: UILabel?
+    private var legend: FLLegend?
+    private let stackView = UIStackView()
+    private let contentGuide = UILayoutGuide()
     private let chartView: FLBarChart
     private let style: FLCardStyle
+    
+    /// Whether to show the legend. Default is `true`.
+    public var showLegend: Bool = true {
+        didSet {
+            configureLegend()
+        }
+    }
     
     /// Whether to show the average view. Default is `true`.
     public var showAverage = true {
@@ -30,7 +40,16 @@ final public class FLCard: UIView {
         self.style = style
         super.init(frame: .zero)
         
+        addLayoutGuide(contentGuide)
+        NSLayoutConstraint.activate([
+            contentGuide.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            contentGuide.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            contentGuide.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            contentGuide.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+        ])
+
         configureViews()
+        configureLegend()
         configureAverageView()
     }
     
@@ -39,7 +58,7 @@ final public class FLCard: UIView {
     }
     
     // MARK: - Configurations
-    
+        
     private func configureViews() {
         style.shadow?.apply(to: self)
         backgroundColor = style.backgroundColor
@@ -48,23 +67,32 @@ final public class FLCard: UIView {
         addSubview(titleLabel)
         titleLabel.text = chartView.chartData.title
         titleLabel.textColor = style.textColor
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .preferredFont(for: .headline, weight: .bold)
-        
-        addSubview(chartView)
-        chartView.highlightingDelegate = self
-        chartView.translatesAutoresizingMaskIntoConstraints = false
-        
+        titleLabel.constraints(equalTo: contentGuide, directions: [.top, .horizontal])
+
+        addSubview(stackView)
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.constraints(equalTo: contentGuide, directions: [.bottom, .horizontal])
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            
-            chartView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            chartView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            chartView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
-            chartView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15)
         ])
+        
+        stackView.addArrangedSubview(chartView)
+        chartView.highlightingDelegate = self
+    }
+    
+    private func configureLegend() {
+        if showLegend {
+            guard legend == nil else { return }
+            legend = FLLegend(config: chartView.config, chartData: chartView.chartData)
+            guard let legend = legend else { return }
+            stackView.addArrangedSubview(legend)
+        } else {
+            guard let legend = legend else { return }
+            stackView.removeArrangedSubview(legend)
+            self.legend = nil
+        }
     }
     
     private func configureAverageView() {
@@ -81,12 +109,7 @@ final public class FLCard: UIView {
                                                      attributes: [.font : UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor : FLColors.black]))
             addSubview(averageLabel)
             averageLabel.attributedText = attributedText
-            averageLabel.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                averageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-                averageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
-            ])
+            averageLabel.constraints(equalTo: contentGuide, directions: [.top, .trailing])
         } else {
             averageLabel?.removeFromSuperview()
         }

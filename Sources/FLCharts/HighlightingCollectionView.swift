@@ -45,13 +45,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
         super.init(frame: frame)
         insertSubview(mockView, belowSubview: collectionView)
         mockView.isUserInteractionEnabled = false
-        mockView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            mockView.topAnchor.constraint(equalTo: topAnchor),
-            mockView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mockView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -config.margin.bottom),
-            mockView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        mockView.constraints(equalTo: collectionView, directions: .all)
     }
     
     required public init?(coder: NSCoder) {
@@ -96,6 +90,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             highlightingDelegate?.didBeginHighlighting()
             
         case .changed:
+            guard mockView.frame.contains(location) else { return }
             handleHighlight(at: location)
             
         case .ended, .cancelled:

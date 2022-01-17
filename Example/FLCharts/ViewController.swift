@@ -26,7 +26,7 @@ class ViewController: UIViewController {
                           BarData(name: "set", values: [66, 23, 24]),
                           BarData(name: "oct", values: [74, 11, 43]),
                           BarData(name: "nov", values: [25, 65, 35]),
-                          BarData(name: "mar", values: [72, 13.4, 24]),
+                          BarData(name: "mar", values: [72, 0, 24]),
                           BarData(name: "apr", values: [42, 33.8, 33]),
                           BarData(name: "may", values: [86, 15, 42]),
                           BarData(name: "jun", values: [45, 43, 55]),
@@ -36,25 +36,22 @@ class ViewController: UIViewController {
         
         let data = ChartData(title: "Consumptions",
                              barData: monthsData,
+                             legendKeys: [Key(key: "F1", color: UIColor(red: 80/255, green: 214/255, blue: 182/255, alpha: 1)),
+                                          Key(key: "F2", color: UIColor(red: 255/255, green: 238/255, blue: 0/255, alpha: 1)),
+                                          Key(key: "F3", color: UIColor(red: 123/255, green: 72/255, blue: 217/255, alpha: 1))],
                              unitOfMeasure: "kWh")
         
         let chart = FLBarChart(data: data,
                                bar: MultipleValuesChartBar.self,
                                highlightView: BarHighlightedView())
-                
-        chart.config = ChartConfig(deltaX: 2,
-                                   deltaY: 30,
-                                   bar: FLBarConfig(colors: [
-                                    UIColor(red: 80/255, green: 214/255, blue: 182/255, alpha: 1),
-                                    UIColor(red: 255/255, green: 238/255, blue: 0/255, alpha: 1),
-                                    UIColor(red: 123/255, green: 72/255, blue: 217/255, alpha: 1)]))
-//        chart.yAxisPosition = .right
 //        chart.showAverageLine = true
+//        chart.yAxisPosition = .right
+        chart.config = ChartConfig(deltaX: 2, deltaY: 30)
 
-        let card = FLCard(chart: chart,
-                          style: .rounded)
+        let card = FLCard(chart: chart, style: .rounded)
         card.showAverage = true
-        
+        card.showLegend = false
+
         view.addSubview(card)
         card.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
