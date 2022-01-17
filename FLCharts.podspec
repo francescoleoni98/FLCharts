@@ -5,7 +5,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FLCharts'
-  s.version          = '1.0.10'
+  s.version          = '1.1.0'
   s.summary          = 'Customizable iOS Charts built in Swift.'
 
   s.description      = <<-DESC
@@ -22,10 +22,9 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'Sources/FLCharts/**/*'
-  s.resources = 'Sources/Assets/**'
+  s.source_files = 'Sources/FLCharts/**/*.{swift}'
+  s.resources = 'Sources/FLCharts/Assets/*'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end

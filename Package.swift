@@ -20,7 +20,7 @@ let package = Package(
             name: "FLCharts",
             dependencies: [],
             resources: [
-                .process("Sources/Assets")
+                .process("Assets/Colors.xcassets")
             ])
     ],
     swiftLanguageVersions: [.v5]

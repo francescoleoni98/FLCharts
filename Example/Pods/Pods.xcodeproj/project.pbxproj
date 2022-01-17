@@ -125,7 +125,7 @@
 		CC2D516F7E2D0049C5CA7B6111E65CA0 /* Pods-FLCharts_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FLCharts_Example-frameworks.sh"; sourceTree = "<group>"; };
 		CEF262F8CA84B7A998BF740C97FFE1FF /* Pods-FLCharts_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FLCharts_Example"; path = Pods_FLCharts_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55DCF01D85B5EA0D8A4C9F113E7341B /* Pods-FLCharts_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FLCharts_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		E5E0189C009C880B155E28AB73EBFC88 /* FLCharts */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FLCharts; path = FLCharts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5E0189C009C880B155E28AB73EBFC88 /* FLCharts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FLCharts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC8707620DFD93931DD3EEC6C296276 /* Pods-FLCharts_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FLCharts_Tests"; path = Pods_FLCharts_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5B17496CD4B25C87B64589EB9CCAE9D /* FLCharts.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = FLCharts.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F8D2F4E341C830B73C1694B3200AF82B /* FLCharts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FLCharts.debug.xcconfig; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 		389D75863C3605A62971050119411186 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E5E0189C009C880B155E28AB73EBFC88 /* FLCharts */,
+				E5E0189C009C880B155E28AB73EBFC88 /* FLCharts.framework */,
 				CEF262F8CA84B7A998BF740C97FFE1FF /* Pods-FLCharts_Example */,
 				EFC8707620DFD93931DD3EEC6C296276 /* Pods-FLCharts_Tests */,
 			);
@@ -242,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				A5805E4B278DFCBD00ED3C7E /* FLCharts */,
-				A5805E6F278F592700ED3C7E /* Assets */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -252,7 +251,6 @@
 			children = (
 				A5805E58278DFCBD00ED3C7E /* FLBarChart.swift */,
 				A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */,
-				A5805E7727903B5A00ED3C7E /* ChartHighlightingDelegate.swift */,
 				A5805E50278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift */,
 				A5805E74279032D400ED3C7E /* FLCard */,
 				A5805E55278DFCBD00ED3C7E /* Bar */,
@@ -260,6 +258,7 @@
 				A5FB594B27957E030085ECBC /* Legend */,
 				A5805E4C278DFCBD00ED3C7E /* Models */,
 				A5805E59278DFCBD00ED3C7E /* Helpers */,
+				A5805E6F278F592700ED3C7E /* Assets */,
 			);
 			path = FLCharts;
 			sourceTree = "<group>";
@@ -278,6 +277,7 @@
 		A5805E51278DFCBD00ED3C7E /* HighlightView */ = {
 			isa = PBXGroup;
 			children = (
+				A5805E7727903B5A00ED3C7E /* ChartHighlightingDelegate.swift */,
 				A5805E53278DFCBD00ED3C7E /* HighlightedView.swift */,
 				A5805E52278DFCBD00ED3C7E /* BarHighlightedView.swift */,
 			);
@@ -438,7 +438,7 @@
 			);
 			name = FLCharts;
 			productName = FLCharts;
-			productReference = E5E0189C009C880B155E28AB73EBFC88 /* FLCharts */;
+			productReference = E5E0189C009C880B155E28AB73EBFC88 /* FLCharts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		61ABA785E8B208E86E68895E0451D5AB /* Pods-FLCharts_Example */ = {
@@ -487,6 +487,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					4C9AD16BA052ADC7F6542A93539C391A = {
+						LastSwiftMigration = 1310;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -735,7 +740,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -767,7 +772,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
