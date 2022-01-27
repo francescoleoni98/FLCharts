@@ -34,7 +34,9 @@ FLCharts is available through [CocoaPods](https://cocoapods.org). To install it,
 ```ruby
 pod 'FLCharts'
 ```
-
+<br>
+Here you can find a guide about how to setup a bar chart using FLCharts: <br>
+https://medium.com/@leonifrancesco/set-up-a-basic-bar-chart-using-flcharts-swift-d2f615a10d0b
 
 ## Features <a name="features"></a>
 
