@@ -120,12 +120,18 @@ public class FLCartesianPlane: UIView, FLStylable {
         /* Y Axis labels and ticks */
 
         let dataMinValue: CGFloat = 0
-        let dataMaxValue: CGFloat = chartData.maxYValue(forType: chartType) ?? 0
+        var dataMaxValue: CGFloat = chartData.maxYValue(forType: chartType) ?? 0
+        var step = config.granularityY
         let tickLabelSpacing: CGFloat = 4
         var maxYLabelWidth: CGFloat = 0
         var labelsYAxis: [Label] = []
         
-        for value in stride(from: dataMinValue, through: dataMaxValue, by: config.granularityY) {
+        if dataMaxValue == 0 {
+            dataMaxValue = 1
+            step = 1
+        }
+        
+        for value in stride(from: dataMinValue, through: dataMaxValue, by: step) {
             if value != 0 {
                 let chartTickY = yPosition(forValue: value)
                 

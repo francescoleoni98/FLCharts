@@ -35,7 +35,7 @@ public final class FLMultipleValuesChartBar: UIView, ChartBar {
         for (index, value) in barData.values.enumerated() {
             precondition(legendKeys.count - 1 >= index, "Not enough keys in legendKeys. The number of legendKeys must be equal or greater then the max number of values in one single bar.")
 
-            let percentageOfTotal = value / totalValue
+            let percentageOfTotal = totalValue == 0 ? 0 : value / totalValue
             let viewHeight = barHeight * percentageOfTotal
 
             let view = UIView()

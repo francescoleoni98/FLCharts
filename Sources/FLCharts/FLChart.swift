@@ -16,9 +16,9 @@ public final class FLChart: UIView, FLStylable {
         case line(config: FLLineConfig = FLLineConfig())
     }
     
-    public let cartesianPlane: FLCartesianPlane
+    public private(set) var cartesianPlane: FLCartesianPlane
     
-    internal let plotView: FLPlotView
+    internal private(set) var plotView: FLPlotView
 
     public private(set) var chartData: FLChartData
     
@@ -62,9 +62,43 @@ public final class FLChart: UIView, FLStylable {
                 return linePlotView
             }
         }()
-        
+
         super.init(frame: .zero)
-        
+        self.commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        let data = FLChartData(title: "", data: [3, 1, 2], legendKeys: [], unitOfMeasure: "")
+        self.chartData = data
+        self.config = FLChartConfig()
+        self.cartesianPlane = FLCartesianPlane(data: data, type: .bar())
+        self.plotView = FLLinePlotView(data: data)
+        super.init(coder: coder)
+    }
+    
+    /// Sets up the chart from the storyboard.
+    public func setup(data: FLChartData, type: PlotType) {
+        self.config = FLChartConfig()
+        self.chartData = data
+        self.cartesianPlane = FLCartesianPlane(data: data, type: type)
+        self.plotView = {
+            switch type {
+            case .bar(let bar, let highlightView, let barConfig):
+                let barPlotView = FLBarPlotView(data: data, bar: bar, highlightView: highlightView)
+                barPlotView.barConfig = barConfig
+                return barPlotView
+                
+            case .line(let lineConfig):
+                let linePlotView = FLLinePlotView(data: data)
+                linePlotView.lineConfig = lineConfig
+                return linePlotView
+            }
+        }()
+                
+        self.commonInit()
+    }
+    
+    private func commonInit() {
         self.cartesianPlane.didUpdateChartLayoutGuide = { layoutGuide in
             self.plotView.constraints(equalTo: layoutGuide, directions: .all)
         }
@@ -73,10 +107,6 @@ public final class FLChart: UIView, FLStylable {
         cartesianPlane.constraints(equalTo: self, directions: .all)
         
         addSubview(plotView)
-    }
-        
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Methods

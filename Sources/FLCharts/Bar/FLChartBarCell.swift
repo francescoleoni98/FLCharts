@@ -97,7 +97,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         self.xAxisLabel.text = barData.name
 
         let barHeight = (frame.height - config.margin.bottom) * constant
-                        
+
         let minVal = min(barHeight, frame.width - barConfig.spacing)
         
         if minVal > 0 {

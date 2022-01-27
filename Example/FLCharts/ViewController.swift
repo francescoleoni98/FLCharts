@@ -11,6 +11,8 @@ import FLCharts
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var chartView: FLChart!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -35,11 +37,14 @@ class ViewController: UIViewController {
                                             Key(key: "F3", color: .Gradient.sunset)],
                                unitOfMeasure: "kWh")
         
-        let chart = FLChart(data: data, type: .line())
-//        chart.config = FLChartConfig(granularityY: 20)
-//        chart.cartesianPlane.yAxisPosition = .right
-        chart.showAverageLine = true
+        chartView.setup(data: data, type: .bar(highlightView: BarHighlightedView()))
+        chartView.showAverageLine = true
 
+        let chart = FLChart(data: data, type: .bar())
+        chart.config = FLChartConfig(granularityY: 20)
+        chart.cartesianPlane.yAxisPosition = .right
+        chart.showAverageLine = true
+                
         let card = FLCard(chart: chart, style: .rounded)
         card.showAverage = true
         card.showLegend = true

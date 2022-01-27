@@ -20,7 +20,16 @@ public protocol PlotableData {
 public extension PlotableData {
     
     /// The sum of the entry values.
-    var total: CGFloat { values.reduce(0, +) }
+    var total: CGFloat {
+        guard values.count >= 2 else {
+            return values.first ?? 0
+        }
+        var total: CGFloat = 0
+        for value in values {
+            total += value
+        }
+        return total
+    }
 }
 
 // MARK: - Concretes

@@ -26,6 +26,9 @@ public struct FLChartData {
     internal func maxYValue(forType type: FLChart.PlotType) -> CGFloat? {
         switch type {
         case .bar:
+            guard dataEntries.count >= 2 else {
+                return dataEntries.first?.total
+            }
             return dataEntries.max(by: { $0.total < $1.total })?.total
         case .line:
             var maxValue: CGFloat?
@@ -56,13 +59,12 @@ public struct FLChartData {
     
     /// The average value of the chart.
     public var average: CGFloat {
-        let sumArray = dataEntries.reduce(0) { sum, newValue -> CGFloat in
-            var sum = sum
-            sum += newValue.total
-            return sum
+        var total: CGFloat = 0
+        for value in dataEntries {
+            total += value.total
         }
 
-        return sumArray / CGFloat(dataEntries.count)
+        return total / CGFloat(dataEntries.count)
     }
     
     public var formattedAverage: String {

@@ -105,8 +105,8 @@ extension FLBarPlotView: UICollectionViewDataSource {
 
         if let max = chartData.maxYValue(forType: .bar()) {
             let barData = chartData.dataEntries[indexPath.item]
-            let ratio = barData.total / max
-                        
+            let ratio = max == 0 ? 0 : barData.total / max
+            
             cell.setBarHeight(ratio, barData: barData, legendKeys: chartData.legendKeys, animated: animated)
         }
         

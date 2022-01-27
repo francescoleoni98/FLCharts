@@ -1,3 +1,6 @@
+## 1.2.1
+* **FEATURE:** Added support for Storyboard
+
 ## 1.2.0
 * **FEATURE:** Added support for line chart
 * **FEATURE:** Added predefined colors and gradients

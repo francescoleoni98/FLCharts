@@ -17,8 +17,8 @@ final public class FLCard: UIView {
     private let headerStackView = UIStackView()
     private let stackView = UIStackView()
     private let contentGuide = UILayoutGuide()
-    private let chartView: FLChart
-    private let style: FLCardStyle
+    private var chartView: FLChart
+    private var style: FLCardStyle
     
     /// Whether to show the legend. Default is `true`.
     public var showLegend: Bool = true {
@@ -40,7 +40,23 @@ final public class FLCard: UIView {
         self.chartView = chart
         self.style = style
         super.init(frame: .zero)
-        
+        self.commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        self.chartView = FLChart(data: FLChartData(title: "", data: [0], legendKeys: [], unitOfMeasure: ""), type: .line())
+        self.style = .plain
+        super.init(coder: coder)
+    }
+    
+    /// Sets up the card from the storyboard.
+    public func setup(chart: FLChart, style: FLCardStyle = .plain) {
+        self.chartView = chart
+        self.style = style
+        self.commonInit()
+    }
+    
+    private func commonInit() {
         addLayoutGuide(contentGuide)
         NSLayoutConstraint.activate([
             contentGuide.topAnchor.constraint(equalTo: topAnchor, constant: 15),
@@ -53,11 +69,7 @@ final public class FLCard: UIView {
         configureLegend()
         configureAverageView()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     // MARK: - Configurations
         
     private func configureViews() {
