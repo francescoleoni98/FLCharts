@@ -1,5 +1,5 @@
 //
-//  ChartBarCell.swift
+//  FLChartBarCell.swift
 //  FLCharts
 //
 //  Created by Francesco Leoni on 09/01/22.
@@ -9,13 +9,14 @@
 import UIKit
 
 /// The base chart bar cell.
-/// If you need a different bar style, create a custom class that inherits from ``ChartBarCell`` and override ``configureViews()``.
-final public class ChartBarCell: UICollectionViewCell {
+/// If you need a different bar style, create a custom class that inherits from ``FLChartBarCell`` and override ``configureViews()``.
+final public class FLChartBarCell: UICollectionViewCell {
     
-    static var identifier = "ChartBarCell"
+    static var identifier = "FLChartBarCell"
             
-    public var barData: BarData?
-    public var config: ChartConfig!
+    public var barData: PlotableData?
+    public var config: FLChartConfig!
+    public var barConfig: FLBarConfig!
     public var shouldShowTicks: Bool = true
     
     internal var barView: ChartBar!
@@ -29,6 +30,7 @@ final public class ChartBarCell: UICollectionViewCell {
     public override func prepareForReuse() {
         super.prepareForReuse()
         heightConstraint.isActive = false
+        xAxisLabel.isHidden = false
         barView.prepareForReuse()
     }
     
@@ -48,8 +50,8 @@ final public class ChartBarCell: UICollectionViewCell {
 
         addSubview(xAxisLabel)
         xAxisLabel.textAlignment = .center
-        xAxisLabel.textColor = config.axesLabels.color
         xAxisLabel.font = config.axesLabels.font
+        xAxisLabel.textColor = config.axesLabels.color
         xAxisLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -73,11 +75,12 @@ final public class ChartBarCell: UICollectionViewCell {
 
         addSubview(barView)
         barView.config = config
+        barView.barConfig = barConfig
         barView.configureViews()
         barView.clipsToBounds = true
         barView.translatesAutoresizingMaskIntoConstraints = false
         
-        let halfSpacing = config.bar.spacing / 2
+        let halfSpacing = barConfig.spacing / 2
         
         NSLayoutConstraint.activate([
             barView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: halfSpacing),
@@ -89,16 +92,16 @@ final public class ChartBarCell: UICollectionViewCell {
         heightConstraint.isActive = true
     }
     
-    public func setBarHeight(_ constant: CGFloat, barData: BarData, legendKeys: [Key], animated: Bool = false) {
+    public func setBarHeight(_ constant: CGFloat, barData: PlotableData, legendKeys: [Key], animated: Bool = false) {
         self.barData = barData
         self.xAxisLabel.text = barData.name
 
         let barHeight = (frame.height - config.margin.bottom) * constant
                         
-        let minVal = min(barHeight, frame.width - config.bar.spacing)
+        let minVal = min(barHeight, frame.width - barConfig.spacing)
         
         if minVal > 0 {
-            switch config.bar.radius {
+            switch barConfig.radius {
             case .none:
                 break
                 

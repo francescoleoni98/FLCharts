@@ -17,16 +17,16 @@ public protocol HighlightedView: UIView {
     /// Use this method to update the ``dataValue`` string.
     func update(with value: String?)
     
-    /// Use this method to update the view with ``BarData``.
-    func update(withBarData barData: BarData)
+    /// Use this method to update the view with ``PlotableData``.
+    func update(withBarData barData: PlotableData)
 
-    /// Use this method to update the view with ``ChartData``.
-    func update(withChartData chartData: ChartData?)
+    /// Use this method to update the view with ``FLChartData``.
+    func update(withChartData chartData: FLChartData?)
 }
 
 extension HighlightedView {
     
-    public func update(withBarData barData: BarData) { }
+    public func update(withBarData barData: PlotableData) { }
 
-    public func update(withChartData chartData: ChartData?) { }
+    public func update(withChartData chartData: FLChartData?) { }
 }

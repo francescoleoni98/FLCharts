@@ -1,5 +1,5 @@
 //
-//  MultipleValuesChartBar.swift
+//  FLMultipleValuesChartBar.swift
 //  FLCharts
 //
 //  Created by Francesco Leoni on 09/01/22.
@@ -9,10 +9,11 @@
 import UIKit
 
 /// A bar cell which allows to display multiple values in one bar.
-public final class MultipleValuesChartBar: UIView, ChartBar {
+public final class FLMultipleValuesChartBar: UIView, ChartBar {
     
-    public var config: ChartConfig?
-
+    public var config: FLChartConfig?
+    public var barConfig: FLBarConfig?
+    
     private let barStackView = UIStackView()
     
     public func prepareForReuse() {
@@ -28,7 +29,7 @@ public final class MultipleValuesChartBar: UIView, ChartBar {
         barStackView.constraints(equalTo: self)
     }
     
-    public func configureBar(for barHeight: CGFloat, barData: BarData, legendKeys: [Key]) {
+    public func configureBar(for barHeight: CGFloat, barData: PlotableData, legendKeys: [Key]) {
         let totalValue = barData.total
 
         for (index, value) in barData.values.enumerated() {
@@ -38,7 +39,7 @@ public final class MultipleValuesChartBar: UIView, ChartBar {
             let viewHeight = barHeight * percentageOfTotal
 
             let view = UIView()
-            view.backgroundColor = legendKeys[index].color
+            view.backgroundColor = legendKeys[index].color.mainColor
             
             barStackView.insertArrangedSubview(view, at: 0)
             view.heightAnchor.constraint(equalToConstant: viewHeight).isActive = true

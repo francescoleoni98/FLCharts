@@ -53,15 +53,15 @@ public final class BarHighlightedView: UIView, HighlightedView {
     }
     
     public override var intrinsicContentSize: CGSize {
-        CGSize(width: 10 + dataValueLabel.intrinsicContentSize.width + 5 + unitOfMeasureLabel.intrinsicContentSize.width + 10,
-               height: 10 + dataValueLabel.intrinsicContentSize.height + 10)
+        CGSize(width: 10 + dataValueLabel.intrinsicWidth + 5 + unitOfMeasureLabel.intrinsicWidth + 10,
+               height: 10 + dataValueLabel.intrinsicHeight + 10)
     }
     
     public func update(with value: String?) {
         dataValueLabel.text = value
     }
     
-    public func update(withChartData chartData: ChartData?) {
+    public func update(withChartData chartData: FLChartData?) {
         unitOfMeasureLabel.text = chartData?.unitOfMeasure
     }
 }

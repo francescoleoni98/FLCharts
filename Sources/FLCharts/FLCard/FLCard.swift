@@ -14,9 +14,10 @@ final public class FLCard: UIView {
     private let titleLabel = UILabel()
     private var averageLabel: UILabel?
     private var legend: FLLegend?
+    private let headerStackView = UIStackView()
     private let stackView = UIStackView()
     private let contentGuide = UILayoutGuide()
-    private let chartView: FLBarChart
+    private let chartView: FLChart
     private let style: FLCardStyle
     
     /// Whether to show the legend. Default is `true`.
@@ -35,7 +36,7 @@ final public class FLCard: UIView {
     
     // MARK: - Inits
     
-    public init(chart: FLBarChart, style: FLCardStyle = .plain) {
+    public init(chart: FLChart, style: FLCardStyle = .plain) {
         self.chartView = chart
         self.style = style
         super.init(frame: .zero)
@@ -64,11 +65,17 @@ final public class FLCard: UIView {
         backgroundColor = style.backgroundColor
         layer.cornerRadius = style.cornerRadius
         
-        addSubview(titleLabel)
-        titleLabel.text = chartView.chartData.title
+        addSubview(headerStackView)
+        headerStackView.addArrangedSubview(titleLabel)
+        headerStackView.axis = .horizontal
+        headerStackView.spacing = 10
+        headerStackView.constraints(equalTo: contentGuide, directions: [.top, .horizontal])
+
         titleLabel.textColor = style.textColor
+        titleLabel.text = chartView.chartData.title
+        titleLabel.minimumScaleFactor = 0.7
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.font = .preferredFont(for: .headline, weight: .bold)
-        titleLabel.constraints(equalTo: contentGuide, directions: [.top, .horizontal])
 
         addSubview(stackView)
         stackView.spacing = 10
@@ -98,20 +105,22 @@ final public class FLCard: UIView {
     private func configureAverageView() {
         if showAverage {
             guard averageLabel == nil else { return }
-            
             averageLabel = UILabel()
-            
             guard let averageLabel = averageLabel else { return }
             
             let attributedText = NSMutableAttributedString(string: "avg. ",
-                                                           attributes: [.font : UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor : FLColors.darkGray])
+                                                           attributes: [.font: UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor: FLColors.darkGray])
             attributedText.append(NSAttributedString(string: chartView.chartData.formattedAverage,
-                                                     attributes: [.font : UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor : FLColors.black]))
-            addSubview(averageLabel)
+                                                     attributes: [.font: UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor: FLColors.black]))
+
+            headerStackView.addArrangedSubview(averageLabel)
+            averageLabel.minimumScaleFactor = 0.7
+            averageLabel.adjustsFontSizeToFitWidth = true
             averageLabel.attributedText = attributedText
-            averageLabel.constraints(equalTo: contentGuide, directions: [.top, .trailing])
         } else {
-            averageLabel?.removeFromSuperview()
+            guard let averageLabel = averageLabel else { return }
+            headerStackView.removeArrangedSubview(averageLabel)
+            self.averageLabel?.removeFromSuperview()
         }
     }
 }
@@ -119,14 +128,14 @@ final public class FLCard: UIView {
 extension FLCard: ChartHighlightingDelegate {
     
     public func didBeginHighlighting() {
-        UIView.animate(withDuration: 0.25) {
+        UIView.quickAnimation {
             self.titleLabel.alpha = 0
             self.averageLabel?.alpha = 0
         }
     }
     
     public func didEndHighlighting() {
-        UIView.animate(withDuration: 0.25) {
+        UIView.quickAnimation {
             self.titleLabel.alpha = 1
             self.averageLabel?.alpha = 1
         }

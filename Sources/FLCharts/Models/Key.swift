@@ -7,15 +7,15 @@
 
 import UIKit
 
-public struct Key: Equatable {
+public struct Key {
     
     /// The title of the key.
     var key: String
     
     /// The color of the key and the corresponding part of the bar.
-    var color: UIColor
+    var color: FLColor
     
-    public init(key: String, color: UIColor) {
+    public init(key: String, color: FLColor) {
         self.key = key
         self.color = color
     }

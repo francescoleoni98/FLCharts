@@ -9,10 +9,10 @@ import UIKit
 
 class FLLegend: FLIntrinsicCollectionView {
     
-    private let config: ChartConfig
-    private let chartData: ChartData
+    private let config: FLChartConfig
+    private let chartData: FLChartData
         
-    public init(config: ChartConfig, chartData: ChartData) {
+    public init(config: FLChartConfig, chartData: FLChartData) {
         self.config = config
         self.chartData = chartData
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

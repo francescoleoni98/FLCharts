@@ -15,37 +15,35 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        let monthsData = [BarData(name: "jan", values: [21, 33, 54]),
-                          BarData(name: "feb", values: [56, 23, 17]),
-                          BarData(name: "mar", values: [72, 13.4, 24]),
-                          BarData(name: "apr", values: [42, 33.8, 33]),
-                          BarData(name: "may", values: [86, 15, 42]),
-                          BarData(name: "jun", values: [45, 0, 55]),
-                          BarData(name: "jul", values: [76, 50, 11]),
-                          BarData(name: "aug", values: [12.6, 45, 42]),
-                          BarData(name: "set", values: [66, 23, 24]),
-                          BarData(name: "oct", values: [74, 11, 43]),
-                          BarData(name: "nov", values: [25, 65, 35]),
-                          BarData(name: "dec", values: [54, 43, 23])]
+        let monthsData = [MultiPlotable(name: "jan", values: [30, 0, 0]),
+                          MultiPlotable(name: "feb", values: [55, 0, 0]),
+                          MultiPlotable(name: "mar", values: [70, 0, 0]),
+                          MultiPlotable(name: "apr", values: [45, 30, 0]),
+                          MultiPlotable(name: "may", values: [85, 0, 0]),
+                          MultiPlotable(name: "jun", values: [46, 40, 0]),
+                          MultiPlotable(name: "jul", values: [75, 0, 0]),
+                          MultiPlotable(name: "aug", values: [10, 0, 0]),
+                          MultiPlotable(name: "set", values: [60, 0, 0]),
+                          MultiPlotable(name: "oct", values: [75, 0, 0]),
+                          MultiPlotable(name: "nov", values: [85, 0, 0]),
+                          MultiPlotable(name: "dec", values: [55, 50, 20])]
         
-        let data = ChartData(title: "Consumptions",
-                             barData: monthsData,
-                             legendKeys: [Key(key: "F1", color: UIColor(red: 80/255, green: 214/255, blue: 182/255, alpha: 1)),
-                                          Key(key: "F2", color: UIColor(red: 255/255, green: 238/255, blue: 0/255, alpha: 1)),
-                                          Key(key: "F3", color: UIColor(red: 123/255, green: 72/255, blue: 217/255, alpha: 1))],
-                             unitOfMeasure: "kWh")
+        let data = FLChartData(title: "Consumptions",
+                               data: monthsData,
+                               legendKeys: [Key(key: "F1", color: .Gradient.purpleCyan),
+                                            Key(key: "F2", color: .green),
+                                            Key(key: "F3", color: .Gradient.sunset)],
+                               unitOfMeasure: "kWh")
         
-        let chart = FLBarChart(data: data,
-                               bar: MultipleValuesChartBar.self,
-                               highlightView: BarHighlightedView())
-//        chart.showAverageLine = true
-//        chart.yAxisPosition = .right
-        chart.config = ChartConfig(deltaX: 2, deltaY: 30)
+        let chart = FLChart(data: data, type: .line())
+//        chart.config = FLChartConfig(granularityY: 20)
+//        chart.cartesianPlane.yAxisPosition = .right
+        chart.showAverageLine = true
 
         let card = FLCard(chart: chart, style: .rounded)
         card.showAverage = true
-        card.showLegend = false
-
+        card.showLegend = true
+        
         view.addSubview(card)
         card.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

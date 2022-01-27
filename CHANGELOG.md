@@ -1,3 +1,10 @@
+## 1.2.0
+* **FEATURE:** Added support for line chart
+* **FEATURE:** Added predefined colors and gradients
+* **FEATURE:** Added support for legend in `FLCard`
+* **IMPROVEMENT:** Fixed FLCard header labels compression
+* **IMPROVEMENT:** Changed data entry type with `SinglePlotable` and `MultiPlotable`
+
 ## 1.1.1
 * **IMPROVEMENT:** Fixed NSLayoutConstraint+XT.swift file
 

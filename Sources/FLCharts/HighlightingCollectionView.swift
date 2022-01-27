@@ -15,7 +15,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
     /// A mock view of the collection view used to calculate the position of the highlighted view.
     private let mockView = UIView()
     
-    internal var getChartData: (() -> ChartData)?
+    internal var getChartData: (() -> FLChartData)?
     
     /// The last index path that was highlighted.
     private var lastHighlightedIndexPath: IndexPath?
@@ -24,10 +24,10 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
     private var lineIndicatorView: UIView?
     
     /// The configuration of the chart
-    public var config: ChartConfig = ChartConfig()
+    internal var config: FLChartConfig = FLChartConfig()
     
     /// The view to display when a cell is highlighted.
-    public var highlightedView: HighlightedView? {
+    internal var highlightedView: HighlightedView? {
         didSet {
             guard highlightedView != nil else { return }
 
@@ -66,7 +66,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             insertSubview(lineIndicatorView, belowSubview: collectionView)
             
             highlightedView.isHidden = true
-            highlightedView.frame = CGRect(origin: CGPoint(x: 0, y: -highlightedView.intrinsicContentSize.height - 5),
+            highlightedView.frame = CGRect(origin: CGPoint(x: 0, y: -highlightedView.intrinsicHeight - 5),
                                            size: highlightedView.intrinsicContentSize)
             
             lineIndicatorView.isHidden = true
@@ -88,9 +88,9 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             collectionView.isUserInteractionEnabled = false
             handleHighlight(at: location)
             highlightingDelegate?.didBeginHighlighting()
-            
+
         case .changed:
-            guard mockView.frame.contains(location) else { return }
+            guard shouldContinueHighlighting(at: location) else { return }
             handleHighlight(at: location)
             
         case .ended, .cancelled:
@@ -102,31 +102,31 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             collectionView.isUserInteractionEnabled = true
 
             if let lastHighlightedIndexPath = lastHighlightedIndexPath {
-                collectionView(didUnhighlightItemAt: lastHighlightedIndexPath)
+                collectionView(unhighlightItemAt: lastHighlightedIndexPath)
             }
             highlightingDelegate?.didEndHighlighting()
             
         default: break
         }
     }
-    
+        
+    // MARK: - Highlighting methods
+
     private func handleHighlight(at location: CGPoint) {
         if let indexPath = collectionView.indexPathForItem(at: location) {
             if let lastHighlightedIndexPath = lastHighlightedIndexPath {
                 if lastHighlightedIndexPath != indexPath {
-                    collectionView(didUnhighlightItemAt: lastHighlightedIndexPath)
-                    collectionView(didHighlightItemAt: indexPath)
+                    collectionView(unhighlightItemAt: lastHighlightedIndexPath)
+                    collectionView(highlightItemAt: indexPath)
                 }
             } else {
-                collectionView(didHighlightItemAt: indexPath)
+                collectionView(highlightItemAt: indexPath)
             }
         }
     }
-    
-    // MARK: - Highlighting methods
-    
-    private func collectionView(didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? ChartBarCell, let barData = cell.barData,
+        
+    private func collectionView(highlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? FLChartBarCell, let barData = cell.barData,
            let highlightedView = highlightedView, let lineIndicatorView = lineIndicatorView {
             highlightingDelegate?.didHighlight(cell: cell)
             
@@ -150,7 +150,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
                 }
                 
                 if highlightedViewFrame.maxX > self.mockView.frame.width {
-                    highlightedView.frame.origin.x = self.mockView.frame.width - highlightedView.intrinsicContentSize.width
+                    highlightedView.frame.origin.x = self.mockView.frame.width - highlightedView.intrinsicWidth
                 }
                 
                 lineIndicatorView.center.x = cellFrame.midX
@@ -163,10 +163,18 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
         }
     }
     
-    private func collectionView(didUnhighlightItemAt indexPath: IndexPath) {
+    private func collectionView(unhighlightItemAt indexPath: IndexPath) {
         if let highlightedView = highlightedView, let lineIndicatorView = lineIndicatorView {
             highlightedView.isHidden = true
             lineIndicatorView.isHidden = true
         }
+    }
+    
+    // MARK: - Helpers
+    
+    private func shouldContinueHighlighting(at location: CGPoint) -> Bool {
+        var locationToCheck = location
+        locationToCheck.x -= collectionView.contentOffset.x
+        return mockView.frame.contains(locationToCheck)
     }
 }

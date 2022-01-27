@@ -40,8 +40,20 @@ extension String {
 
 extension UIView {
     
+    var intrinsicWidth: CGFloat {
+        intrinsicContentSize.width
+    }
+    
+    var intrinsicHeight: CGFloat {
+        intrinsicContentSize.height
+    }
+    
+    static func quickAnimation(_ animations: @escaping () -> Void) {
+        animate(withDuration: 0.25, animations: animations)
+    }
+    
     static func animateContraints(for view: UIView, damping: CGFloat, response: CGFloat, delay: TimeInterval = 0) {
-        UIView.animate(damping: 0.6, response: 0.7) {
+        animate(damping: 0.6, response: 0.7) {
             view.layoutIfNeeded()
         }
     }

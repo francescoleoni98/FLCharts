@@ -17,6 +17,7 @@ class FLLegendKeyCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(squareView)
+        squareView.clipsToBounds = true
         squareView.layer.cornerRadius = 3
         squareView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -38,10 +39,10 @@ class FLLegendKeyCell: UICollectionViewCell {
         ])
     }
     
-    public func configure(key: String?, color: UIColor?) {
-        squareView.backgroundColor = color
+    public func configure(key: String?, color: FLColor) {
+        squareView.layer.addSublayer(color.gradientLayer(in: CGRect(x: 0, y: 0, width: 15, height: 15)))
         keyLabel.text = key
-        keyLabel.textColor = color
+        keyLabel.textColor = color.mainColor
     }
     
     required init?(coder: NSCoder) {
