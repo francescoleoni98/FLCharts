@@ -34,7 +34,9 @@ FLCharts is available through [CocoaPods](https://cocoapods.org). To install it,
 ```ruby
 pod 'FLCharts'
 ```
-
+<br>
+Here you can find a guide about how to setup a bar chart using FLCharts: <br>
+https://medium.com/@leonifrancesco/set-up-a-basic-bar-chart-using-flcharts-swift-d2f615a10d0b
 
 ## Features <a name="features"></a>
 
@@ -48,18 +50,13 @@ pod 'FLCharts'
 
 ## Configurations <a name="configurations"></a>
 
-FLChart is highly customizable. You can choose which property to modify through the FLBarChart.config property.
+FLChart is highly customizable. You can choose which property to modify through the .config property.
 
 ```swift
-let barConfig = FLBarConfig(colors: [.red, .blue, .green],
-                            radius: .capsule,
-                            spacing: 10)
-                            
 let axisLabelConfig = FLAxisLabelConfig(color: .black,
                                         font: .preferredFont(forTextStyle: .body))
 
-let config = ChartConfig(bar: barConfig,
-                         axesLabels: axisLabelConfig)
+let config = ChartConfig(axesLabels: axisLabelConfig)
                          
 chart.config.dashedLines.color = .darkGray
 ```
