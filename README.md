@@ -29,12 +29,28 @@ Embed effortlessly your chart in a `FLCard` alogside with a title, an average vl
 
 ## Installation <a name="installation"></a>
 
+### CocoaPods
 FLCharts is available through [CocoaPods](https://cocoapods.org). To install it, add the following line to your Podfile:
 
 ```ruby
 pod 'FLCharts'
 ```
-<br>
+Then run `pod install`
+
+### Carthage
+To install it with Carthage, in your Cartfile add:
+```ruby
+github "francescoleoni98/FLCharts"
+```
+Then run `carthage update`
+
+In XCode > Build phases click the plus button on top left > New Run Script Phases. <br>
+Then in Run Script > Shell script window > add `/usr/local/bin/carthage copy-frameworks`. <br>
+Run Script > Input file window > add `$(SRCROOT)/Carthage/Build/iOS/FLCharts.framework`.
+
+Then, go to `$project_dir/Carthage/Build/iOS` and drag the folder `FLCharts.framework` into your `Xcode Project > Your Target > Frameworks, Libraries and Embedded Content`.
+
+### Example
 Here you can find a guide about how to setup a bar chart using FLCharts: <br>
 https://medium.com/@leonifrancesco/set-up-a-basic-bar-chart-using-flcharts-swift-d2f615a10d0b
 
