@@ -4,7 +4,7 @@
 
 ![Version](https://img.shields.io/cocoapods/v/FLCharts.svg?style=flat) ![Platforms](https://img.shields.io/cocoapods/p/FLCharts.svg?style=flat) ![License](https://img.shields.io/cocoapods/l/FLCharts.svg?style=flat) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) ![Swift](https://img.shields.io/badge/swift-5.0-brightgreen.svg) ![Xcode 11.0+](https://img.shields.io/badge/Xcode-11.0%2B-blue.svg) ![iOS 11.0+](https://img.shields.io/badge/iOS-11.0%2B-blue.svg) [![SPM](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 
-FLCharts is an easy-to-use library to build highly customizable bar charts. It allows you to create your own chart bar `UIView` and use it to display data in the chart.
+FLCharts is an easy-to-use library to build highly customizable bar and line charts. It allows you to create your own chart bar `UIView` and use it to display data in the chart.
 <br>
 Additionally FLCharts allows you to provide a custom `HighlightedView` to show the highlighted bar contents on top of the chart.
 <br>
@@ -111,7 +111,10 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/dark_mode.jpg)
 
+- **Line Chart**
 
+ ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/line_chart.jpg)
+ 
 ## Animations <a name="animations"></a>
 
 - **Panning while highlighted**
