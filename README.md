@@ -14,6 +14,9 @@ Embed effortlessly your chart in a `FLCard` alogside with a title, an average vl
 # Table of Contents
 * [Requirements](#requirements)
 * [Installation](#installation)
+  * [Swift Package Manager](#SPM)
+  * [CocoaPods](#cocoapods)
+  * [Carthage](#carthage)
 * [Features](#features)
 * [Configurations](#configurations)
 * [Docs](#docs)
@@ -29,7 +32,17 @@ Embed effortlessly your chart in a `FLCard` alogside with a title, an average vl
 
 ## Installation <a name="installation"></a>
 
-### CocoaPods
+FLCharts is available through SPM, CocoaPods and Carthage
+
+### Swift Package Manager <a name="SPM"></a>
+
+In XCode go to `File -> Add Packages...`
+
+Search for `https://github.com/francescoleoni98/FLCharts` and click `Add Package`.
+
+Select to which target you want to add it and select `Add Package`.
+
+### CocoaPods <a name="cocoapods"></a>
 FLCharts is available through [CocoaPods](https://cocoapods.org). To install it, add the following line to your Podfile:
 
 ```ruby
@@ -37,7 +50,7 @@ pod 'FLCharts'
 ```
 Then run `pod install`
 
-### Carthage
+### Carthage <a name="carthage"></a>
 To install it with Carthage, in your Cartfile add:
 ```ruby
 github "francescoleoni98/FLCharts"
