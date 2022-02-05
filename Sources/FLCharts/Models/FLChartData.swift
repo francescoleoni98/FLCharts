@@ -30,6 +30,7 @@ public struct FLChartData {
                 return dataEntries.first?.total
             }
             return dataEntries.max(by: { $0.total < $1.total })?.total
+            
         case .line:
             var maxValue: CGFloat?
             dataEntries.forEach { data in
@@ -44,6 +45,13 @@ public struct FLChartData {
                 }
             }
             return maxValue
+            
+        case .scatter:
+            if let dataEntries = dataEntries as? [ScatterPlotable],
+               let maxYValue = dataEntries.maxFor(\.yValue) {
+                return maxYValue + (maxYValue * 0.1)
+            }
+            return nil
         }
     }
     

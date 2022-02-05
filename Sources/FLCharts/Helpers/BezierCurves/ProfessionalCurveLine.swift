@@ -7,6 +7,24 @@
 
 import UIKit
 
+class Line: UIBezierPath {
+    
+    init(points: [CGPoint]) {
+        super.init()
+        
+        guard let first = points.first else { return }
+        move(to: first)
+        
+        for point in points.dropFirst() {
+            addLine(to: point)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class ProfessionalCurveLine {
     
     private static var smoothness: CGFloat = 0.1

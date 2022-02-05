@@ -14,6 +14,7 @@ public final class FLChart: UIView, FLStylable {
                  highlightView: HighlightedView? = nil,
                  config: FLBarConfig = FLBarConfig())
         case line(config: FLLineConfig = FLLineConfig())
+        case scatter(dotDiameter: CGFloat = 3)
     }
     
     public private(set) var cartesianPlane: FLCartesianPlane
@@ -21,6 +22,17 @@ public final class FLChart: UIView, FLStylable {
     internal private(set) var plotView: FLPlotView
 
     public private(set) var chartData: FLChartData
+    
+    /// Whether the chart should scroll. The chart will start scrolling once there is bar outside of the right bound.
+    ///
+    /// - note: This property can be enabled only while using bar charts.
+    public var shouldScroll: Bool = true {
+        didSet {
+            if let barPlotView = plotView as? FLBarPlotView {
+                barPlotView.shouldScroll = shouldScroll
+            }
+        }
+    }
     
     /// Whether to show the average line.
     /// - note: This option will be disabled for line chart with ``MultiPlotable`` data, since is not fair to calculate an average between multiple lines.
@@ -37,6 +49,7 @@ public final class FLChart: UIView, FLStylable {
         }
     }
     
+    /// The highlight view delegate that observes different states of the view.
     public weak var highlightingDelegate: ChartHighlightingDelegate? {
         didSet {
             plotView.highlightingDelegate = highlightingDelegate
@@ -60,6 +73,11 @@ public final class FLChart: UIView, FLStylable {
                 let linePlotView = FLLinePlotView(data: data)
                 linePlotView.lineConfig = lineConfig
                 return linePlotView
+                
+            case .scatter(let diameter):
+                let scatterPlotView = FLScatterPlotView(data: data)
+                scatterPlotView.dotDiameter = diameter
+                return scatterPlotView
             }
         }()
 
@@ -68,7 +86,7 @@ public final class FLChart: UIView, FLStylable {
     }
     
     required init?(coder: NSCoder) {
-        let data = FLChartData(title: "", data: [3, 1, 2], legendKeys: [], unitOfMeasure: "")
+        let data = FLChartData(title: "", data: [1, 2, 3], legendKeys: [], unitOfMeasure: "")
         self.chartData = data
         self.config = FLChartConfig()
         self.cartesianPlane = FLCartesianPlane(data: data, type: .bar())
@@ -92,6 +110,9 @@ public final class FLChart: UIView, FLStylable {
                 let linePlotView = FLLinePlotView(data: data)
                 linePlotView.lineConfig = lineConfig
                 return linePlotView
+                
+            case .scatter:
+                return FLScatterPlotView(data: data)
             }
         }()
                 

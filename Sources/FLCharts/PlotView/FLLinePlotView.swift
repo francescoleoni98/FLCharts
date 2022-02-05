@@ -20,7 +20,7 @@ internal final class FLLinePlotView: UIView, FLPlotView {
     internal init(data: FLChartData) {
         self.chartData = data
         super.init(frame: .zero)
-        backgroundColor = .clear
+        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -77,7 +77,8 @@ internal final class FLLinePlotView: UIView, FLPlotView {
 
                 context.setLineWidth(lineWidth)
                 context.setLineCap(lineConfig.capStyle)
-
+                context.setLineJoin(.round)
+                
                 let dotSpacing = chartWidth / CGFloat(chartData.dataEntries.count - 1)
 
                 // Draws a line for each set of values.
@@ -94,7 +95,14 @@ internal final class FLLinePlotView: UIView, FLPlotView {
                         points.append(CGPoint(x: x, y: y))
                     }
 
-                    let linePath = ProfessionalCurveLine.quadCurvedPath(data: points)
+                    var linePath: UIBezierPath
+                    
+                    if lineConfig.isSmooth {
+                        linePath = ProfessionalCurveLine.quadCurvedPath(data: points)
+                    } else {
+                        linePath = Line(points: points)
+                    }
+                    
                     drawGradient(path: linePath.cgPath, colors: chartData.legendKeys[i].color.colors, isVertical: false, isStroke: true)
                     drawCirclesIfNeeded(for: points)
                 }
@@ -127,7 +135,11 @@ internal final class FLLinePlotView: UIView, FLPlotView {
                     points.append(CGPoint(x: x, y: y))
                 }
 
-                return ProfessionalCurveLine.quadCurvedPath(data: points, smoothness: 0.05)
+                if lineConfig.isSmooth {
+                    return ProfessionalCurveLine.quadCurvedPath(data: points, smoothness: 0.05)
+                } else {
+                    return Line(points: points)
+                }
             }
             
             func drawGradient(path: CGPath, colors: [UIColor], isVertical: Bool, isStroke: Bool) {

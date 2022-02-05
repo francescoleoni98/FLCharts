@@ -1,3 +1,8 @@
+## 1.3.0
+* **FEATURE:** Added Scatter chart
+* **FIX:** Fixed `shouldScroll` property.
+
+
 ## 1.2.1
 * **FEATURE:** Added support for Storyboard
 

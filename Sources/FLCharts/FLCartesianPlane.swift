@@ -7,6 +7,12 @@
 
 import UIKit
 
+internal struct Label {
+    var text: String
+    var size: CGSize = .zero
+    var point: CGPoint
+}
+
 /// Defines a horizontal position.
 public enum YPosition {
     case left
@@ -15,26 +21,20 @@ public enum YPosition {
 
 /// The cartesian plane on which the chart is plotted.
 public class FLCartesianPlane: UIView, FLStylable {
-    
-    private struct Label {
-        var text: String
-        var size: CGSize
-        var yPosition: CGFloat
-    }
-
+        
     /// The configuration of the chart.
     public var config: FLChartConfig = FLChartConfig() {
         didSet {
             updateConfigGranularityY()
         }
     }
-
+    
     /// The data to show in the chart.
     private var chartData: FLChartData
-
+    
     /// The margins of the chart.
     private var margin: UIEdgeInsets { config.margin }
-        
+    
     private var marginForAverageView: CGFloat = 70
     
     private let chartLayoutGuide = UILayoutGuide()
@@ -58,11 +58,15 @@ public class FLCartesianPlane: UIView, FLStylable {
             if case .line = chartType, chartData.numberOfValues > 1 {
                 showAverageLine = false
             }
+            
+            if case .scatter = chartType {
+                showAverageLine = false
+            }
         }
     }
-            
+    
     // MARK: - Inits
-        
+    
     /// Creates a cartesian plane with the provided chart data.
     internal init(data: FLChartData, type: FLChart.PlotType) {
         self.chartData = data
@@ -78,31 +82,31 @@ public class FLCartesianPlane: UIView, FLStylable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Updates the values of the chart.
+    /// Updates the values of the chart with new data.
     internal func updateData(_ data: [PlotableData]) {
         self.chartData.dataEntries = data
         self.updateConfigGranularityY()
         self.setNeedsDisplay()
     }
-
+    
     // MARK: - Configurations
-        
+    
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         drawAxes(in: context, rect: rect)
     }
-        
+    
     private func drawAxes(in context: CGContext, rect: CGRect) {
         context.saveGState()
         
         let halfAxesWidth = config.axesLines.lineWidth / 2
-
+        
         var chartLeft: CGFloat { rect.minX + margin.left }
         var chartRight: CGFloat { rect.maxX - margin.right }
         let chartTop = rect.minY + margin.top - halfAxesWidth
         let chartBottom = rect.maxY - margin.bottom + halfAxesWidth
-
+        
         var chartWidth: CGFloat { chartRight - chartLeft }
         let chartHeight = chartBottom - chartTop
         
@@ -116,15 +120,15 @@ public class FLCartesianPlane: UIView, FLStylable {
         let axesLines = CGMutablePath()
         let ticksLines = CGMutablePath()
         let dashedLines = CGMutablePath()
-
+        
         /* Y Axis labels and ticks */
-
+        
         let dataMinValue: CGFloat = 0
         var dataMaxValue: CGFloat = chartData.maxYValue(forType: chartType) ?? 0
         var step = config.granularityY
         let tickLabelSpacing: CGFloat = 4
         var maxYLabelWidth: CGFloat = 0
-        var labelsYAxis: [Label] = []
+        var YAxisLabels: [Label] = []
         
         if dataMaxValue == 0 {
             dataMaxValue = 1
@@ -142,15 +146,15 @@ public class FLCartesianPlane: UIView, FLStylable {
                     maxYLabelWidth = labelSize.width
                 }
                 
-                labelsYAxis.append(Label(text: text, size: labelSize, yPosition: chartTickY))
+                YAxisLabels.append(Label(text: text, size: labelSize, point: CGPoint(x: 0, y: chartTickY)))
             }
         }
         
         // This prevents the last label to overlap the max label.
-        if let lastLabel = labelsYAxis.last, lastLabel.yPosition - chartTop > 15 {
-            let text = "\(Int(dataMaxValue))"
+        if let lastLabel = YAxisLabels.last, lastLabel.point.y - chartTop > 15 {
+            let text = String(format: "%.1f", dataMaxValue)
             let labelSize = text.size(withSystemFontSize: config.axesLabels.font.pointSize)
-            labelsYAxis.append(Label(text: text, size: labelSize, yPosition: chartTop))
+            YAxisLabels.append(Label(text: text, size: labelSize, point: CGPoint(x: 0, y: chartTop)))
             
             if labelSize.width > maxYLabelWidth {
                 maxYLabelWidth = labelSize.width
@@ -158,12 +162,12 @@ public class FLCartesianPlane: UIView, FLStylable {
         }
         
         config.setMargin(for: yAxisPosition, horizontalMargin: maxYLabelWidth + config.tick.lineLength + tickLabelSpacing)
-                        
-        for label in labelsYAxis {
-            let yPosition = label.yPosition
+        
+        for label in YAxisLabels {
+            let yPosition = label.point.y
             
             drawLabel(label)
-
+            
             if showTicks {
                 if yAxisPosition == .left {
                     ticksLines.addLines(between: [CGPoint(x: chartLeft - config.tick.lineLength, y: yPosition),
@@ -173,68 +177,56 @@ public class FLCartesianPlane: UIView, FLStylable {
                                                   CGPoint(x: chartRight, y: yPosition)])
                 }
             }
-                        
+            
             if showDashedLines {
                 dashedLines.addLines(between: [CGPoint(x: chartLeft, y: yPosition),
                                                CGPoint(x: chartRight, y: yPosition)])
             }
         }
         
-        drawAverageLine()
-
+        drawAverageLineIfNeeded()
+        
         /* X Axis */
         
-        if case .line = chartType {
-            let entriesCount = chartData.dataEntries.count - 1
+        var xAxisProvider: XAxisProvider?
+        let chartRect = CGRect(x: chartLeft, y: chartTop, width: chartWidth, height: chartHeight)
+        
+        switch chartType {
+        case .bar:
+            xAxisProvider = nil
             
-            var usefulChartWidth = chartWidth - marginForAverageView
-            var startXPosition = yAxisPosition == .left ? 0 : marginForAverageView
-            
-            if !showAverageLine {
-                usefulChartWidth = chartWidth
-                startXPosition = 0
-            }
-            
-            let step = usefulChartWidth / CGFloat(entriesCount)
-            
-            for (index, x) in stride(from: startXPosition, through: chartWidth, by: step).enumerated() {
-                guard index.isMultiple(of: config.granularityX) else { continue }
-                
-                let percentageOfTotal = x / chartWidth * 100
-                let viewWidth = chartWidth * percentageOfTotal / 100
-                let XPosition = margin.left + viewWidth
-                
-                // Removes last x axes label when y axes if on the left.
-                if index >= entriesCount, case .left = yAxisPosition {
-                    continue
-                }
-                
-                // Removes first x axes label when y axes if on the right.
-                if x == 0, case .right = yAxisPosition {
-                    continue
-                }
-                
-                let text = chartData.dataEntries[index].name
-                let labelSize = text.size(withSystemFontSize: config.axesLabels.font.pointSize)
-                
-                let labelDrawPoint = CGPoint(
-                    x: XPosition - (labelSize.width / 2),
-                    y: chartBottom + 10)
-                
-                drawLabel(text: text, inPoint: labelDrawPoint)
-                
-                if showTicks, x != 0 {
-                    ticksLines.addLines(between: [CGPoint(x: XPosition, y: chartBottom),
-                                                  CGPoint(x: XPosition, y: chartBottom + config.tick.lineLength)])
-                }
+        case .line:
+            let usefulChartWidth = showAverageLine ? (chartWidth - marginForAverageView) : chartWidth
+            let startXPosition = showAverageLine ? (yAxisPosition == .left ? 0 : marginForAverageView) : 0
 
-                if showDashedLines {
-                    dashedLines.addLines(between: [CGPoint(x: XPosition, y: chartTop),
-                                                   CGPoint(x: XPosition, y: chartBottom)])
-                }
-            }
+            let lineDraw = LineXAxis(data: chartData, config: config, chartRect: chartRect)
+            lineDraw.configureLines(startXPosition: startXPosition, usefulChartWidth: usefulChartWidth)
+            lineDraw.yAxisPosition = yAxisPosition
+
+            xAxisProvider = lineDraw
+            
+        case .scatter:
+            xAxisProvider = ScatterXAxis(data: chartData, config: config, chartRect: chartRect)
         }
         
+        if let xAxisProvider = xAxisProvider {
+            xAxisProvider.xPositions.forEach { xPosition in
+                if showTicks {
+                    ticksLines.addLines(between: [CGPoint(x: xPosition, y: chartBottom),
+                                                  CGPoint(x: xPosition, y: chartBottom + config.tick.lineLength)])
+                }
+                
+                if showDashedLines {
+                    dashedLines.addLines(between: [CGPoint(x: xPosition, y: chartTop),
+                                                   CGPoint(x: xPosition, y: chartBottom)])
+                }
+            }
+            
+            xAxisProvider.labels.forEach { label in
+                drawLabel(text: label.text, inPoint: label.point)
+            }
+        }
+                
         /* Axes lines */
         
         if yAxisPosition == .left {
@@ -256,7 +248,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         context.setLineWidth(config.tick.lineWidth)
         context.addPath(ticksLines)
         context.strokePath()
-
+        
         context.setStrokeColor(config.dashedLines.color.cgColor)
         context.setLineWidth(config.dashedLines.lineWidth)
         context.setLineDash(phase: 0, lengths: [config.dashedLines.dashWidth])
@@ -284,7 +276,7 @@ public class FLCartesianPlane: UIView, FLStylable {
                 labelXPosition = chartRight + config.tick.lineLength + tickLabelSpacing
             }
             
-            let labelDrawPoint = CGPoint(x: labelXPosition, y: label.yPosition - (label.size.height / 2))
+            let labelDrawPoint = CGPoint(x: labelXPosition, y: label.point.y - (label.size.height / 2))
             
             drawLabel(text: label.text, inPoint: labelDrawPoint)
         }
@@ -294,7 +286,7 @@ public class FLCartesianPlane: UIView, FLStylable {
                                     withAttributes: [.font: config.axesLabels.font,
                                                      .foregroundColor: config.axesLabels.color])
         }
-
+        
         func xPositionForAverageLabel(_ label: UILabel) -> CGFloat {
             if yAxisPosition == .left {
                 return chartRight - label.intrinsicWidth - 5
@@ -303,7 +295,7 @@ public class FLCartesianPlane: UIView, FLStylable {
             }
         }
         
-        func drawAverageLine() {
+        func drawAverageLineIfNeeded() {
             if showAverageLine {
                 let averageLineY = yPosition(forValue: chartData.average)
                 let spacingFromLine: CGFloat = 2
@@ -343,7 +335,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     private func updateChartLayoutGuide() {
         var leadingConstant: CGFloat = 0
         var trailingConstant: CGFloat = 0
-
+        
         switch yAxisPosition {
         case .left:
             leadingConstant = margin.left + config.axesLines.lineWidth
@@ -353,7 +345,7 @@ public class FLCartesianPlane: UIView, FLStylable {
             leadingConstant = showAverageLine ? marginForAverageView + margin.left : margin.left
             trailingConstant = -margin.right - config.axesLines.lineWidth
         }
-
+        
         NSLayoutConstraint.activate([
             chartLayoutGuide.topAnchor.constraint(equalTo: topAnchor, constant: margin.top),
             chartLayoutGuide.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingConstant),

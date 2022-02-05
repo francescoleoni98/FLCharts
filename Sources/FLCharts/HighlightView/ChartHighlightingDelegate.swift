@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The highlight view delegate that observes different states of the view.
 public protocol ChartHighlightingDelegate: AnyObject {
     
     /// This method is called once the ``HighlightedView`` appears.
