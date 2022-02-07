@@ -35,10 +35,22 @@ public final class FLChart: UIView, FLStylable {
     }
     
     /// Whether to show the average line.
+    ///
     /// - note: This option will be disabled for line chart with ``MultiPlotable`` data, since is not fair to calculate an average between multiple lines.
     public var showAverageLine: Bool = false {
         didSet {
             cartesianPlane.showAverageLine = showAverageLine
+        }
+    }
+
+    /// Whether to show the axes ticks.
+    public var showTicks: Bool = true {
+        didSet {
+            cartesianPlane.showTicks = showTicks
+            
+            if let barPlotView = plotView as? FLBarPlotView {
+                barPlotView.showTicks = showTicks
+            }
         }
     }
 

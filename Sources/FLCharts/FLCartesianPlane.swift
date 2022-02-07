@@ -41,7 +41,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     public var yAxisPosition: YPosition = .left
     
     /// Whether to show the axes ticks.
-    public var showTicks: Bool = true
+    internal var showTicks: Bool = true
     
     /// Whether to show the dash lines.
     public var showDashedLines: Bool = true
@@ -79,7 +79,8 @@ public class FLCartesianPlane: UIView, FLStylable {
     private let ticksLines = CGMutablePath()
     private let dashedLines = CGMutablePath()
     
-    private let unitLabelSpacing: CGFloat = 20
+    private let xUnitLabelSpacing: CGFloat = -5
+    private let yUnitLabelSpacing: CGFloat = 5
     private let tickLabelSpacing: CGFloat = 4
     private let dataMinValue: CGFloat = 0
     private var dataMaxValue: CGFloat { chartData.maxYValue(forType: chartType) ?? 0 }
@@ -185,6 +186,10 @@ public class FLCartesianPlane: UIView, FLStylable {
             }
             
             labels.add(xAxisProvider.labels)
+            
+            labels.editLabels(types: .xLabel) { label in
+                label.point.y = chartBottom + config.tick.lineLength
+            }
         }
         
         for label in labels.labels {
@@ -236,19 +241,19 @@ public class FLCartesianPlane: UIView, FLStylable {
     private func drawXAxisUnitOfMeasure() {
         if let xUnitOfMeasure = chartData.xAxisUnitOfMeasure {
             let text = xUnitOfMeasure
-            let labelSize = sizeForText(text)
-            config.setMarginBottom(to: labelSize.height + unitLabelSpacing)
+            let size = sizeForText(text)
+            config.setMarginBottom(to: size.height + xUnitLabelSpacing)
             
-            let point = CGPoint(x: ((chartWidth - marginForAverageView).half) - (labelSize.width.half) + margin.left,
-                                y: rect.maxY - labelSize.height)
-            labels.add(Label(text: text, size: labelSize, point: point, type: .xUnitOfMeasure))
+            let point = CGPoint(x: ((chartWidth - marginForAverageView).half) - (size.width.half) + margin.left,
+                                y: rect.maxY - size.height)
+            labels.add(Label(text: text, size: size, point: point, type: .xUnitOfMeasure))
         }
     }
     
     private func drawYAxisUnitOfMeasure() {
         let text = chartData.yAxisUnitOfMeasure
         let size = sizeForText(text)
-        config.setMarginTop(to: size.height + unitLabelSpacing)
+        config.setMarginTop(to: size.height + yUnitLabelSpacing)
         
         let point = CGPoint(x: yAxisPosition == .left ? 0 : chartRight - size.width,
                             y: rect.minY)
@@ -367,7 +372,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         var labelHeight: CGFloat = 0
         
         if let xUnitOfMeasure = labels.find(type: .xUnitOfMeasure).first {
-            labelHeight = xUnitOfMeasure.size.height + unitLabelSpacing
+            labelHeight = xUnitOfMeasure.size.height + xUnitLabelSpacing
         }
                 
         NSLayoutConstraint.activate([

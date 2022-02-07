@@ -16,10 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        var monthsData: [PlotableData] = []
-        
-        monthsData = [
+                
+        let scatterData = [
             ScatterPlotable(x: 3, y: 38.587106591224336),
             ScatterPlotable(x: 3, y: 38.552766707227285),
             ScatterPlotable(x: 3, y: 36.49894052036733),
@@ -51,73 +49,72 @@ class ViewController: UIViewController {
             ScatterPlotable(x: 2, y: 17.049959556070704),
             ScatterPlotable(x: 4, y: 78.14597672470192)
         ]
-                
-//        monthsData = [MultiPlotable(name: "jan", values: [30, 43]),
-//                      MultiPlotable(name: "feb", values: [55, 43]),
-//                      MultiPlotable(name: "mar", values: [70, 43]),
-//                      MultiPlotable(name: "apr", values: [45, 43]),
-//                      MultiPlotable(name: "may", values: [85, 43]),
-//                      MultiPlotable(name: "jun", values: [46, 43]),
-//                      MultiPlotable(name: "jul", values: [75, 43]),
-//                      MultiPlotable(name: "aug", values: [10, 43]),
-//                      MultiPlotable(name: "set", values: [60, 43]),
-//                      MultiPlotable(name: "oct", values: [75, 43]),
-//                      MultiPlotable(name: "nov", values: [85, 43]),
-//                      MultiPlotable(name: "dec", values: [55, 0])]
-
-//        let series1 = FLScatterEntries([])
-//        series1.color = .red
-//        series1.dotDiameter = 8
         
-        let chartData = FLChartData(title: "Consumptions",
+        let scatterChartData = FLChartData(title: "Ages",
+                                    data: scatterData,
+                                    legendKeys: [Key(key: "Age", color: .dusk)],
+                                    unitOfMeasure: "years")
+        scatterChartData.xAxisUnitOfMeasure = "days of birth"
+
+        chartView.config = FLChartConfig(granularityY: 5)
+        chartView.setup(data: scatterChartData, type: .scatter(dotDiameter: 8))
+
+        
+        
+        let monthsData = [MultiPlotable(name: "jan", values: [30, 43]),
+                      MultiPlotable(name: "feb", values: [55, 43]),
+                      MultiPlotable(name: "mar", values: [70, 43]),
+                      MultiPlotable(name: "apr", values: [45, 43]),
+                      MultiPlotable(name: "may", values: [85, 43]),
+                      MultiPlotable(name: "jun", values: [46, 43]),
+                      MultiPlotable(name: "jul", values: [75, 43]),
+                      MultiPlotable(name: "aug", values: [10, 43]),
+                      MultiPlotable(name: "set", values: [60, 43]),
+                      MultiPlotable(name: "oct", values: [75, 43]),
+                      MultiPlotable(name: "nov", values: [85, 43]),
+                      MultiPlotable(name: "dec", values: [55, 0])]
+
+        let barChartData = FLChartData(title: "Consumptions",
                                     data: monthsData,
-                                    legendKeys: [Key(key: "F1", color: .Gradient.purpleCyan),
-                                                 Key(key: "F2", color: .green),
-                                                 Key(key: "F3", color: .Gradient.sunset)],
+                                    legendKeys: [Key(key: "F1", color: .purple),
+                                                 Key(key: "F2", color: .seaBlue)],
                                     unitOfMeasure: "kWh")
-        chartData.xAxisUnitOfMeasure = "days"
+        barChartData.xAxisUnitOfMeasure = "months"
         
         let num = NumberFormatter()
-        num.locale = Locale.current // Change this to another locale if you want to force a specific locale, otherwise this is redundant as the current locale is the default already
-        num.numberStyle = .currency
+        num.locale = .current
+        num.minimumFractionDigits = 1
 
-        chartData.yAxisFormatter = num
-        chartData.xAxisFormatter = num
+        barChartData.yAxisFormatter = num
 
-        chartView.backgroundColor = .red
-        chartView.config = FLChartConfig(granularityY: 5)
-        chartView.setup(data: chartData, type: .scatter(dotDiameter: 8))
-
-        let chart = FLChart(data: chartData, type: .bar())
-//        chart.config = FLChartConfig(granularityX: 3, granularityY: 20)
-//        chart.cartesianPlane.yAxisPosition = .right
-//        chart.cartesianPlane.showTicks = false
-//        chart.showAverageLine = true
-
+        let chart = FLChart(data: barChartData, type: .bar())
+        chart.cartesianPlane.yAxisPosition = .right
+        chart.showAverageLine = true
+    
         let card = FLCard(chart: chart, style: .rounded)
         card.showAverage = true
-        card.showLegend = false
+        card.showLegend = true
         
         view.addSubview(card)
         card.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            card.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            card.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
             card.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            card.heightAnchor.constraint(equalToConstant: 180),
+            card.heightAnchor.constraint(equalToConstant: 220),
             card.widthAnchor.constraint(equalToConstant: 330)
         ])
         
-        let chart2 = FLChart(data: chartData, type: .line())
+        
+        let chart2 = FLChart(data: barChartData, type: .line())
         chart2.cartesianPlane.showUnitsOfMeasure = false
         
         view.addSubview(chart2)
         chart2.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chart2.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 200),
+            chart2.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 230),
             chart2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             chart2.heightAnchor.constraint(equalToConstant: 180),
             chart2.widthAnchor.constraint(equalToConstant: 330)
         ])
-
     }
 }

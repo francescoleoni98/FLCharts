@@ -21,10 +21,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DI4-YA-c8Z" customClass="FLChart" customModule="FLCharts">
-                                <rect key="frame" x="36" y="50" width="303" height="120"/>
+                                <rect key="frame" x="36" y="50" width="303" height="160"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="8P8-mg-TAZ"/>
+                                    <constraint firstAttribute="height" constant="160" id="8P8-mg-TAZ"/>
                                 </constraints>
                             </view>
                         </subviews>
