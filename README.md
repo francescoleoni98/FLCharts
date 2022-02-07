@@ -102,31 +102,35 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  - **Bar Chart**
 
- ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/base_chart.jpg)
+ ![bar chart](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/base_chart.jpg)
 
  - **Multivalue Bar Chart**
 
- ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/multiple_value_chart.jpg)
+ ![multivalue bar chart](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/multiple_value_chart.jpg)
 
  - **Highlighted Bar**
 
- ![alt tag](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
+ ![highlighted bar](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
 
  - **Average view**
 
- ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/average_line.jpg)
+ ![average view](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/average_line.jpg)
 
  - **Bar chart embedded in FLCard**
 
- ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCard.jpg)
+ ![bar chart embedded in FLCard](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCard.jpg)
 
  - **Dark mode**
 
- ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/dark_mode.jpg)
+ ![dark mode](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/dark_mode.jpg)
 
 - **Line Chart**
 
- ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/line_chart.jpg)
+ ![line chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/line_chart.jpg)
+ 
+- **Scatter Chart**
+
+ ![scatter chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/scatter_chart.png)
  
 ## Animations <a name="animations"></a>
 
