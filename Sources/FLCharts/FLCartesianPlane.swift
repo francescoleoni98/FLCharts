@@ -264,12 +264,14 @@ public class FLCartesianPlane: UIView, FLStylable {
         let step = config.granularityY
         var maxYLabelWidth: CGFloat = 0
         
-        for value in stride(from: dataMinValue, through: dataMaxValue, by: step) {
-            guard value > 0 else { continue }
-            
-            let chartTickY = yPosition(forValue: value)
-            let (text, size) = textSizeFrom(value: value)
-            labels.add(Label(text: text, size: size, point: CGPoint(x: 0, y: chartTickY), type: .yLabel))
+        if step > 0 {
+            for value in stride(from: dataMinValue, through: dataMaxValue, by: step) {
+                guard value > 0 else { continue }
+                
+                let chartTickY = yPosition(forValue: value)
+                let (text, size) = textSizeFrom(value: value)
+                labels.add(Label(text: text, size: size, point: CGPoint(x: 0, y: chartTickY), type: .yLabel))
+            }
         }
         
         // This prevents the last label to overlap the max label.
