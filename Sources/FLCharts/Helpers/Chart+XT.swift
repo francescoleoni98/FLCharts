@@ -8,6 +8,20 @@
 
 import UIKit
 
+public extension CGFloat {
+
+    var half: CGFloat {
+        self / 2
+    }
+}
+
+public extension Int {
+
+    var cgFloat: CGFloat {
+        CGFloat(self)
+    }
+}
+
 public extension UIFont {
     
     static func preferredFont(for style: TextStyle, weight: Weight, italic: Bool = false) -> UIFont {

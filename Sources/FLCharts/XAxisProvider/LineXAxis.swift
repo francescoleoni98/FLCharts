@@ -12,16 +12,16 @@ class LineXAxis: XAxisProvider {
     var xPositions: [CGFloat] = []
     var labels: [Label] = []
     
-    var yAxisPosition: YPosition = .left
-    
+    let yAxisPosition: YPosition
     let chartData: FLChartData
     let config: FLChartConfig
     let chartRect: CGRect
 
-    required init(data: FLChartData, config: FLChartConfig, chartRect: CGRect) {
+    required init(data: FLChartData, config: FLChartConfig, chartRect: CGRect, yAxisPosition: YPosition) {
         self.chartData = data
         self.config = config
         self.chartRect = chartRect
+        self.yAxisPosition = yAxisPosition
     }
 
     func configureLines(startXPosition: CGFloat, usefulChartWidth: CGFloat) {
@@ -30,12 +30,6 @@ class LineXAxis: XAxisProvider {
         let step = usefulChartWidth / CGFloat(entriesCount)
 
         for (index, x) in stride(from: startXPosition, through: chartWidth, by: step).enumerated() {
-            guard index.isMultiple(of: config.granularityX) else { continue }
-
-            let percentageOfTotal = x / chartWidth
-            let viewWidth = chartWidth * percentageOfTotal
-            let XPosition = chartLeft + viewWidth
-
             // Removes last x axes label when y axes if on the left.
             if index >= entriesCount, case .left = yAxisPosition {
                 continue
@@ -46,13 +40,19 @@ class LineXAxis: XAxisProvider {
                 continue
             }
 
+            guard index.isMultiple(of: config.granularityX) else { continue }
+
+            let percentageOfTotal = x / chartWidth
+            let viewWidth = chartWidth * percentageOfTotal
+            let XPosition = chartLeft + viewWidth
+
             let text = chartData.dataEntries[index].name
             let labelSize = text.size(withSystemFontSize: config.axesLabels.font.pointSize)
 
-            let labelDrawPoint = CGPoint(x: XPosition - (labelSize.width / 2),
+            let labelDrawPoint = CGPoint(x: XPosition - (labelSize.width.half),
                                          y: chartBottom + 10)
 
-            labels.append(Label(text: text, point: labelDrawPoint))
+            labels.append(Label(text: text, point: labelDrawPoint, type: .xLabel))
 
             if x != 0 {
                 xPositions.append(XPosition)

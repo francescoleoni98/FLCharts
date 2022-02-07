@@ -15,8 +15,6 @@ protocol XAxisProvider {
     var chartData: FLChartData { get }
     var config: FLChartConfig { get }
     var chartRect: CGRect { get }
-    
-    init(data: FLChartData, config: FLChartConfig, chartRect: CGRect)
 }
 
 extension XAxisProvider {

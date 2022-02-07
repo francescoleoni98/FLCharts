@@ -10,9 +10,9 @@ import Foundation
 
 enum Formatters {
     
-    static func toDecimals(value: NSNumber) -> String? {
+    static func toDecimals(value: NSNumber) -> String {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 1
-        return formatter.string(from: value)
+        return formatter.string(from: value) ?? "N/D"
     }
 }

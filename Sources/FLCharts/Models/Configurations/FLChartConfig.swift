@@ -13,7 +13,7 @@ import UIKit
 ///
 /// - note: The order in which you modify this properties matter. Eg. if you assign a new ``FLChart/config`` and then modify the property ``FLChartConfig/axesLineWidth``, this will override the `lineWidth` property of ``FLAxisLineConfig`` and ``FLTickConfig``.
 /// Conversly if you modify the ``FLChartConfig/axesLineWidth`` first and then assign a new ``FLAxisLineConfig``, the latter will override ``FLChartConfig/axesLineWidth``.
-public struct FLChartConfig {
+public class FLChartConfig {
         
     internal private(set) var margin: UIEdgeInsets = UIEdgeInsets(top: 5, left: 45, bottom: 25, right: 0)
 
@@ -79,8 +79,16 @@ public struct FLChartConfig {
     }
     
     // MARK: - Internal methods
+    
+    func setMarginTop(to value: CGFloat) {
+        margin.top += value
+    }
 
-    mutating func setMargin(for yPosition: YPosition, horizontalMargin: CGFloat) {
+    func setMarginBottom(to value: CGFloat) {
+        margin.bottom += value
+    }
+
+    func setMargin(for yPosition: YPosition, horizontalMargin: CGFloat) {
         switch yPosition {
         case .left:
             margin.left = horizontalMargin

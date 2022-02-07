@@ -21,14 +21,11 @@ public extension PlotableData {
     
     /// The sum of the entry values.
     var total: CGFloat {
-        guard values.count >= 2 else {
+        guard values.count > 1 else {
             return values.first ?? 0
         }
-        var total: CGFloat = 0
-        for value in values {
-            total += value
-        }
-        return total
+        
+        return values.reduce(0, +)
     }
 }
 

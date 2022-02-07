@@ -30,6 +30,10 @@ final public class FLCard: UIView {
     /// Whether to show the average view. Default is `true`.
     public var showAverage = true {
         didSet {
+            if !FLChart.canShowAverage(chartType: chartView.cartesianPlane.chartType, data: chartView.chartData) {
+                showAverage = false
+            }
+
             configureAverageView()
         }
     }

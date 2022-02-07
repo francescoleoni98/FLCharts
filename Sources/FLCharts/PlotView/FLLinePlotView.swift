@@ -45,7 +45,7 @@ internal final class FLLinePlotView: UIView, FLPlotView {
             let valuesCount = chartData.numberOfValues
             
             let lineWidth = lineConfig.width
-            let halfLineWidth = lineWidth / 2
+            let halfLineWidth = lineWidth.half
             
             var chartWidth = frame.width
             var chartHeight = frame.height - config.margin.bottom - halfLineWidth
@@ -114,7 +114,7 @@ internal final class FLLinePlotView: UIView, FLPlotView {
 
                     let insetWidth = lineWidth - 2
                     let width = insetWidth < 4 ? lineWidth : insetWidth
-                    let halfWidth = width / 2
+                    let halfWidth = width.half
 
                     for point in points {
                         context.addEllipse(in: CGRect(x: point.x - halfWidth, y: point.y - halfWidth,

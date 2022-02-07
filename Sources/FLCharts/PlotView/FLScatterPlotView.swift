@@ -82,7 +82,7 @@ internal final class FLScatterPlotView: UIView, FLPlotView {
         
         for (point, numberOfAggregations) in aggregations {
             let diameter = CGFloat(numberOfAggregations) * dotDiameter
-            let circleRadius = diameter / 2
+            let circleRadius = diameter.half
             
             context.addEllipse(in: CGRect(x: point.x - circleRadius, y: point.y - circleRadius,
                                           width: diameter, height: diameter))
@@ -122,7 +122,7 @@ class Aggregator {
     }
     
     private func rectFor(_ point: CGPoint) -> CGRect {
-        let radius = diameter / 2
+        let radius = diameter.half
         return CGRect(x: point.x - radius, y: point.y - radius, width: diameter, height: diameter)
     }
 }
@@ -153,8 +153,8 @@ extension Array where Element == CGPoint {
             }
         }
         
-        let centerX = minX + ((maxX - minX) / 2)
-        let centerY = minY + ((maxY - minY) / 2)
+        let centerX = minX + ((maxX - minX).half)
+        let centerY = minY + ((maxY - minY).half)
         return CGPoint(x: centerX, y: centerY)
     }
 }

@@ -62,6 +62,6 @@ public final class BarHighlightedView: UIView, HighlightedView {
     }
     
     public func update(withChartData chartData: FLChartData?) {
-        unitOfMeasureLabel.text = chartData?.unitOfMeasure
+        unitOfMeasureLabel.text = chartData?.yAxisUnitOfMeasure
     }
 }

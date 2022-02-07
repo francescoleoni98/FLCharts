@@ -80,7 +80,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         barView.clipsToBounds = true
         barView.translatesAutoresizingMaskIntoConstraints = false
         
-        let halfSpacing = barConfig.spacing / 2
+        let halfSpacing = barConfig.spacing.half
         
         NSLayoutConstraint.activate([
             barView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: halfSpacing),
@@ -106,7 +106,7 @@ final public class FLChartBarCell: UICollectionViewCell {
                 break
                 
             case .capsule:
-                barView.layer.cornerRadius = minVal / 2
+                barView.layer.cornerRadius = minVal.half
 
             case .custom(let radius):
                 barView.layer.cornerRadius = radius

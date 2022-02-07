@@ -86,7 +86,7 @@ public final class FLChart: UIView, FLStylable {
     }
     
     required init?(coder: NSCoder) {
-        let data = FLChartData(title: "", data: [1, 2, 3], legendKeys: [], unitOfMeasure: "")
+        let data = FLChartData(title: "", data: [0], legendKeys: [], unitOfMeasure: "")
         self.chartData = data
         self.config = FLChartConfig()
         self.cartesianPlane = FLCartesianPlane(data: data, type: .bar())
@@ -136,5 +136,17 @@ public final class FLChart: UIView, FLStylable {
         chartData.dataEntries = data
         cartesianPlane.updateData(data)
         plotView.updateData(data)
+    }
+    
+    internal static func canShowAverage(chartType: FLChart.PlotType, data: FLChartData) -> Bool {
+        if case .line = chartType, data.numberOfValues > 1 {
+            return false
+        }
+        
+        if case .scatter = chartType {
+            return false
+        }
+        
+        return true
     }
 }

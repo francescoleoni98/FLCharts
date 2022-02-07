@@ -14,6 +14,8 @@
 		A51C893827AD8D94001E9304 /* XAxisProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C893727AD8D94001E9304 /* XAxisProvider.swift */; };
 		A51C893A27AD8DAE001E9304 /* ScatterXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C893927AD8DAE001E9304 /* ScatterXAxis.swift */; };
 		A51C893C27AD8DBF001E9304 /* LineXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C893B27AD8DBF001E9304 /* LineXAxis.swift */; };
+		A51C894027B0338C001E9304 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C893F27B0338C001E9304 /* Label.swift */; };
+		A51C894227B033A1001E9304 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C894127B033A1001E9304 /* Labels.swift */; };
 		A5603A3D2799E1980062C7D1 /* FLColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5603A3C2799E1980062C7D1 /* FLColor.swift */; };
 		A5603A402799FAD60062C7D1 /* PlayfulCurveLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5603A3F2799FAD60062C7D1 /* PlayfulCurveLine.swift */; };
 		A5603A422799FAE60062C7D1 /* ProfessionalCurveLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5603A412799FAE50062C7D1 /* ProfessionalCurveLine.swift */; };
@@ -103,6 +105,8 @@
 		A51C893727AD8D94001E9304 /* XAxisProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XAxisProvider.swift; sourceTree = "<group>"; };
 		A51C893927AD8DAE001E9304 /* ScatterXAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterXAxis.swift; sourceTree = "<group>"; };
 		A51C893B27AD8DBF001E9304 /* LineXAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineXAxis.swift; sourceTree = "<group>"; };
+		A51C893F27B0338C001E9304 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		A51C894127B033A1001E9304 /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		A5603A3C2799E1980062C7D1 /* FLColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColor.swift; sourceTree = "<group>"; };
 		A5603A3F2799FAD60062C7D1 /* PlayfulCurveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayfulCurveLine.swift; sourceTree = "<group>"; };
 		A5603A412799FAE50062C7D1 /* ProfessionalCurveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCurveLine.swift; sourceTree = "<group>"; };
@@ -285,6 +289,15 @@
 			path = PlotView;
 			sourceTree = "<group>";
 		};
+		A51C893E27B03384001E9304 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				A51C893F27B0338C001E9304 /* Label.swift */,
+				A51C894127B033A1001E9304 /* Labels.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
 		A5603A3E2799FAC30062C7D1 /* BezierCurves */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,10 +320,10 @@
 			children = (
 				A5FB595627970DC90085ECBC /* FLChart.swift */,
 				A5FB59542796BAE40085ECBC /* FLCartesianPlane.swift */,
-				A51C893627AD8D77001E9304 /* XAxisProvider */,
-				A51C893D27AD8E7B001E9304 /* PlotView */,
 				A5805E54278DFCBD00ED3C7E /* HighlightingCollectionView.swift */,
 				A5805E50278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift */,
+				A51C893627AD8D77001E9304 /* XAxisProvider */,
+				A51C893D27AD8E7B001E9304 /* PlotView */,
 				A5805E74279032D400ED3C7E /* FLCard */,
 				A5805E55278DFCBD00ED3C7E /* Bar */,
 				A5805E51278DFCBD00ED3C7E /* HighlightView */,
@@ -357,13 +370,14 @@
 		A5805E59278DFCBD00ED3C7E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A51C893E27B03384001E9304 /* Labels */,
+				A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */,
 				A5603A3C2799E1980062C7D1 /* FLColor.swift */,
 				A5805E72278F595F00ED3C7E /* FLColors.swift */,
 				A5FB594E27957E2C0085ECBC /* FLIntrinsicCollectionView.swift */,
 				A5805E792790474F00ED3C7E /* FLShadow.swift */,
 				A5805E5B278DFCBD00ED3C7E /* Formatters.swift */,
 				A5FB5949279482C70085ECBC /* NSLayoutConstraint+XT.swift */,
-				A5805E5A278DFCBD00ED3C7E /* Chart+XT.swift */,
 				A5603A3E2799FAC30062C7D1 /* BezierCurves */,
 			);
 			path = Helpers;
@@ -645,6 +659,7 @@
 				A5805E7827903B5B00ED3C7E /* ChartHighlightingDelegate.swift in Sources */,
 				A5FB59552796BAE40085ECBC /* FLCartesianPlane.swift in Sources */,
 				A5FB595F27970EF80085ECBC /* FLLinePlotView.swift in Sources */,
+				A51C894027B0338C001E9304 /* Label.swift in Sources */,
 				A5805E5C278DFCBD00ED3C7E /* FLChartConfig.swift in Sources */,
 				A5603A422799FAE60062C7D1 /* ProfessionalCurveLine.swift in Sources */,
 				A5805E7C2790476600ED3C7E /* FLCardStyle.swift in Sources */,
@@ -653,6 +668,7 @@
 				A5805E76279032DF00ED3C7E /* FLCard.swift in Sources */,
 				A5805E5D278DFCBD00ED3C7E /* FLChartData.swift in Sources */,
 				A7C43404AD22C8E0A682C980A5CD8D49 /* FLCharts-dummy.m in Sources */,
+				A51C894227B033A1001E9304 /* Labels.swift in Sources */,
 				A5805E63278DFCBD00ED3C7E /* FLChartBarCell.swift in Sources */,
 				A5FB594A279482C70085ECBC /* NSLayoutConstraint+XT.swift in Sources */,
 				A5FB594D27957E0A0085ECBC /* FLLegendKeyCell.swift in Sources */,
