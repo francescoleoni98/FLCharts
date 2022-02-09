@@ -10,13 +10,13 @@ import UIKit
 import FLCharts
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var chartView: FLChart!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-                
+        
         let scatterData = [
             ScatterPlotable(x: 3, y: 38.587106591224336),
             ScatterPlotable(x: 3, y: 38.552766707227285),
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
             ScatterPlotable(x: 5, y: 22.358078282814976),
             ScatterPlotable(x: 7, y: 98.02773021009796),
             ScatterPlotable(x: 8, y: 85.68037835676299),
-
+            
             ScatterPlotable(x: 4, y: 62.508555646363185),
             ScatterPlotable(x: 6, y: 61.78378326561926),
             ScatterPlotable(x: 6, y: 96.53751839181793),
@@ -51,46 +51,46 @@ class ViewController: UIViewController {
         ]
         
         let scatterChartData = FLChartData(title: "Ages",
-                                    data: scatterData,
-                                    legendKeys: [Key(key: "Age", color: .dusk)],
-                                    unitOfMeasure: "years")
+                                           data: scatterData,
+                                           legendKeys: [Key(key: "Age", color: .dusk)],
+                                           unitOfMeasure: "years")
         scatterChartData.xAxisUnitOfMeasure = "days of birth"
-
+        
         chartView.config = FLChartConfig(granularityY: 5)
         chartView.setup(data: scatterChartData, type: .scatter(dotDiameter: 8))
-
+        
         
         
         let monthsData = [MultiPlotable(name: "jan", values: [30, 43]),
-                      MultiPlotable(name: "feb", values: [55, 43]),
-                      MultiPlotable(name: "mar", values: [70, 43]),
-                      MultiPlotable(name: "apr", values: [45, 43]),
-                      MultiPlotable(name: "may", values: [85, 43]),
-                      MultiPlotable(name: "jun", values: [46, 43]),
-                      MultiPlotable(name: "jul", values: [75, 43]),
-                      MultiPlotable(name: "aug", values: [10, 43]),
-                      MultiPlotable(name: "set", values: [60, 43]),
-                      MultiPlotable(name: "oct", values: [75, 43]),
-                      MultiPlotable(name: "nov", values: [85, 43]),
-                      MultiPlotable(name: "dec", values: [55, 0])]
-
+                          MultiPlotable(name: "feb", values: [55, 43]),
+                          MultiPlotable(name: "mar", values: [70, 43]),
+                          MultiPlotable(name: "apr", values: [45, 43]),
+                          MultiPlotable(name: "may", values: [85, 43]),
+                          MultiPlotable(name: "jun", values: [46, 43]),
+                          MultiPlotable(name: "jul", values: [75, 43]),
+                          MultiPlotable(name: "aug", values: [10, 43]),
+                          MultiPlotable(name: "set", values: [60, 43]),
+                          MultiPlotable(name: "oct", values: [75, 43]),
+                          MultiPlotable(name: "nov", values: [85, 43]),
+                          MultiPlotable(name: "dec", values: [55, 0])]
+        
         let barChartData = FLChartData(title: "Consumptions",
-                                    data: monthsData,
-                                    legendKeys: [Key(key: "F1", color: .purple),
-                                                 Key(key: "F2", color: .seaBlue)],
-                                    unitOfMeasure: "kWh")
+                                       data: monthsData,
+                                       legendKeys: [Key(key: "F1", color: .purple),
+                                                    Key(key: "F2", color: .seaBlue)],
+                                       unitOfMeasure: "kWh")
         barChartData.xAxisUnitOfMeasure = "months"
         
         let num = NumberFormatter()
         num.locale = .current
         num.minimumFractionDigits = 1
-
+        
         barChartData.yAxisFormatter = num
-
+        
         let chart = FLChart(data: barChartData, type: .bar())
         chart.cartesianPlane.yAxisPosition = .right
         chart.showAverageLine = true
-    
+        
         let card = FLCard(chart: chart, style: .rounded)
         card.showAverage = true
         card.showLegend = true
