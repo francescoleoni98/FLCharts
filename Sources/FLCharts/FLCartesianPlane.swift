@@ -283,7 +283,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         config.setMargin(for: yAxisPosition, horizontalMargin: maxYLabelWidth + config.tick.lineLength + tickLabelSpacing)
         
         func textSizeFrom(value: CGFloat) -> (text: String, size: CGSize) {
-            let text = chartData.yAxisFormatter?.string(for: value) ?? Formatters.toDecimals(value: NSNumber(value: value))
+            let text = chartData.yAxisFormatter.string(from: NSNumber(value: value))
             let size = sizeForText(text)
             
             if size.width > maxYLabelWidth {

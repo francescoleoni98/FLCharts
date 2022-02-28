@@ -1,3 +1,7 @@
+## 1.4.0
+* **FEATURE:** Added pie chart.
+* **FEATURE:** Added possibility to create your own `FLLegend` view.
+
 ## 1.3.1
 * **FEATURE:** Added formatters and unit of measure labels for x and y axes.
 * **FIX:** Fixed crash if `FLChartData` contains few data.

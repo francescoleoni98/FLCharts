@@ -8,11 +8,47 @@
 
 import Foundation
 
-enum Formatters {
+public enum FLFormatter {
     
-    static func toDecimals(value: NSNumber) -> String {
+    /// A decimal style format.
+    case decimal(Int)
+    
+    /// A percent style format.
+    case percent
+    
+    /// A currency style format that uses the provided locale. Default is `.current`.
+    case currency(Locale = .current)
+    
+    /// Uses the provided custom formatter.
+    case custom(Formatter)
+    
+    var formatter: Formatter {
         let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 1
-        return formatter.string(from: value) ?? "N/D"
+
+        switch self {
+        case .decimal(let numberOfDecimals):
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = numberOfDecimals
+
+        case .percent:
+            formatter.numberStyle = .percent
+            formatter.maximumFractionDigits = 2
+            formatter.multiplier = 1
+
+        case .currency(let locale):
+            formatter.locale = locale
+            formatter.numberStyle = .currency
+            formatter.maximumFractionDigits = 2
+            formatter.usesGroupingSeparator = true
+            
+        case .custom(let formatter):
+            return formatter
+        }
+        
+        return formatter
+    }
+    
+    func string(from value: NSNumber) -> String {
+        return formatter.string(for: value) ?? "N/D"
     }
 }

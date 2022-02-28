@@ -52,6 +52,11 @@ public class FLColor {
 
 public extension FLColor {
     
+    static let white = UIColor(named: "white", in: bundle, compatibleWith: nil) ?? .white
+    static let lightGray = UIColor(named: "light gray", in: bundle, compatibleWith: nil) ?? backupLightGray
+    static let mediumGray = FLColor(hex: "A7A6A8")
+    static let darkGray = UIColor(named: "dark gray", in: bundle, compatibleWith: nil) ?? backupDarkGray
+    static let black = UIColor(named: "black", in: bundle, compatibleWith: nil) ?? .black
     static let mintGreen = FLColor(hex: "E2FAE7")
     static let green = FLColor(hex: "72BF82")
     static let dusk = FLColor(hex: "E1614C")
@@ -64,9 +69,6 @@ public extension FLColor {
     static let blue = FLColor(hex: "4EBCFF")
     static let seaBlue = FLColor(hex: "4266E8")
     static let darkBlue = FLColor(hex: "1B205E")
-    static let lightGray = FLColor(hex: "E8E7EA")
-    static let mediumGray = FLColor(hex: "A7A6A8")
-    static let darkGray = FLColor(hex: "545454")
 
     enum Gradient {
         
@@ -81,5 +83,41 @@ public extension FLColor {
         public static let purpleClear = FLColor(startColor: purple.mainColor, endColor: purple.mainColor.withAlphaComponent(0.2))
         public static let purpleCyan = FLColor(startColor: purple.mainColor, endColor: UIColor(hex: "7BD1FC"))
         public static let sunset = FLColor(startColor: UIColor(hex: "FF8E2D"), endColor: UIColor(hex: "FF4E7A"))
+    }
+}
+
+public extension FLColor {
+    
+    private static var bundle: Bundle {
+      Bundle(for: self)
+    }
+    
+    private static let backupLightGray = UIColor(red: 242/255, green: 242/255, blue: 246/255, alpha: 1)
+    private static let backupDarkGray = UIColor(red: 209/255, green: 209/255, blue: 213/255, alpha: 1)
+
+}
+
+extension UIColor {
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let scanner = Scanner(string: hexString)
+        
+        if hexString.hasPrefix("#") {
+            scanner.scanLocation = 1
+        }
+        
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 }

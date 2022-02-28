@@ -8,10 +8,46 @@
 
 import UIKit
 
+extension RangeReplaceableCollection where Element: Equatable {
+    
+    @discardableResult
+    mutating func remove(object element: Element) -> Element? {
+        if let index = firstIndex(of: element) {
+            return remove(at: index)
+        }
+        return nil
+    }
+    
+    @discardableResult
+    mutating func remove(objects elements: [Element]) -> [Element] {
+        var removedObjects: [Element] = []
+        
+        for element in elements {
+            if let index = firstIndex(of: element) {
+                removedObjects.append(remove(at: index))
+            }
+        }
+        
+        return removedObjects
+    }
+}
+
+extension Sequence {
+    func maxFor<T: Comparable>(_ keyPath: KeyPath<Element, T>) -> T? {
+        self.max { first, second in
+            first[keyPath: keyPath] < second[keyPath: keyPath]
+        }?[keyPath: keyPath]
+    }
+}
+
 public extension CGFloat {
 
     var half: CGFloat {
         self / 2
+    }
+    
+    static func degrees(_ degrees: CGFloat) -> CGFloat {
+        degrees * .pi / 180
     }
 }
 

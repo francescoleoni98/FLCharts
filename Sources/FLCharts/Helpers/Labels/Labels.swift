@@ -28,7 +28,9 @@ class Labels {
     }
     
     func add(_ label: Label) {
-        labels.append(label)
+        if !labels.contains(label) {
+            labels.append(label)
+        }
     }
     
     func add(_ labels: [Label]) {

@@ -18,7 +18,7 @@ public struct FLTickConfig {
     /// The width of the tick lines.
     public var lineWidth: CGFloat
     
-    public init(color: UIColor = FLColors.darkGray, lineWidth: CGFloat = 1, lineLength: CGFloat = 5) {
+    public init(color: UIColor = FLColor.darkGray, lineWidth: CGFloat = 1, lineLength: CGFloat = 5) {
         self.color = color
         self.lineWidth = lineWidth
         self.lineLength = lineLength

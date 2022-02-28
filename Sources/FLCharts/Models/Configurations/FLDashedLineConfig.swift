@@ -18,7 +18,7 @@ public struct FLDashedLineConfig {
     /// The width of each dash.
     public var dashWidth: CGFloat
     
-    public init(color: UIColor = FLColors.darkGray, lineWidth: CGFloat = 1, dashWidth: CGFloat = 3) {
+    public init(color: UIColor = FLColor.darkGray, lineWidth: CGFloat = 1, dashWidth: CGFloat = 3) {
         self.color = color
         self.lineWidth = lineWidth
         self.dashWidth = dashWidth

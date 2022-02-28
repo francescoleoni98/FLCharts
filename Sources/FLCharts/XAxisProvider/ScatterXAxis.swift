@@ -42,7 +42,7 @@ class ScatterXAxis: XAxisProvider {
 
             let xPosition = value + chartLeft
             
-            let text = chartData.xAxisFormatter?.string(for: config.granularityX * index) ?? String(config.granularityX * index)
+            let text = chartData.xAxisFormatter?.string(from: NSNumber(value: config.granularityX * index)) ?? String(config.granularityX * index)
             let labelSize = text.size(withSystemFontSize: config.axesLabels.font.pointSize)
             
             let labelDrawPoint = CGPoint(x: xPosition - (labelSize.width.half),

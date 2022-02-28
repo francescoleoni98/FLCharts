@@ -30,9 +30,9 @@ public struct FLAverageViewConfig {
     public init(lineWidth: CGFloat = 2,
                 primaryFont: UIFont = .preferredFont(for: .subheadline, weight: .semibold),
                 secondaryFont: UIFont = .preferredFont(for: .footnote, weight: .medium),
-                primaryColor: UIColor = FLColors.black,
-                secondaryColor: UIColor = FLColors.darkGray,
-                lineColor: UIColor = FLColors.darkGray) {
+                primaryColor: UIColor = FLColor.black,
+                secondaryColor: UIColor = FLColor.darkGray,
+                lineColor: UIColor = FLColor.darkGray) {
         self.lineWidth = lineWidth
         self.primaryFont = primaryFont
         self.secondaryFont = secondaryFont

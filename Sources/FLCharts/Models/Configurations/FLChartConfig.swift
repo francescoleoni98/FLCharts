@@ -50,7 +50,7 @@ public class FLChartConfig {
     
     /// The color of the axes lines and ticks.
     /// - note: If used after setting ``FLAxisLabelConfig``, ``FLAxisLineConfig`` and ``FLTickConfig``, this will override their relative property.
-    public var axesColor: UIColor = FLColors.darkGray {
+    public var axesColor: UIColor = FLColor.darkGray {
         didSet {
             tick.color = axesColor
             axesLines.color = axesColor
@@ -66,7 +66,7 @@ public class FLChartConfig {
                 dashedLines: FLDashedLineConfig = FLDashedLineConfig(),
                 averageView: FLAverageViewConfig = FLAverageViewConfig(),
                 axesLineWidth: CGFloat = 1,
-                axesColor: UIColor = FLColors.darkGray) {
+                axesColor: UIColor = FLColor.darkGray) {
         self.granularityX = granularityX
         self.granularityY = granularityY
         self.tick = tick

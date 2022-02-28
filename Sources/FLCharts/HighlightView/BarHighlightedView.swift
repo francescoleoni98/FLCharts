@@ -20,10 +20,10 @@ public final class BarHighlightedView: UIView, HighlightedView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = FLColors.lightGray
+        backgroundColor = FLColor.lightGray
         layer.cornerRadius = 5
         dataValueLabel.text = "0"
-        dataValueLabel.textColor = FLColors.black
+        dataValueLabel.textColor = FLColor.black
         dataValueLabel.textAlignment = .right
         dataValueLabel.font = .preferredFont(for: .subheadline, weight: .bold)
         dataValueLabel.translatesAutoresizingMaskIntoConstraints = false

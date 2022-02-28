@@ -7,7 +7,8 @@
 
 import UIKit
 
-class Label {
+class Label: Equatable {
+    
     var text: String
     var size: CGSize = .zero
     var point: CGPoint
@@ -26,5 +27,10 @@ class Label {
         case topYLabel
         case xUnitOfMeasure
         case yUnitOfMeasure
+    }
+    
+    static func == (lhs: Label, rhs: Label) -> Bool {
+        lhs.text == rhs.text &&
+        lhs.point == rhs.point
     }
 }

@@ -7,16 +7,16 @@
 
 import UIKit
 
-class FLIntrinsicCollectionView: UICollectionView {
+public class FLIntrinsicCollectionView: UICollectionView {
     
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
         if bounds.size != intrinsicContentSize {
             invalidateIntrinsicContentSize()
         }
     }
 
-    override var intrinsicContentSize: CGSize {
+    public override var intrinsicContentSize: CGSize {
         self.contentSize
     }
 }

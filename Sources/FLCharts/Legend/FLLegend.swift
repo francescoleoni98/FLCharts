@@ -7,16 +7,25 @@
 
 import UIKit
 
-class FLLegend: FLIntrinsicCollectionView {
+public class FLLegend: FLIntrinsicCollectionView {
     
-    private let config: FLChartConfig
-    private let chartData: FLChartData
-        
-    public init(config: FLChartConfig, chartData: FLChartData) {
-        self.config = config
-        self.chartData = chartData
+    private let keys: [Key]
+    private var formatter: FLFormatter
+    private var maxCellWidth: CGFloat = 0
+    
+    public init(keys: [Key], formatter: FLFormatter = .decimal(2)) {
+        self.keys = keys
+        self.formatter = formatter
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-
+            
+        for key in keys {
+            let stringWidth = key.textWithValue(formatter: formatter).string.size(withSystemFontSize: 13).width
+            
+            if maxCellWidth < stringWidth {
+                maxCellWidth = stringWidth
+            }
+        }
+        
         delegate = self
         dataSource = self
         isScrollEnabled = false
@@ -32,27 +41,26 @@ class FLLegend: FLIntrinsicCollectionView {
 
 extension FLLegend: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return chartData.legendKeys.count
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return keys.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FLLegendKeyCell.identifier, for: indexPath) as? FLLegendKeyCell else { return UICollectionViewCell() }
-        let key = chartData.legendKeys[indexPath.item]
-        cell.configure(key: key.key, color: key.color)
+        let key = keys[indexPath.item]
+        cell.configure(key: key, formatter: formatter)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let stringWidth = chartData.legendKeys[indexPath.item].key.size(withSystemFontSize: 13)
-        return CGSize(width: stringWidth.width + 15 + 10 + 5, height: 15)
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: maxCellWidth + 15 + 5 + 5, height: 15)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
 }

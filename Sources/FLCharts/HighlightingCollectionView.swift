@@ -73,7 +73,7 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             lineIndicatorView.layer.cornerRadius = 1
             lineIndicatorView.frame = CGRect(x: 0, y: -5, width: 2, height: 0)
             lineIndicatorView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-            lineIndicatorView.backgroundColor = FLColors.darkGray
+            lineIndicatorView.backgroundColor = FLColor.darkGray
         }
     }
     
@@ -131,9 +131,9 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
             highlightingDelegate?.didHighlight(cell: cell)
             
             let cellFrame = cell.convert(cell.bounds, to: self.mockView)
-            
-            highlightedView.update(with: Formatters.toDecimals(value: NSNumber(value: barData.total)))
-            highlightedView.update(withChartData: getChartData?())
+            let chartData = getChartData?()
+            highlightedView.update(with: chartData?.yAxisFormatter.string(from: NSNumber(value: barData.total)))
+            highlightedView.update(withChartData: chartData)
             highlightedView.update(withBarData: barData)
             highlightedView.frame.size = highlightedView.intrinsicContentSize
             highlightedView.isHidden = false

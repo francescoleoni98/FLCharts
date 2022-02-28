@@ -17,12 +17,12 @@ public struct FLCardStyle {
 
 public extension FLCardStyle {
     
-    static let plain = FLCardStyle(backgroundColor: FLColors.white,
-                                   textColor: FLColors.black,
+    static let plain = FLCardStyle(backgroundColor: FLColor.white,
+                                   textColor: FLColor.black,
                                    shadow: FLShadow(color: .black, radius: 10, opacity: 0.1))
     
-    static let rounded = FLCardStyle(backgroundColor: FLColors.white,
-                                     textColor: FLColors.black,
+    static let rounded = FLCardStyle(backgroundColor: FLColor.white,
+                                     textColor: FLColor.black,
                                      cornerRadius: 12,
                                      shadow: FLShadow(color: .black, radius: 10, opacity: 0.1))
 }

@@ -33,16 +33,16 @@ class FLLegendKeyCell: UICollectionViewCell {
             squareView.widthAnchor.constraint(equalToConstant: 15),
 
             keyLabel.topAnchor.constraint(equalTo: topAnchor),
-            keyLabel.leadingAnchor.constraint(equalTo: squareView.trailingAnchor, constant: 10),
+            keyLabel.leadingAnchor.constraint(equalTo: squareView.trailingAnchor, constant: 5),
             keyLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             keyLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
-    public func configure(key: String?, color: FLColor) {
-        squareView.layer.addSublayer(color.gradientLayer(in: CGRect(x: 0, y: 0, width: 15, height: 15)))
-        keyLabel.text = key
-        keyLabel.textColor = color.mainColor
+    public func configure(key: Key, formatter: FLFormatter) {
+        squareView.layer.addSublayer(key.color.gradientLayer(in: CGRect(x: 0, y: 0, width: 15, height: 15)))
+        keyLabel.attributedText = key.textWithValue(formatter: formatter)
+        keyLabel.textColor = FLColor.black
     }
     
     required init?(coder: NSCoder) {

@@ -28,10 +28,10 @@ public class FLChartData {
     /// The formatter to use for the x axis values.
     ///
     /// - note: Works only for scatter chart. For bar and line charts provide the ``PlotableData/name`` already formatted.
-    public var xAxisFormatter: Formatter?
+    public var xAxisFormatter: FLFormatter?
 
     /// The formatter to use for the y axis values. If not defined, the values will be formatted with two decimals.
-    public var yAxisFormatter: Formatter?
+    public var yAxisFormatter: FLFormatter = .decimal(2)
     
     /// The average value of the chart.
     public var average: CGFloat {
@@ -43,7 +43,7 @@ public class FLChartData {
     }
     
     public var formattedAverage: String {
-        Formatters.toDecimals(value: NSNumber(value: average))
+        yAxisFormatter.string(from: NSNumber(value: average))
     }
         
     internal var numberOfValues: Int {
