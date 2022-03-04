@@ -132,6 +132,11 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  ![scatter chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/scatter_chart.png)
  
+- **Pie Chart**
+
+ ![pie chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/pie_chart.png)
+
+
 ## Animations <a name="animations"></a>
 
 - **Panning while highlighted**
