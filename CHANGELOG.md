@@ -1,3 +1,6 @@
+## 1.4.1
+* **Fix:** Fix duplicated Y axise labels.
+
 ## 1.4.0
 * **FEATURE:** Added pie chart.
 * **FEATURE:** Added possibility to create your own `FLLegend` view.
