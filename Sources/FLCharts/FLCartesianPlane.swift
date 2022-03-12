@@ -120,6 +120,8 @@ public class FLCartesianPlane: UIView, FLStylable {
         
         context.saveGState()
         
+        labels.labels.removeAll()
+
         guard dataMaxValue > 0 else {
             drawNoDataLabel()
             return
