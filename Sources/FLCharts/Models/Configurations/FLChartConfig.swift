@@ -87,6 +87,13 @@ public class FLChartConfig {
     func setMarginBottom(to value: CGFloat) {
         margin.bottom += value
     }
+        
+    func setMarginDefault(){
+        margin.top = 5
+        margin.left = 45
+        margin.botton = 25
+        margin.right = 0
+    }
 
     func setMargin(for yPosition: YPosition, horizontalMargin: CGFloat) {
         switch yPosition {
