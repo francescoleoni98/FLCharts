@@ -136,6 +136,10 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  ![pie chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/pie_chart.png)
 
+ - **Radar Chart**
+
+ ![radar chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLChart_radar_chart.png)
+
 
 ## Animations <a name="animations"></a>
 
