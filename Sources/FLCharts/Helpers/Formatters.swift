@@ -19,6 +19,8 @@ public enum FLFormatter {
     /// A currency style format that uses the provided locale. Default is `.current`.
     case currency(Locale = .current)
     
+    case suffix(String)
+    
     /// Uses the provided custom formatter.
     case custom(Formatter)
     
@@ -41,6 +43,10 @@ public enum FLFormatter {
             formatter.maximumFractionDigits = 2
             formatter.usesGroupingSeparator = true
             
+        case .suffix(let suffix):
+            formatter.negativeSuffix = " " + suffix
+            formatter.positiveSuffix = " " + suffix
+
         case .custom(let formatter):
             return formatter
         }

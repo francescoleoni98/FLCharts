@@ -10,6 +10,12 @@ import UIKit
 class Labels {
     
     var labels: [Label] = []
+    private var font: UIFont = .systemFont(ofSize: 15)
+    
+    convenience init(font: UIFont) {
+        self.init()
+        self.font = font
+    }
     
     func editLabels(types: Label.Role..., handler: (Label) -> Void) {
         var labels: [Label] = []
@@ -35,5 +41,16 @@ class Labels {
     
     func add(_ labels: [Label]) {
         self.labels.append(contentsOf: labels)
+    }
+    
+    func drawLabels(color: UIColor = FLColor.black) {
+        for label in labels {
+            (label.text as NSString).draw(at: label.point, withAttributes: [.font: font,
+                                                                            .foregroundColor: color])
+        }
+    }
+    
+    func clearLabels() {
+        labels.removeAll()
     }
 }

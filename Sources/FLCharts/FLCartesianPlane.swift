@@ -120,7 +120,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         
         context.saveGState()
         
-        labels.labels.removeAll()
+        labels.clearLabels()
         config.resetDefaultMargins()
 
         guard dataMaxValue > 0 else {

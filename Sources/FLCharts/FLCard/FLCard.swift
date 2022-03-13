@@ -17,8 +17,7 @@ final public class FLCard: UIView {
     private let headerStackView = UIStackView()
     private let stackView = UIStackView()
     private let contentGuide = UILayoutGuide()
-    private var chartView: FLChart?
-    private var pieChartView: FLPieChart?
+    private var chartView: CardableChart!
     private var style: FLCardStyle
     
     /// Whether to show the legend. Default is `true`.
@@ -31,14 +30,12 @@ final public class FLCard: UIView {
     /// Whether to show the average view. Default is `true`.
     public var showAverage = true {
         didSet {
-            if let _ = pieChartView {
-                showAverage = false
-            }
-            
-            if let chartView = chartView {
+            if let chartView = chartView as? FLChart {
                 if !FLChart.canShowAverage(chartType: chartView.cartesianPlane.chartType, data: chartView.chartData) {
                     showAverage = false
                 }
+            } else {
+                showAverage = false
             }
             
             configureAverageView()
@@ -47,14 +44,11 @@ final public class FLCard: UIView {
     
     // MARK: - Inits
     
-    public init(chart: FLPieChart, style: FLCardStyle = .rounded) {
-        self.pieChartView = chart
-        self.style = style
-        super.init(frame: .zero)
-        self.commonInit()
-    }
-    
-    public init(chart: FLChart, style: FLCardStyle = .rounded) {
+    /// Creates a card with a chart, title, average and legend.
+    /// - Parameters:
+    ///   - chart: The chart to display.
+    ///   - style: The style of the card.
+    public init(chart: CardableChart, style: FLCardStyle = .rounded) {
         self.chartView = chart
         self.style = style
         super.init(frame: .zero)
@@ -67,15 +61,12 @@ final public class FLCard: UIView {
     }
     
     /// Sets up the card from the storyboard.
-    public func setup(chart: FLChart, style: FLCardStyle = .rounded) {
+    /// Creates a card with a chart, title, average and legend.
+    /// - Parameters:
+    ///   - chart: The chart to display.
+    ///   - style: The style of the card.
+    public func setup(chart: CardableChart, style: FLCardStyle = .rounded) {
         self.chartView = chart
-        self.style = style
-        self.commonInit()
-    }
-    
-    /// Sets up the card from the storyboard.
-    public func setup(chart: FLPieChart, style: FLCardStyle = .rounded) {
-        self.pieChartView = chart
         self.style = style
         self.commonInit()
     }
@@ -102,39 +93,35 @@ final public class FLCard: UIView {
         layer.cornerRadius = style.cornerRadius
         
         addSubview(headerStackView)
-        headerStackView.addArrangedSubview(titleLabel)
-        headerStackView.axis = .horizontal
         headerStackView.spacing = 10
+        headerStackView.axis = .horizontal
+        headerStackView.addArrangedSubview(titleLabel)
         headerStackView.constraints(equalTo: contentGuide, directions: [.top, .horizontal])
 
-        titleLabel.textColor = style.textColor
-        titleLabel.text = chartView?.chartData.title ?? pieChartView?.title
+        titleLabel.text = chartView.title
         titleLabel.minimumScaleFactor = 0.7
+        titleLabel.textColor = style.textColor
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.font = .preferredFont(for: .headline, weight: .bold)
 
         addSubview(stackView)
         stackView.spacing = 10
         stackView.axis = .vertical
+        stackView.addArrangedSubview(chartView)
         stackView.constraints(equalTo: contentGuide, directions: [.bottom, .horizontal])
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15)
         ])
         
-        if let chartView = chartView {
-            stackView.addArrangedSubview(chartView)
+        if let chartView = chartView as? FLChart {
             chartView.highlightingDelegate = self
         }
-        
-        if let pieChartView = pieChartView {
-            stackView.addArrangedSubview(pieChartView)
-        }
     }
-    
+
     private func configureLegend() {
         if showLegend {
             guard legend == nil else { return }
-            legend = FLLegend(keys: chartView?.chartData.legendKeys ?? pieChartView?.chartData.map { $0.key } ?? [], formatter: pieChartView?.formatter ?? .decimal(2))
+            legend = FLLegend(keys: chartView.legendKeys, formatter: chartView.formatter)
             guard let legend = legend else { return }
             stackView.addArrangedSubview(legend)
         } else {
@@ -152,7 +139,7 @@ final public class FLCard: UIView {
             
             let attributedText = NSMutableAttributedString(string: "avg. ",
                                                            attributes: [.font: UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor: FLColor.darkGray])
-            attributedText.append(NSAttributedString(string: chartView?.chartData.formattedAverage ?? "",
+            attributedText.append(NSAttributedString(string: (chartView as? FLChart)?.chartData.formattedAverage ?? "",
                                                      attributes: [.font: UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor: FLColor.black]))
 
             headerStackView.addArrangedSubview(averageLabel)

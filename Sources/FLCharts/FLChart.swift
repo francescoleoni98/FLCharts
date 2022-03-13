@@ -7,8 +7,8 @@
 
 import UIKit
 
-public final class FLChart: UIView, FLStylable {
-    
+public final class FLChart: UIView, FLStylable, MutableCardableChart {
+        
     public enum PlotType {
         case bar(bar: ChartBar.Type = FLMultipleValuesChartBar.self,
                  highlightView: HighlightedView? = nil,
@@ -23,6 +23,10 @@ public final class FLChart: UIView, FLStylable {
 
     public private(set) var chartData: FLChartData
     
+    public internal(set) var title: String = ""
+    public internal(set) var legendKeys: [Key] = []
+    public internal(set) var formatter: FLFormatter = .decimal(2)
+
     /// Whether the chart should scroll. The chart will start scrolling once there is bar outside of the right bound.
     ///
     /// - note: This property can be enabled only while using bar charts.
@@ -73,6 +77,9 @@ public final class FLChart: UIView, FLStylable {
     public init(data: FLChartData, type: PlotType) {
         self.config = FLChartConfig()
         self.chartData = data
+        self.title = data.title
+        self.legendKeys = data.legendKeys
+        self.formatter = data.yAxisFormatter
         self.cartesianPlane = FLCartesianPlane(data: data, type: type)
         self.plotView = {
             switch type {
@@ -110,6 +117,9 @@ public final class FLChart: UIView, FLStylable {
     public func setup(data: FLChartData, type: PlotType) {
         self.config = FLChartConfig()
         self.chartData = data
+        self.title = data.title
+        self.legendKeys = data.legendKeys
+        self.formatter = data.yAxisFormatter
         self.cartesianPlane = FLCartesianPlane(data: data, type: type)
         self.plotView = {
             switch type {

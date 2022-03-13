@@ -1,3 +1,6 @@
+## 1.5.0
+* **FEATURE:** Added radar chart.
+
 ## 1.4.1
 * **Fix:** Fix duplicated Y axise labels.
 
