@@ -20,8 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DI4-YA-c8Z" customClass="FLCard" customModule="FLCharts">
-                                <rect key="frame" x="36" y="94" width="303" height="160"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DI4-YA-c8Z" customClass="FLChart" customModule="FLCharts">
+                                <rect key="frame" x="36" y="24" width="303" height="160"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="8P8-mg-TAZ"/>
@@ -31,7 +31,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="DI4-YA-c8Z" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="LNP-J6-XuM"/>
-                            <constraint firstItem="DI4-YA-c8Z" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="d7i-NV-rMG"/>
+                            <constraint firstItem="DI4-YA-c8Z" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-20" id="d7i-NV-rMG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DI4-YA-c8Z" secondAttribute="trailing" constant="20" id="m3O-0X-ryF"/>
                         </constraints>
                     </view>

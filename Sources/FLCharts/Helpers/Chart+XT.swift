@@ -81,6 +81,12 @@ public extension UIFont {
     }
 }
 
+public extension UIViewController {
+    
+    func runOnMain(after interval: TimeInterval, execute work: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + interval, execute: work)
+    }
+}
 
 extension String {
     func size(withSystemFontSize pointSize: CGFloat) -> CGSize {

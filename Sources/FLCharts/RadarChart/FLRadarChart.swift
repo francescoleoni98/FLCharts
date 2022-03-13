@@ -82,7 +82,6 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         self.legendKeys = data.map { $0.key }
         self.formatter = formatter
         self.labels = Labels(font: config.labelsFont)
-        self.backgroundColor = .clear
         self.setNeedsDisplay()
     }
     
@@ -148,7 +147,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         for dataSet in data {
             context.addPath(dataPath(in: rect, data: dataSet.data).cgPath)
             context.setStrokeColor(dataSet.key.color.mainColor.cgColor)
-            context.setFillColor(dataSet.key.color.mainColor.withAlphaComponent(0.5).cgColor)
+            context.setFillColor(dataSet.key.color.mainColor.withAlphaComponent(0.4).cgColor)
             context.setLineWidth(2)
             context.setLineJoin(.round)
             

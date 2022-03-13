@@ -57,3 +57,7 @@ public struct FLShadow {
     }
 }
 
+public extension FLShadow {
+    
+    static let basic = FLShadow(color: .black, radius: 10, opacity: 0.1)
+}

@@ -28,6 +28,7 @@ final public class FLCard: UIView {
     }
     
     /// Whether to show the average view. Default is `true`.
+    /// - Note: This property can be used only with bar and line charts. Else it will be `false`.
     public var showAverage = true {
         didSet {
             if let chartView = chartView as? FLChart {
