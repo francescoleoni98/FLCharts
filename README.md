@@ -166,3 +166,6 @@ francescoleoni98 | https://github.com/francescoleoni98
 ## License <a name="license"></a>
 
 FLCharts is available under the MIT license. See the LICENSE file for more info.
+
+### My Apps
+[Linkboard - Bookmarks Manager](https://apps.apple.com/app/linkboard-websites-manager/id1612805234)
