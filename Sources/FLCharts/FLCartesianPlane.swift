@@ -121,6 +121,9 @@ public class FLCartesianPlane: UIView, FLStylable {
         context.saveGState()
         
         labels.clearLabels()
+        axesLines = CGMutablePath()
+        ticksLines = CGMutablePath()
+        dashedLines = CGMutablePath()
         config.resetDefaultMargins()
 
         guard dataMaxValue > 0 else {
