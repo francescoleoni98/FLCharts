@@ -1,8 +1,14 @@
+## 1.6.0
+* **FEATURE:** Added possibility to choose color of the line of line chart for each x and y segment.
+* **FEATURE:** Added possibility to create segmented gradients in `FLColor`.
+* **FIX:** Fixed bug with drawing axes when device orientation changes.
+
+
 ## 1.5.0
 * **FEATURE:** Added radar chart.
 
 ## 1.4.1
-* **Fix:** Fix duplicated Y axise labels.
+* **FIX:** Fix duplicated Y axise labels.
 
 ## 1.4.0
 * **FEATURE:** Added pie chart.

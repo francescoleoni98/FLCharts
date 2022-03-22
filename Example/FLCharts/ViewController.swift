@@ -26,15 +26,23 @@ class ViewController: UIViewController {
         chartView.setup(data: scatterChartData, type: .scatter(dotDiameter: 8))
         chartView.cartesianPlane.yAxisPosition = .right
         chartView.config = FLChartConfig(granularityY: 30)
-
+                
         let barChartData = FLChartData(title: "Consumptions",
                                        data: monthsData,
-                                       legendKeys: [Key(key: "F1", color: .purple),
-                                                    Key(key: "F2", color: .seaBlue)],
+                                       legendKeys: [
+                                        Key(key: "F1", yThresholds: [40 : .red,
+                                                                     56 : .blue,
+                                                                     84 : .green,
+                                                                     100 : .orange],
+                                            data: monthsData),
+                                        Key(key: "F2", xColors: [.red,
+                                                                 .blue,
+                                                                 .green,
+                                                                 .orange])],
                                        unitOfMeasure: "kWh")
         barChartData.xAxisUnitOfMeasure = "months"
         barChartData.yAxisFormatter = .decimal(2)
-                
+        
         let pieChart = FLPieChart(title: "Platforms",
                                   data: [FLPiePlotable(value: 51.7, key: Key(key: "Desktop", color: FLColor(hex: "138CFD"))),
                                          FLPiePlotable(value: 25.2, key: Key(key: "Mobile", color: FLColor(hex: "4DA8FF"))),
@@ -63,9 +71,9 @@ class ViewController: UIViewController {
         radarChart.showYAxisLabels = true
         
         let lineChart = FLChart(data: barChartData, type: .line())
-        lineChart.cartesianPlane.showUnitsOfMeasure = false
+//        lineChart.cartesianPlane.showUnitsOfMeasure = false
         
-        let card = FLCard(chart: radarChart, style: .rounded)
+        let card = FLCard(chart: lineChart, style: .rounded)
         card.showAverage = true
         card.showLegend = true
         
@@ -92,18 +100,18 @@ class ViewController: UIViewController {
 extension ViewController {
     
     var monthsData: [MultiPlotable] {
-        [MultiPlotable(name: "jan", values: [30, 6]),
-         MultiPlotable(name: "feb", values: [55, 43]),
-         MultiPlotable(name: "mar", values: [70, 54]),
-         MultiPlotable(name: "apr", values: [45, 43]),
-         MultiPlotable(name: "may", values: [85, 23]),
-         MultiPlotable(name: "jun", values: [46, 43]),
-         MultiPlotable(name: "jul", values: [75, 12]),
-         MultiPlotable(name: "aug", values: [10, 32]),
-         MultiPlotable(name: "set", values: [60, 43]),
-         MultiPlotable(name: "oct", values: [75, 15]),
-         MultiPlotable(name: "nov", values: [85, 64]),
-         MultiPlotable(name: "dec", values: [55, 32])]
+        [MultiPlotable(name: "jan", values: [30, 24]),
+         MultiPlotable(name: "feb", values: [55, 44]),
+         MultiPlotable(name: "mar", values: [70, 15]),
+         MultiPlotable(name: "apr", values: [45, 68]),
+         MultiPlotable(name: "may", values: [85, 46]),
+         MultiPlotable(name: "jun", values: [46, 73]),
+         MultiPlotable(name: "jul", values: [75, 46]),
+         MultiPlotable(name: "aug", values: [10, 24]),
+         MultiPlotable(name: "set", values: [60, 74]),
+         MultiPlotable(name: "oct", values: [75, 72]),
+         MultiPlotable(name: "nov", values: [85, 105]),
+         MultiPlotable(name: "dec", values: [55, 66])]
     }
     
     var scatterData: [ScatterPlotable] {

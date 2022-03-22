@@ -9,33 +9,89 @@ import UIKit
 
 public class FLColor {
     
-    let startColor: UIColor
-    let endColor: UIColor
+    public let colors: [UIColor]
+
+    public let startColor: UIColor
+    public let endColor: UIColor
+
+    public var locations: [CGFloat]?
 
     public var mainColor: UIColor { startColor }
     
-    public var colors: [UIColor] {
-        [startColor, endColor]
-    }
-
     public var cgColors: [CGColor] {
-        [startColor.cgColor, endColor.cgColor]
+        colors.map { $0.cgColor }
     }
     
     // MARK: - Init
     
+    /// Creates a color from an hex string.
+    /// - Parameter hex: The hex string that describes a color.
     public convenience init(hex: String) {
         self.init(UIColor(hex: hex))
     }
-
+    
+    /// Creates an FLColor from an UIColor.
+    /// - Parameter color: The UIColor to convert to FLColor.
     public init(_ color: UIColor) {
         self.startColor = color
         self.endColor = color
+        self.colors = [startColor, endColor]
     }
+    
+    /// Creates a color the can handle a gradient.
+    /// - Parameters:
+    ///   - colors: The colors of the gradients.
+    ///   - segmentedGradient: Whether the transition between colors is smooth or sharp.
+    public init(colors: [UIColor], locations: [CGFloat]? = nil, segmentedGradient: Bool) {
+        self.startColor = colors.first ?? .white
+        self.endColor = colors.last ?? .black
+        
+        if segmentedGradient {
+            if let locations = locations {
+                self.locations = []
+                
+                for location in locations {
+                    self.locations?.append(location)
+                    self.locations?.append(location)
+                }
 
+                self.locations?.removeFirst(2)
+                self.locations?.insert(0, at: 0)
+            } else {
+                self.locations = []
+                
+                let step = 1 / CGFloat(colors.count)
+                
+                for i in stride(from: 0, through: 1, by: step) {
+                    self.locations?.append(i)
+                    
+                    if i != 0 && i != 1 {
+                        self.locations?.append(i)
+                    }
+                }
+            }
+
+            var tempColors: [UIColor] = []
+            
+            for color in colors {
+                tempColors.append(color)
+                tempColors.append(color)
+            }
+            
+            self.colors = tempColors
+        } else {
+            self.colors = colors
+        }
+    }
+    
+    /// Creates a color the can handle a gradient.
+    /// - Parameters:
+    ///   - startColor: The first color of the gradient.
+    ///   - endColor: The last color of the gradient.
     public init(startColor: UIColor, endColor: UIColor) {
         self.startColor = startColor
         self.endColor = endColor
+        self.colors = [startColor, endColor]
     }
         
     // MARK: - Methods
@@ -45,6 +101,11 @@ public class FLColor {
         gradientLayer.colors = cgColors
         gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        
+        if let locations = locations {
+            gradientLayer.locations = locations.map { NSNumber(value: $0) }
+        }
+
         gradientLayer.frame = rect
         return gradientLayer
     }
@@ -52,6 +113,7 @@ public class FLColor {
 
 public extension FLColor {
     
+    static let clear = FLColor(.clear)
     static let white = UIColor(named: "white", in: bundle, compatibleWith: nil) ?? .white
     static let lightGray = UIColor(named: "light gray", in: bundle, compatibleWith: nil) ?? backupLightGray
     static let mediumGray = FLColor(hex: "A7A6A8")

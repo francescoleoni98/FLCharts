@@ -103,7 +103,9 @@ internal final class FLLinePlotView: UIView, FLPlotView {
                         linePath = Line(points: points)
                     }
                     
-                    drawGradient(path: linePath.cgPath, colors: chartData.legendKeys[i].color.colors, isVertical: false, isStroke: true)
+                    let key = chartData.legendKeys[i]
+                    let color = key.color
+                    drawGradient(path: linePath.cgPath, colors: color.colors, locations: color.locations, isVertical: key.isVertical, isStroke: true)
                     drawCirclesIfNeeded(for: points)
                 }
             }
@@ -142,7 +144,7 @@ internal final class FLLinePlotView: UIView, FLPlotView {
                 }
             }
             
-            func drawGradient(path: CGPath, colors: [UIColor], isVertical: Bool, isStroke: Bool) {
+            func drawGradient(path: CGPath, colors: [UIColor], locations: [CGFloat]? = nil, isVertical: Bool, isStroke: Bool) {
                 context.addPath(path)
                 if isStroke {
                     context.replacePathWithStrokedPath()
@@ -161,13 +163,15 @@ internal final class FLLinePlotView: UIView, FLPlotView {
                 let endPoint: CGPoint
                 
                 if isVertical {
-                    endPoint = CGPoint(x: 0,y: bounds.height)
+                    endPoint = CGPoint(x: 0, y: chartHeight + lineWidth)
                 } else {
-                    endPoint = CGPoint(x: bounds.width,y: 0)
+                    endPoint = CGPoint(x: bounds.width, y: 0)
                 }
 
                 context.drawLinearGradient(CGGradient(colorSpace: CGColorSpaceCreateDeviceRGB(),
-                                                      colorComponents: colorComponents, locations: nil, count: colors.count)!,
+                                                      colorComponents: colorComponents,
+                                                      locations: locations,
+                                                      count: colors.count)!,
                                            start: startPoint,
                                            end: endPoint,
                                            options: CGGradientDrawingOptions(rawValue: 0))

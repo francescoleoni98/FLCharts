@@ -28,7 +28,7 @@ public struct FLLineConfig {
     /// The configuration of the circles.
     public var circleColor: UIColor
     
-    public init(width: CGFloat = 4, capStyle: CGLineCap = .round, backgroundFill: FLColor = FLColor.Gradient.lightBlue, showCircles: Bool = false, isSmooth: Bool = true, circleColor: UIColor = .white) {
+    public init(width: CGFloat = 4, capStyle: CGLineCap = .round, backgroundFill: FLColor? = FLColor.Gradient.lightBlue, showCircles: Bool = false, isSmooth: Bool = true, circleColor: UIColor = .white) {
         self.width = width
         self.capStyle = capStyle
         self.showCircles = showCircles
