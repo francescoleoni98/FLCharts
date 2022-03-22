@@ -124,6 +124,10 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  ![dark mode](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/dark_mode.jpg)
 
+ - **Line Chart X and Y Segments**
+
+ ![x y segments](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/x_y_segments_line_chart.jpg)
+
 - **Line Chart**
 
  ![line chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/line_chart.jpg)
