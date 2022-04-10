@@ -84,10 +84,8 @@ FLChart is highly customizable. You can choose which property to modify through 
 ```swift
 let axisLabelConfig = FLAxisLabelConfig(color: .black,
                                         font: .preferredFont(forTextStyle: .body))
-
-let config = ChartConfig(axesLabels: axisLabelConfig)
                          
-chart.config.dashedLines.color = .darkGray
+chart.config = ChartConfig(axesLabels: axisLabelConfig)
 ```
 
 
