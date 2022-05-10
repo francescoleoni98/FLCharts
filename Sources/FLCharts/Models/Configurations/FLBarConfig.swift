@@ -37,7 +37,7 @@ public struct FLBarConfig {
     public var limitWidth: Bool
     
     public init(radius: Radius = .corners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], 3),
-                width: CGFloat = 25,
+                width: CGFloat = 12,
                 spacing: CGFloat = 5,
                 limitWidth: Bool = false) {
         self.radius = radius
