@@ -27,7 +27,7 @@ public struct FLBarConfig {
     public var radius: Radius
 
     /// The width of the bar.
-    /// - note: This value will be used as absolute value if ``FLBarPlotView/shouldScroll`` is set to `true`. Else the width of the bar will be calculated based on the width of the chart but will not be larger than this value
+    /// - note: If ``FLBarPlotView/shouldScroll`` is set to `true` this value will be used as absolute value for the bar width. Else the width of the bar will be calculated based on the width of the chart but If ``limitWidth`` is set to `true` this value will be used as the maximum width for the bar
     public var width: CGFloat
     
     /// The space between each chart bar.
