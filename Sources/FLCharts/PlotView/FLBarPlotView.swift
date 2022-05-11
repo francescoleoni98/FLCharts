@@ -129,7 +129,10 @@ extension FLBarPlotView: UICollectionViewDelegateFlowLayout {
             return CGSize(width: cellWidth, height: collectionView.frame.height)
         } else {
             let numberOfBars = CGFloat(chartData.dataEntries.count)
-            let cellWidth = collectionView.frame.width / numberOfBars
+            var cellWidth = collectionView.frame.width / numberOfBars
+            if barConfig.limitWidth {
+                cellWidth = min(cellWidth, barConfig.width)
+            }
             return CGSize(width: cellWidth, height: collectionView.frame.height)
         }
     }
