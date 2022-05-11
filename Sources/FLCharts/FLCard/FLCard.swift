@@ -72,6 +72,13 @@ final public class FLCard: UIView {
         self.commonInit()
     }
 
+    /// Updates card average value
+    /// - Parameters:
+    ///   - chart: The chart to display.
+    public func updateAverage(from chart: CardableChart) {
+        updateAverageLabel(with: (chart as? FLChart)?.chartData.formattedAverage)
+    }
+
     private func commonInit() {
         addLayoutGuide(contentGuide)
         NSLayoutConstraint.activate([
@@ -138,20 +145,24 @@ final public class FLCard: UIView {
             averageLabel = UILabel()
             guard let averageLabel = averageLabel else { return }
             
-            let attributedText = NSMutableAttributedString(string: "avg. ",
-                                                           attributes: [.font: UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor: FLColor.darkGray])
-            attributedText.append(NSAttributedString(string: (chartView as? FLChart)?.chartData.formattedAverage ?? "",
-                                                     attributes: [.font: UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor: FLColor.black]))
-
             headerStackView.addArrangedSubview(averageLabel)
             averageLabel.minimumScaleFactor = 0.7
             averageLabel.adjustsFontSizeToFitWidth = true
-            averageLabel.attributedText = attributedText
+
+            updateAverageLabel(with: (chartView as? FLChart)?.chartData.formattedAverage)
         } else {
             guard let averageLabel = averageLabel else { return }
             headerStackView.removeArrangedSubview(averageLabel)
             self.averageLabel?.removeFromSuperview()
         }
+    }
+    
+    private func updateAverageLabel(with formattedAverage: String?) {
+        let attributedText = NSMutableAttributedString(string: "avg. ",
+                                                       attributes: [.font: UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor: FLColor.darkGray])
+        attributedText.append(NSAttributedString(string: formattedAverage ?? "",
+                                                 attributes: [.font: UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor: FLColor.black]))
+        averageLabel?.attributedText = attributedText
     }
 }
 
