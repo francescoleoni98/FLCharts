@@ -73,7 +73,11 @@ final public class FLCard: UIView {
     }
     
     /// Updates card values by chart.
-    public func updateIfNeeded() {
+    ///     /// - Parameters:
+    ///   - newChart: The new chart to display.
+    public func updateIfNeeded(with newChart: CardableChart? = nil) {
+        self.chartView = newChart ?? chartView
+        
         guard let chartView = chartView as? FLChart else { return }
         updateAverageLabel(with: chartView.chartData.formattedAverage)
         titleLabel.text = chartView.title
