@@ -71,12 +71,16 @@ final public class FLCard: UIView {
         self.style = style
         self.commonInit()
     }
-
-    /// Updates card average value.
-    /// - Parameters:
-    ///   - chart: The chart to display.
-    public func updateAverage(from chart: CardableChart) {
-        updateAverageLabel(with: (chart as? FLChart)?.chartData.formattedAverage)
+    
+    /// Updates card values by chart.
+    ///     /// - Parameters:
+    ///   - newChart: The new chart to display.
+    public func updateIfNeeded(with newChart: CardableChart? = nil) {
+        self.chartView = newChart ?? chartView
+        
+        guard let chartView = chartView as? FLChart else { return }
+        updateAverageLabel(with: chartView.chartData.formattedAverage)
+        titleLabel.text = chartView.title
     }
 
     // MARK: - Configurations
@@ -149,7 +153,8 @@ final public class FLCard: UIView {
             averageLabel.minimumScaleFactor = 0.7
             averageLabel.adjustsFontSizeToFitWidth = true
 
-            updateAverage(from: chartView)
+            guard let chartView = chartView as? FLChart else { return }
+            updateAverageLabel(with: chartView.chartData.formattedAverage)
         } else {
             guard let averageLabel = averageLabel else { return }
             headerStackView.removeArrangedSubview(averageLabel)
