@@ -149,7 +149,8 @@ final public class FLCard: UIView {
             averageLabel.minimumScaleFactor = 0.7
             averageLabel.adjustsFontSizeToFitWidth = true
 
-            updateAverage(from: chartView)
+            guard let chartView = chartView as? FLChart else { return }
+            updateAverageLabel(with: chartView.chartData.formattedAverage)
         } else {
             guard let averageLabel = averageLabel else { return }
             headerStackView.removeArrangedSubview(averageLabel)
