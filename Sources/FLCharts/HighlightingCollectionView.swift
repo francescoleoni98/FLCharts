@@ -82,33 +82,6 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
         let location: CGPoint = tapGesture.location(in: collectionView)
         handleHighlight(at: location)
         highlightingDelegate?.didBeginHighlighting()
-        
-//        switch panGesture.state {
-//        case .began:
-//            collectionView.isScrollEnabled = false
-//            collectionView.isUserInteractionEnabled = false
-//            handleHighlight(at: location)
-//
-//
-//        case .changed:
-//            guard shouldContinueHighlighting(at: location) else { return }
-//            handleHighlight(at: location)
-//
-//        case .ended, .cancelled:
-//            defer {
-//                self.lastHighlightedIndexPath = nil
-//            }
-//
-//            collectionView.isScrollEnabled = true
-//            collectionView.isUserInteractionEnabled = true
-//
-//            if let lastHighlightedIndexPath = lastHighlightedIndexPath {
-//                collectionView(unhighlightItemAt: lastHighlightedIndexPath)
-//            }
-//            highlightingDelegate?.didEndHighlighting()
-//
-//        default: break
-//        }
     }
         
     // MARK: - Highlighting methods
