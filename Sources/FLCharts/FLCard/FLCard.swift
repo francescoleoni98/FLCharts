@@ -71,6 +71,19 @@ final public class FLCard: UIView {
         self.style = style
         self.commonInit()
     }
+    
+    /// Updates card values by chart.
+    ///     /// - Parameters:
+    ///   - newChart: The new chart to display.
+    public func updateIfNeeded(with newChart: CardableChart? = nil) {
+        self.chartView = newChart ?? chartView
+        
+        guard let chartView = chartView as? FLChart else { return }
+        updateAverageLabel(with: chartView.chartData.formattedAverage)
+        titleLabel.text = chartView.title
+    }
+
+    // MARK: - Configurations
 
     private func commonInit() {
         addLayoutGuide(contentGuide)
@@ -85,8 +98,6 @@ final public class FLCard: UIView {
         configureLegend()
         configureAverageView()
     }
-
-    // MARK: - Configurations
         
     private func configureViews() {
         style.shadow?.apply(to: self)
@@ -138,20 +149,25 @@ final public class FLCard: UIView {
             averageLabel = UILabel()
             guard let averageLabel = averageLabel else { return }
             
-            let attributedText = NSMutableAttributedString(string: "avg. ",
-                                                           attributes: [.font: UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor: FLColor.darkGray])
-            attributedText.append(NSAttributedString(string: (chartView as? FLChart)?.chartData.formattedAverage ?? "",
-                                                     attributes: [.font: UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor: FLColor.black]))
-
             headerStackView.addArrangedSubview(averageLabel)
             averageLabel.minimumScaleFactor = 0.7
             averageLabel.adjustsFontSizeToFitWidth = true
-            averageLabel.attributedText = attributedText
+
+            guard let chartView = chartView as? FLChart else { return }
+            updateAverageLabel(with: chartView.chartData.formattedAverage)
         } else {
             guard let averageLabel = averageLabel else { return }
             headerStackView.removeArrangedSubview(averageLabel)
             self.averageLabel?.removeFromSuperview()
         }
+    }
+    
+    private func updateAverageLabel(with formattedAverage: String?) {
+        let attributedText = NSMutableAttributedString(string: "avg. ",
+                                                       attributes: [.font: UIFont.preferredFont(for: .footnote, weight: .bold), .foregroundColor: FLColor.darkGray])
+        attributedText.append(NSAttributedString(string: formattedAverage ?? "",
+                                                 attributes: [.font: UIFont.preferredFont(for: .body, weight: .bold), .foregroundColor: FLColor.black]))
+        averageLabel?.attributedText = attributedText
     }
 }
 
