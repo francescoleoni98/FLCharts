@@ -73,7 +73,7 @@ final public class FLCard: UIView {
     }
     
     /// Updates card values by chart.
-    ///     /// - Parameters:
+    /// - Parameters:
     ///   - newChart: The new chart to display.
     public func updateIfNeeded(with newChart: CardableChart? = nil) {
         self.chartView = newChart ?? chartView
