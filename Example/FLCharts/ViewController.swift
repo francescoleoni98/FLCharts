@@ -23,22 +23,32 @@ class ViewController: UIViewController {
                                            unitOfMeasure: "years")
         scatterChartData.xAxisUnitOfMeasure = "days of birth"
         
-        chartView.setup(data: scatterChartData, type: .scatter(dotDiameter: 8))
+        chartView.setup(data: FLChartData(title: "Line", data: monthsData, legendKeys: [Key(key: "1", color: .green), Key(key: "2", color: .blue), Key(key: "3", color: .red)], unitOfMeasure: "kWh"), type: .line())
         chartView.cartesianPlane.yAxisPosition = .right
-        chartView.config = FLChartConfig(granularityY: 30)
-                
+        chartView.config.dashedLines.color = .red
+        
         let barChartData = FLChartData(title: "Consumptions",
                                        data: monthsData,
                                        legendKeys: [
-                                        Key(key: "F1", yThresholds: [40 : .red,
-                                                                     56 : .blue,
-                                                                     84 : .green,
-                                                                     100 : .orange],
-                                            data: monthsData),
-                                        Key(key: "F2", xColors: [.red,
-                                                                 .blue,
-                                                                 .green,
-                                                                 .orange])],
+                                        Key(key: "1", color: .red),
+                                        Key(key: "2", color: .blue),
+                                        Key(key: "3", color: .green)
+
+
+//                                        Key(key: "F1", yThresholds: [40 : .red,
+//                                                                     56 : .blue,
+//                                                                     84 : .green,
+//                                                                     100 : .orange],
+//                                            data: monthsData),
+//                                        Key(key: "F2", xColors: [.red,
+//                                                                 .blue,
+//                                                                 .green,
+//                                                                 .orange]),
+//                                        Key(key: "F3", xColors: [.red,
+//                                                                 .blue,
+//                                                                 .green,
+//                                                                 .orange])
+                                       ],
                                        unitOfMeasure: "kWh")
         barChartData.xAxisUnitOfMeasure = "months"
         barChartData.yAxisFormatter = .decimal(2)
@@ -70,12 +80,13 @@ class ViewController: UIViewController {
         radarChart.showXAxisLabels = true
         radarChart.showYAxisLabels = true
         
-        let lineChart = FLChart(data: barChartData, type: .line())
-//        lineChart.cartesianPlane.showUnitsOfMeasure = false
-        
+        let lineChart = FLChart(data: barChartData, type: .bar(bar: FLHorizontalMultipleValuesChartBar.self, config: FLBarConfig(radius: .capsule, width: 30, spacing: 15)))
+        lineChart.showAverageLine = true
+        lineChart.config = FLChartConfig(granularityY: 20)
+
         let card = FLCard(chart: lineChart, style: .rounded)
-        card.showAverage = true
-        card.showLegend = true
+        card.showAverage = false
+        card.showLegend = false
         
         view.addSubview(card)
         card.translatesAutoresizingMaskIntoConstraints = false
@@ -100,18 +111,18 @@ class ViewController: UIViewController {
 extension ViewController {
     
     var monthsData: [MultiPlotable] {
-        [MultiPlotable(name: "jan", values: [30, 24]),
-         MultiPlotable(name: "feb", values: [55, 44]),
-         MultiPlotable(name: "mar", values: [70, 15]),
-         MultiPlotable(name: "apr", values: [45, 68]),
-         MultiPlotable(name: "may", values: [85, 46]),
-         MultiPlotable(name: "jun", values: [46, 73]),
-         MultiPlotable(name: "jul", values: [75, 46]),
-         MultiPlotable(name: "aug", values: [10, 24]),
-         MultiPlotable(name: "set", values: [60, 74]),
-         MultiPlotable(name: "oct", values: [75, 72]),
-         MultiPlotable(name: "nov", values: [85, 105]),
-         MultiPlotable(name: "dec", values: [55, 66])]
+        [MultiPlotable(name: "jan", values: [30, 24, 53]),
+         MultiPlotable(name: "feb", values: [55, 44, 24]),
+         MultiPlotable(name: "mar", values: [70, 15, 44]),
+         MultiPlotable(name: "apr", values: [45, 68, 34]),
+         MultiPlotable(name: "may", values: [85, 46, 12]),
+         MultiPlotable(name: "jun", values: [46, 73, 32]),
+         MultiPlotable(name: "jul", values: [75, 46, 53]),
+         MultiPlotable(name: "aug", values: [10, 24, 24]),
+         MultiPlotable(name: "set", values: [60, 74, 44]),
+         MultiPlotable(name: "oct", values: [75, 72, 34]),
+         MultiPlotable(name: "nov", values: [85, 10, 15]),
+         MultiPlotable(name: "dec", values: [55, 66, 32])]
     }
     
     var scatterData: [ScatterPlotable] {
