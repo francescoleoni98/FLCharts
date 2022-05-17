@@ -112,12 +112,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     // MARK: - Overrides
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-        setNeedsDisplay()
-    }
-    
+        
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         guard let context = UIGraphicsGetCurrentContext() else { return }
