@@ -21,6 +21,7 @@ final public class FLChartBarCell: UICollectionViewCell {
     
     internal var barView: ChartBar!
     private let xAxisLine = UIView()
+    private let spaceXLineFromBottom: CGFloat = 25
     let xAxisLabel = UILabel()
     
     internal var heightConstraint: NSLayoutConstraint!
@@ -44,7 +45,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             xAxisLine.heightAnchor.constraint(equalToConstant: config.axesLines.lineWidth),
             xAxisLine.leadingAnchor.constraint(equalTo: leadingAnchor),
-            xAxisLine.topAnchor.constraint(equalTo: bottomAnchor, constant: -config.margin.bottom),
+            xAxisLine.topAnchor.constraint(equalTo: bottomAnchor, constant: -spaceXLineFromBottom),
             xAxisLine.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
 
@@ -96,7 +97,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         self.barData = barData
         self.xAxisLabel.text = barData.name
 
-        let barHeight = (frame.height - config.margin.bottom) * constant
+        let barHeight = (frame.height - spaceXLineFromBottom) * constant
 
         let minVal = min(barHeight, frame.width - barConfig.spacing)
         
