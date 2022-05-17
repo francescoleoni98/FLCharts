@@ -43,8 +43,7 @@ public class FLChartConfig {
     /// - note: If used after setting ``FLAxisLineConfig`` and ``FLTickConfig``, this will override their relative property.
     public var axesLineWidth: CGFloat = 1 {
         didSet {
-            tick.lineWidth = axesLineWidth
-            axesLines.lineWidth = axesLineWidth
+            updateWidths()
         }
     }
     
@@ -52,9 +51,7 @@ public class FLChartConfig {
     /// - note: If used after setting ``FLAxisLabelConfig``, ``FLAxisLineConfig`` and ``FLTickConfig``, this will override their relative property.
     public var axesColor: UIColor = FLColor.darkGray {
         didSet {
-            tick.color = axesColor
-            axesLines.color = axesColor
-            axesLabels.color = axesColor
+            updateColors()
         }
     }
             
@@ -80,6 +77,17 @@ public class FLChartConfig {
     
     // MARK: - Internal methods
     
+    private func updateWidths() {
+        tick.lineWidth = axesLineWidth
+        axesLines.lineWidth = axesLineWidth
+    }
+    
+    private func updateColors() {
+        tick.color = axesColor
+        axesLines.color = axesColor
+        axesLabels.color = axesColor
+    }
+
     func setMarginTop(to value: CGFloat) {
         margin.top += value
     }
