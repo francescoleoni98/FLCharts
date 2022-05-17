@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 /// A collection view that displays an UIView when a cell is highlighted.
 /// The user can swipe between cells and the ``HighlightedView`` will update its position and value.

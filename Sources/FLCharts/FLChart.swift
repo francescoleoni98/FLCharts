@@ -23,6 +23,8 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
 
     public private(set) var chartData: FLChartData
     
+    internal var horizontalRepresentedValues: Bool
+    
     public internal(set) var title: String = ""
     public internal(set) var legendKeys: [Key] = []
     public internal(set) var formatter: FLFormatter = .decimal(2)
@@ -80,12 +82,13 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
         self.title = data.title
         self.legendKeys = data.legendKeys
         self.formatter = data.yAxisFormatter
-        self.cartesianPlane = FLCartesianPlane(data: data, type: type)
+        var horizontalRepresentedValues = false
         self.plotView = {
             switch type {
             case .bar(let bar, let highlightView, let barConfig):
                 let barPlotView = FLBarPlotView(data: data, bar: bar, highlightView: highlightView)
                 barPlotView.barConfig = barConfig
+                horizontalRepresentedValues = bar.init().horizontalRepresentedValues
                 return barPlotView
                 
             case .line(let lineConfig):
@@ -99,6 +102,8 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
                 return scatterPlotView
             }
         }()
+        self.horizontalRepresentedValues = horizontalRepresentedValues
+        self.cartesianPlane = FLCartesianPlane(data: data, type: type, horizontalRepresentedValues: horizontalRepresentedValues)
 
         super.init(frame: .zero)
         self.commonInit()
@@ -108,8 +113,9 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
         let data = FLChartData(title: "", data: [0], legendKeys: [], unitOfMeasure: "")
         self.chartData = data
         self.config = FLChartConfig()
-        self.cartesianPlane = FLCartesianPlane(data: data, type: .bar())
+        self.cartesianPlane = FLCartesianPlane(data: data, type: .bar(), horizontalRepresentedValues: false)
         self.plotView = FLLinePlotView(data: data)
+        self.horizontalRepresentedValues = false
         super.init(coder: coder)
     }
     
@@ -120,12 +126,14 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
         self.title = data.title
         self.legendKeys = data.legendKeys
         self.formatter = data.yAxisFormatter
-        self.cartesianPlane = FLCartesianPlane(data: data, type: type)
+        var horizontalRepresentedValues = false
+
         self.plotView = {
             switch type {
             case .bar(let bar, let highlightView, let barConfig):
                 let barPlotView = FLBarPlotView(data: data, bar: bar, highlightView: highlightView)
                 barPlotView.barConfig = barConfig
+                horizontalRepresentedValues = bar.init().horizontalRepresentedValues
                 return barPlotView
                 
             case .line(let lineConfig):
@@ -137,6 +145,8 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
                 return FLScatterPlotView(data: data)
             }
         }()
+        self.horizontalRepresentedValues = horizontalRepresentedValues
+        self.cartesianPlane = FLCartesianPlane(data: data, type: type, horizontalRepresentedValues: horizontalRepresentedValues)
                 
         self.commonInit()
     }
@@ -160,7 +170,11 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
         plotView.updateData(data)
     }
     
-    internal static func canShowAverage(chartType: FLChart.PlotType, data: FLChartData) -> Bool {
+    internal static func canShowAverage(chartType: FLChart.PlotType, data: FLChartData, horizontalRepresentedValues: Bool) -> Bool {
+        if horizontalRepresentedValues {
+            return false
+        }
+        
         if case .line = chartType, data.numberOfValues > 1 {
             return false
         }

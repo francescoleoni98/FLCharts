@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 /// A radar chart, or Kiviat chart.
 public final class FLRadarChart: UIView, MutableCardableChart {
@@ -15,7 +16,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
     
     /// Whether to show the X axis labels.
     public var showXAxisLabels: Bool = true
-
+    
     /// Whether to show the Y axis and X axis labels.
     /// - Note: This property can override ``showYAxisLabels`` and ``showXAxisLabels``.
     public var showLabels: Bool = true {
@@ -24,7 +25,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
             showYAxisLabels = showLabels
         }
     }
-
+    
     public internal(set) var title: String = ""
     public internal(set) var legendKeys: [Key] = []
     public internal(set) var formatter: FLFormatter = .decimal(2)
@@ -34,7 +35,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
     private var isFilled: Bool = true
     private var categories: [String] = []
     private var config: FLRadarGridConfig = FLRadarGridConfig()
-
+    
     /// Creates a radar chart.
     /// - Parameters:
     ///   - title: The title of the chart. It will be displayed if the chart is embedded in a ``FLCard``.
@@ -45,7 +46,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
     ///   - config: The configuration for the chart grid.
     public init(title: String, categories: [String], data: [FLDataSet], isFilled: Bool = true, formatter: FLFormatter = .decimal(2), config: FLRadarGridConfig = FLRadarGridConfig()) {
         Self.checkDataValidity(data: data, categories: categories)
-
+        
         self.title = title
         self.categories = categories
         self.data = data
@@ -93,7 +94,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         if let newCategories = newCategories {
             self.categories = newCategories
         }
-
+        
         self.setNeedsDisplay()
     }
     
@@ -115,11 +116,11 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         
         labels.clearLabels()
         
-        var rect = rect
-
+        var internalRect = rect
+        
         if showLabels && showYAxisLabels {
-            rect.origin.y += 20
-            rect.size.height -= 40
+            internalRect.origin.y += 20
+            internalRect.size.height -= 40
         }
         
         if showLabels && showXAxisLabels {
@@ -133,19 +134,19 @@ public final class FLRadarChart: UIView, MutableCardableChart {
                 }
             }
             
-            rect.origin.x += widestLabel
-            rect.size.width -= widestLabel * 2
+            internalRect.origin.x += widestLabel
+            internalRect.size.width -= widestLabel * 2
         }
         
-        context.addPath(gridPath(in: rect).cgPath)
+        context.addPath(gridPath(in: internalRect).cgPath)
         context.setStrokeColor(config.color.cgColor)
         context.setLineWidth(config.lineWidth)
         context.strokePath()
-
+        
         labels.drawLabels(color: config.labelsColor)
         
         for dataSet in data {
-            context.addPath(dataPath(in: rect, data: dataSet.data).cgPath)
+            context.addPath(dataPath(in: internalRect, data: dataSet.data).cgPath)
             context.setStrokeColor(dataSet.key.color.mainColor.cgColor)
             context.setFillColor(dataSet.key.color.mainColor.withAlphaComponent(0.4).cgColor)
             context.setLineWidth(2)
@@ -163,11 +164,11 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         guard 3 <= data.count else {
             preconditionFailure("The number of values must be three or more.")
         }
-
+        
         guard let minimum = self.data.min,
               0 <= minimum,
               let maximum = self.data.max else { return UIBezierPath() }
-                
+        
         let radius = min(rect.maxX - rect.midX, rect.maxY - rect.midY)
         let path = UIBezierPath()
         
@@ -186,12 +187,12 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         
         return path
     }
-
+    
     private func gridPath(in rect: CGRect) -> UIBezierPath {
         let radius = min(rect.maxX - rect.midX, rect.maxY - rect.midY)
         let stride = radius / CGFloat(config.divisions)
         let maxY = data.max ?? 0
-                
+        
         let path = UIBezierPath()
         
         for (index, category) in categories.enumerated() {
@@ -200,7 +201,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
             
             let endPoint = CGPoint(x: rect.midX + cos * radius,
                                    y: rect.midY + sin * radius)
-
+            
             path.move(to: CGPoint(x: rect.midX, y: rect.midY))
             path.addLine(to: endPoint)
             
@@ -229,7 +230,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         
         for step in 1 ... config.divisions {
             let rad = CGFloat(step) * stride
-
+            
             let startPoint = CGPoint(x: rect.midX + cos(-.pi / 2) * rad,
                                      y: rect.midY + sin(-.pi / 2) * rad)
             

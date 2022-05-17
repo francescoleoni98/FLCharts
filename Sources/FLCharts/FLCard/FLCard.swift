@@ -32,7 +32,7 @@ final public class FLCard: UIView {
     public var showAverage = true {
         didSet {
             if let chartView = chartView as? FLChart {
-                if !FLChart.canShowAverage(chartType: chartView.cartesianPlane.chartType, data: chartView.chartData) {
+                if !FLChart.canShowAverage(chartType: chartView.cartesianPlane.chartType, data: chartView.chartData, horizontalRepresentedValues: chartView.horizontalRepresentedValues) {
                     showAverage = false
                 }
             } else {

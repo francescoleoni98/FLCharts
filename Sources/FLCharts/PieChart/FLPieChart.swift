@@ -19,11 +19,7 @@ public final class FLPieChart: UIView, MutableCardableChart {
     private var animated: Bool = true
     
     private var sum: CGFloat {
-        chartData.reduce(0.0) { sum, value in
-            var sum = sum
-            sum += value.value
-            return sum
-        }
+        chartData.reduce(0, { $0 + $1.value })
     }
     
     /// Initializes the pie chart.
@@ -73,7 +69,7 @@ public final class FLPieChart: UIView, MutableCardableChart {
             subview.removeFromSuperview()
         }
                 
-        let sum = sum
+        let internalSum = sum
         var startPercentage: CGFloat = 0
         let minEdge = min(frame.width, frame.height)
         let borderWidth: CGFloat = {
@@ -87,7 +83,7 @@ public final class FLPieChart: UIView, MutableCardableChart {
         circleRect = CGRect(x: (frame.width - widthCircle) / 2, y: borderWidth / 2, width: widthCircle, height: widthCircle)
       
         for datum in chartData {
-            let degrees = datum.value / sum
+            let degrees = datum.value / internalSum
                         
             let shape = SliceShape(data: datum,
                                    width: border,
@@ -107,7 +103,7 @@ public final class FLPieChart: UIView, MutableCardableChart {
     public func updateData(_ data: [FLPiePlotable], animated: Bool) {
         self.chartData = data
         
-        let sum = sum
+        let internalSum = sum
         var startPercentage: Double = 0
         var notCurrentlyDisplayed: [FLPiePlotable] = data
         
@@ -133,7 +129,7 @@ public final class FLPieChart: UIView, MutableCardableChart {
         }
         
         for (shape, datum) in zip(shapes, data) {
-            let degrees = datum.value / sum
+            let degrees = datum.value / internalSum
             shape.data = datum
             shape.animateShape(from: startPercentage, to: startPercentage + degrees, animated: animated)
             startPercentage += degrees

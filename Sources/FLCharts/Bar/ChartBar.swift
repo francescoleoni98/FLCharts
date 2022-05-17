@@ -11,6 +11,9 @@ public protocol ChartBar: UIView {
     
     var config: FLChartConfig? { get set }
     var barConfig: FLBarConfig? { get set }
+    
+    /// Whether the values of each bar are represented side by side or stack one on top of the other.
+    var horizontalRepresentedValues: Bool { get set }
 
     func prepareForReuse()
 
@@ -19,7 +22,7 @@ public protocol ChartBar: UIView {
 
     /// Use this method in a subclass to configure custom views based on the bar height.
     /// - note: This method is called once the bar has set its height.
-    func configureBar(for barHeight: CGFloat, barData: PlotableData, legendKeys: [Key])
+    func configureBar(for barHeight: CGFloat, chartData: FLChartData, barData: PlotableData, legendKeys: [Key])
 }
 
 public extension ChartBar {

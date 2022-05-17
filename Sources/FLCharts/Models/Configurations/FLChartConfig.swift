@@ -61,9 +61,7 @@ public class FLChartConfig {
                 axesLabels: FLAxesLabelConfig = FLAxesLabelConfig(),
                 axesLines: FLAxesLineConfig = FLAxesLineConfig(),
                 dashedLines: FLDashedLineConfig = FLDashedLineConfig(),
-                averageView: FLAverageViewConfig = FLAverageViewConfig(),
-                axesLineWidth: CGFloat = 1,
-                axesColor: UIColor = FLColor.darkGray) {
+                averageView: FLAverageViewConfig = FLAverageViewConfig()) {
         self.granularityX = granularityX
         self.granularityY = granularityY
         self.tick = tick
@@ -71,8 +69,6 @@ public class FLChartConfig {
         self.axesLines = axesLines
         self.dashedLines = dashedLines
         self.averageView = averageView
-        self.axesLineWidth = axesLineWidth
-        self.axesColor = axesColor
     }
     
     // MARK: - Internal methods

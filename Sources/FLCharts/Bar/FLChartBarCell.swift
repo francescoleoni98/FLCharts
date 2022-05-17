@@ -41,7 +41,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         addSubview(xAxisLine)
         xAxisLine.backgroundColor = config.axesLines.color
         xAxisLine.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             xAxisLine.heightAnchor.constraint(equalToConstant: config.axesLines.lineWidth),
             xAxisLine.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -93,40 +93,31 @@ final public class FLChartBarCell: UICollectionViewCell {
         heightConstraint.isActive = true
     }
     
-    public func setBarHeight(_ constant: CGFloat, barData: PlotableData, legendKeys: [Key], animated: Bool = false) {
+    public func setBarHeight(_ constant: CGFloat, chartData: FLChartData, barData: PlotableData, legendKeys: [Key], animated: Bool = false, horizontalRepresentedValues: Bool) {
         self.barData = barData
         self.xAxisLabel.text = barData.name
 
-        let barHeight = (frame.height - spaceXLineFromBottom) * constant
+        var barHeight = frame.height - spaceXLineFromBottom
 
+        if !horizontalRepresentedValues {
+            barHeight *= constant
+        }
+        
         let minVal = min(barHeight, frame.width - barConfig.spacing)
         
-        if minVal > 0 {
-            switch barConfig.radius {
-            case .none:
-                break
-                
-            case .capsule:
-                barView.layer.cornerRadius = minVal.half
-
-            case .custom(let radius):
-                barView.layer.cornerRadius = radius
-
-            case .corners(let corners, let radius):
-                barView.layer.cornerRadius = radius
-                barView.layer.maskedCorners = corners
-            }
+        if !horizontalRepresentedValues, minVal > 0 {
+            barConfig.radius.apply(to: barView, shorterEdge: minVal)
         }
                 
         if animated {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.heightConstraint.constant = barHeight
                 UIView.animateContraints(for: self, damping: 0.6, response: 0.7)
-                self.barView.configureBar(for: barHeight, barData: barData, legendKeys: legendKeys)
+                self.barView.configureBar(for: barHeight, chartData: chartData, barData: barData, legendKeys: legendKeys)
             }
         } else {
             heightConstraint.constant = barHeight
-            barView.configureBar(for: barHeight, barData: barData, legendKeys: legendKeys)
+            barView.configureBar(for: barHeight, chartData: chartData, barData: barData, legendKeys: legendKeys)
         }
     }
 }

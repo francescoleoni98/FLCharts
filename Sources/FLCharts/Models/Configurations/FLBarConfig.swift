@@ -21,6 +21,23 @@ public struct FLBarConfig {
         
         /// Applies the specified radius to the given corners of the bar.
         case corners(corners: CACornerMask, CGFloat)
+        
+        func apply(to view: UIView, shorterEdge: CGFloat) {
+            switch self {
+            case .none:
+                break
+                
+            case .capsule:
+                view.layer.cornerRadius = shorterEdge.half
+
+            case .custom(let radius):
+                view.layer.cornerRadius = radius
+
+            case .corners(let corners, let radius):
+                view.layer.cornerRadius = radius
+                view.layer.maskedCorners = corners
+            }
+        }
     }
 
     /// The style of the bars corners.
@@ -38,7 +55,7 @@ public struct FLBarConfig {
     
     public init(radius: Radius = .corners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], 3),
                 width: CGFloat = 12,
-                spacing: CGFloat = 5,
+                spacing: CGFloat = 7,
                 limitWidth: Bool = false) {
         self.radius = radius
         self.width = width

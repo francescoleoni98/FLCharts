@@ -16,6 +16,7 @@
 		A51C893C27AD8DBF001E9304 /* LineXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C893B27AD8DBF001E9304 /* LineXAxis.swift */; };
 		A51C894027B0338C001E9304 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C893F27B0338C001E9304 /* Label.swift */; };
 		A51C894227B033A1001E9304 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51C894127B033A1001E9304 /* Labels.swift */; };
+		A55CAD1B28328CFE00D87837 /* FLHorizontalMultipleValuesChartBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55CAD1A28328CFE00D87837 /* FLHorizontalMultipleValuesChartBar.swift */; };
 		A5603A3D2799E1980062C7D1 /* FLColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5603A3C2799E1980062C7D1 /* FLColor.swift */; };
 		A5603A402799FAD60062C7D1 /* PlayfulCurveLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5603A3F2799FAD60062C7D1 /* PlayfulCurveLine.swift */; };
 		A5603A422799FAE60062C7D1 /* ProfessionalCurveLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5603A412799FAE50062C7D1 /* ProfessionalCurveLine.swift */; };
@@ -116,6 +117,7 @@
 		A51C893B27AD8DBF001E9304 /* LineXAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineXAxis.swift; sourceTree = "<group>"; };
 		A51C893F27B0338C001E9304 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		A51C894127B033A1001E9304 /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		A55CAD1A28328CFE00D87837 /* FLHorizontalMultipleValuesChartBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLHorizontalMultipleValuesChartBar.swift; sourceTree = "<group>"; };
 		A5603A3C2799E1980062C7D1 /* FLColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColor.swift; sourceTree = "<group>"; };
 		A5603A3F2799FAD60062C7D1 /* PlayfulCurveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayfulCurveLine.swift; sourceTree = "<group>"; };
 		A5603A412799FAE50062C7D1 /* ProfessionalCurveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalCurveLine.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				A5805E6D278EF08800ED3C7E /* ChartBar.swift */,
 				A5805E6B278EF00400ED3C7E /* FLPlainChartBar.swift */,
 				A5805E57278DFCBD00ED3C7E /* FLMultipleValuesChartBar.swift */,
+				A55CAD1A28328CFE00D87837 /* FLHorizontalMultipleValuesChartBar.swift */,
 			);
 			path = Bar;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 				A5805E5C278DFCBD00ED3C7E /* FLChartConfig.swift in Sources */,
 				A5603A422799FAE60062C7D1 /* ProfessionalCurveLine.swift in Sources */,
 				A5805E7C2790476600ED3C7E /* FLCardStyle.swift in Sources */,
+				A55CAD1B28328CFE00D87837 /* FLHorizontalMultipleValuesChartBar.swift in Sources */,
 				A5805E61278DFCBD00ED3C7E /* HighlightedView.swift in Sources */,
 				A5805E5F278DFCBD00ED3C7E /* UnclippedTopCollectionView.swift in Sources */,
 				A5805E76279032DF00ED3C7E /* FLCard.swift in Sources */,

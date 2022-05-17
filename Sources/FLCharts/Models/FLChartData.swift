@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 public class FLChartData {
     
@@ -88,6 +89,14 @@ public class FLChartData {
     
     // MARK: - Methods
     
+    // The max value of each independent subvalue of each ``PlotableData``.
+    internal func maxIndividualValue() -> CGFloat? {
+        guard dataEntries.count >= 2 else {
+            return dataEntries.first?.total
+        }
+        return dataEntries.max(by: { $0.maxValue < $1.maxValue })?.maxValue
+    }
+    
     /// The max value of the Y axis.
     internal func maxYValue(forType type: FLChart.PlotType) -> CGFloat? {
         switch type {
@@ -127,7 +136,7 @@ public class FLChartData {
     }
     
     /// The y granularity that specifies the y axis granulation if the user doesn't provide one.
-    internal func defaultYGranularity(forType type: FLChart.PlotType) -> CGFloat {
-        floor((maxYValue(forType: type) ?? 100) / 3)
+    internal func defaultYGranularity(forType type: FLChart.PlotType, horizontalRepresentedValues: Bool) -> CGFloat {
+        floor(((horizontalRepresentedValues ? maxIndividualValue() : maxYValue(forType: type)) ?? 100) / 3)
     }
 }

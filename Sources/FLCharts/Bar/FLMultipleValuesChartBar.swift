@@ -14,6 +14,8 @@ public final class FLMultipleValuesChartBar: UIView, ChartBar {
     public var config: FLChartConfig?
     public var barConfig: FLBarConfig?
     
+    public var horizontalRepresentedValues: Bool = false
+
     private let barStackView = UIStackView()
     
     public func prepareForReuse() {
@@ -29,7 +31,7 @@ public final class FLMultipleValuesChartBar: UIView, ChartBar {
         barStackView.constraints(equalTo: self)
     }
     
-    public func configureBar(for barHeight: CGFloat, barData: PlotableData, legendKeys: [Key]) {
+    public func configureBar(for barHeight: CGFloat, chartData: FLChartData, barData: PlotableData, legendKeys: [Key]) {
         let totalValue = barData.total
 
         for (index, value) in barData.values.enumerated() {

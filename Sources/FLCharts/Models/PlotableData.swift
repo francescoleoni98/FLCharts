@@ -27,6 +27,14 @@ public extension PlotableData {
         
         return values.reduce(0, +)
     }
+    
+    var maxValue: CGFloat {
+        guard values.count > 1 else {
+            return values.first ?? 0
+        }
+
+        return values.max() ?? 0
+    }
 }
 
 // MARK: - Concretes

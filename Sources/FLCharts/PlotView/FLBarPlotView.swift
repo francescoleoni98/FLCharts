@@ -10,9 +10,9 @@ import UIKit
 /// A bar chart that displays one or more bars.
 /// It takes a ``ChartBar`` in the initializer that allows to provide a custom bar cell.
 internal final class FLBarPlotView: UIView, FLPlotView {
-
+    
     private let collectionView = HighlightingCollectionView()
-        
+    
     /// The configuration of the chart.
     internal var config: FLChartConfig = FLChartConfig() {
         didSet {
@@ -21,7 +21,7 @@ internal final class FLBarPlotView: UIView, FLPlotView {
     }
     
     internal var barConfig: FLBarConfig = FLBarConfig()
-        
+    
     /// Whether the bars are animated.
     internal var animated: Bool = true
     
@@ -33,20 +33,20 @@ internal final class FLBarPlotView: UIView, FLPlotView {
     
     /// The data to show in the chart.
     internal private(set) var chartData: FLChartData
-
+    
     /// The bar view to use in the chart.
     private let bar: ChartBar.Type
-        
+    
     private var cellWidth: CGFloat { barConfig.width + barConfig.spacing }
-
+    
     internal weak var highlightingDelegate: ChartHighlightingDelegate? {
         didSet {
             collectionView.highlightingDelegate = highlightingDelegate
         }
     }
-
+    
     // MARK: - Inits
-        
+    
     /// Creates a bar chart with the provided chart data.
     ///
     /// If you need a different bar style provide a ``ChartBar``.
@@ -60,7 +60,7 @@ internal final class FLBarPlotView: UIView, FLPlotView {
         self.configureCollectionView()
         self.collectionView.getChartData = { data }
         self.collectionView.highlightedView = highlightView
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.animated = false
         }
@@ -75,7 +75,7 @@ internal final class FLBarPlotView: UIView, FLPlotView {
         self.chartData.dataEntries = data
         self.collectionView.reloadData()
     }
-
+    
     // MARK: - Configurations
     
     private func configureCollectionView() {
@@ -100,14 +100,20 @@ extension FLBarPlotView: UICollectionViewDataSource {
         cell.config = config
         cell.barConfig = barConfig
         cell.shouldShowTicks = showTicks
-        cell.configure(withBar: bar.init())
-        cell.barView.backgroundColor = chartData.legendKeys.first?.color.mainColor
-
-        if let max = chartData.maxYValue(forType: .bar()) {
-            let barData = chartData.dataEntries[indexPath.item]
-            let ratio = max == 0 ? 0 : barData.total / max
-            
-            cell.setBarHeight(ratio, barData: barData, legendKeys: chartData.legendKeys, animated: animated)
+        let bar = bar.init()
+        cell.configure(withBar: bar)
+        
+        let barData = chartData.dataEntries[indexPath.item]
+        
+        if bar.horizontalRepresentedValues {
+            let max = chartData.maxIndividualValue() ?? 0
+            let ratio = max == 0 ? 0 : barData.maxValue / max
+            cell.setBarHeight(ratio, chartData: chartData, barData: barData, legendKeys: chartData.legendKeys, animated: animated, horizontalRepresentedValues: bar.horizontalRepresentedValues)
+        } else {
+            if let max = chartData.maxYValue(forType: .bar()) {
+                let ratio = max == 0 ? 0 : barData.total / max
+                cell.setBarHeight(ratio, chartData: chartData, barData: barData, legendKeys: chartData.legendKeys, animated: animated, horizontalRepresentedValues: bar.horizontalRepresentedValues)
+            }
         }
         
         if config.granularityX == 0 {
@@ -130,9 +136,11 @@ extension FLBarPlotView: UICollectionViewDelegateFlowLayout {
         } else {
             let numberOfBars = CGFloat(chartData.dataEntries.count)
             var cellWidth = collectionView.frame.width / numberOfBars
+            
             if barConfig.limitWidth {
                 cellWidth = min(cellWidth, barConfig.width)
             }
+            
             return CGSize(width: cellWidth, height: collectionView.frame.height)
         }
     }

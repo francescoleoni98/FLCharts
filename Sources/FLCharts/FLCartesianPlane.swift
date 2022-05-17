@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 /// Defines a horizontal position.
 public enum YPosition {
@@ -37,6 +38,8 @@ public class FLCartesianPlane: UIView, FLStylable {
     
     internal let chartType: FLChart.PlotType
     
+    internal var horizontalRepresentedValues: Bool
+    
     /// The position of the y axis.
     public var yAxisPosition: YPosition = .left
     
@@ -52,7 +55,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     /// Whether to show the average line.
     public var showAverageLine: Bool = false {
         didSet {
-            if !FLChart.canShowAverage(chartType: chartType, data: chartData) {
+            if !FLChart.canShowAverage(chartType: chartType, data: chartData, horizontalRepresentedValues: horizontalRepresentedValues) {
                 showAverageLine = false
             }
         }
@@ -83,18 +86,25 @@ public class FLCartesianPlane: UIView, FLStylable {
     private let yUnitLabelSpacing: CGFloat = 5
     private let tickLabelSpacing: CGFloat = 4
     private let dataMinValue: CGFloat = 0
-    private var dataMaxValue: CGFloat { chartData.maxYValue(forType: chartType) ?? 0 }
+    private var dataMaxValue: CGFloat {
+        if horizontalRepresentedValues {
+            return chartData.maxIndividualValue() ?? 0
+        } else {
+            return chartData.maxYValue(forType: chartType) ?? 0
+        }
+    }
     
     private let labels = Labels()
     
     // MARK: - Inits
     
     /// Creates a cartesian plane with the provided chart data.
-    internal init(data: FLChartData, type: FLChart.PlotType) {
+    internal init(data: FLChartData, type: FLChart.PlotType, horizontalRepresentedValues: Bool) {
         self.chartData = data
         self.chartType = type
+        self.horizontalRepresentedValues = horizontalRepresentedValues
         super.init(frame: .zero)
-        self.config.granularityY = data.defaultYGranularity(forType: type)
+        self.config.granularityY = data.defaultYGranularity(forType: type, horizontalRepresentedValues: horizontalRepresentedValues)
         self.backgroundColor = .clear
         
         self.addLayoutGuide(chartLayoutGuide)
@@ -248,6 +258,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         if let xUnitOfMeasure = chartData.xAxisUnitOfMeasure {
             let text = xUnitOfMeasure
             let size = sizeForText(text)
+
             config.setMarginBottom(to: size.height + xUnitLabelSpacing)
             
             let point = CGPoint(x: ((chartWidth - marginForAverageView).half) - (size.width.half) + margin.left,
@@ -275,29 +286,18 @@ public class FLCartesianPlane: UIView, FLStylable {
                 guard value > 0 else { continue }
                 
                 let chartTickY = yPosition(forValue: value)
-                let (text, size) = textSizeFrom(value: value)
+                let (text, size) = textSizeFrom(value: value, maxYLabelWidth: &maxYLabelWidth)
                 labels.add(Label(text: text, size: size, point: CGPoint(x: 0, y: chartTickY), type: .yLabel))
             }
         }
         
         // This prevents the last label to overlap the max label.
         if let lastLabel = labels.find(type: .yLabel).last, lastLabel.point.y - chartTop > 15 {
-            let (text, size) = textSizeFrom(value: dataMaxValue)
+            let (text, size) = textSizeFrom(value: dataMaxValue, maxYLabelWidth: &maxYLabelWidth)
             labels.add(Label(text: text, size: size, point: CGPoint(x: 0, y: chartTop), type: .topYLabel))
         }
         
         config.setMargin(for: yAxisPosition, horizontalMargin: maxYLabelWidth + config.tick.lineLength + tickLabelSpacing)
-        
-        func textSizeFrom(value: CGFloat) -> (text: String, size: CGSize) {
-            let text = chartData.yAxisFormatter.string(from: NSNumber(value: value))
-            let size = sizeForText(text)
-            
-            if size.width > maxYLabelWidth {
-                maxYLabelWidth = size.width
-            }
-            
-            return (text, size)
-        }
     }
     
     private func drawNoDataLabel() {
@@ -310,6 +310,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     private func drawAverageLineIfNeeded() {
         if showAverageLine {
             let averageLineY = yPosition(forValue: chartData.average)
+
             let spacingFromLine: CGFloat = 2
             
             let averageLabel = UILabel()
@@ -363,6 +364,17 @@ public class FLCartesianPlane: UIView, FLStylable {
                                                             .foregroundColor: config.axesLabels.color])
     }
     
+    private func textSizeFrom(value: CGFloat, maxYLabelWidth: inout CGFloat) -> (text: String, size: CGSize) {
+        let text = chartData.yAxisFormatter.string(from: NSNumber(value: value))
+        let size = sizeForText(text)
+        
+        if size.width > maxYLabelWidth {
+            maxYLabelWidth = size.width
+        }
+        
+        return (text, size)
+    }
+
     private func updateChartLayoutGuide() {
         var leadingConstant: CGFloat = 0
         var trailingConstant: CGFloat = 0
@@ -395,7 +407,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     
     private func updateConfigGranularityY() {
         if config.granularityY == 0 {
-            config.granularityY = chartData.defaultYGranularity(forType: chartType)
+            config.granularityY = chartData.defaultYGranularity(forType: chartType, horizontalRepresentedValues: horizontalRepresentedValues)
         }
     }
     

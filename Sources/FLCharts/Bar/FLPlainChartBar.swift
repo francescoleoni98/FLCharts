@@ -13,8 +13,11 @@ public final class FLPlainChartBar: UIView, ChartBar {
     public var config: FLChartConfig?
     public var barConfig: FLBarConfig?
     
+    public var horizontalRepresentedValues: Bool = false
+
     public func configureViews() { }
     
-    public func configureBar(for barHeight: CGFloat, barData: PlotableData, legendKeys: [Key]) { }
-
+    public func configureBar(for barHeight: CGFloat, chartData: FLChartData, barData: PlotableData, legendKeys: [Key]) {
+        backgroundColor = legendKeys.first?.color.mainColor
+    }
 }

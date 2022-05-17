@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 public class FLColor {
     

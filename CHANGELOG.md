@@ -1,3 +1,9 @@
+## 1.7.0
+* **FEATURE:** Added `FLHorizontalMultipleValuesChartBar` to display multiple values with single bars side by side.
+* **IMPROVEMENT:** Added method to update average value in `FLCard`.
+* **IMPROVEMENT:** Added possibility to limit the width of the bars if scroll is enabled.
+
+
 ## 1.6.0
 * **FEATURE:** Added possibility to choose color of the line of line chart for each x and y segment.
 * **FEATURE:** Added possibility to create segmented gradients in `FLColor`.
