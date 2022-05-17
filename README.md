@@ -19,6 +19,7 @@ Embed effortlessly your chart in a `FLCard` alogside with a title, an average vl
   * [Carthage](#carthage)
 * [Features](#features)
 * [Configurations](#configurations)
+* [Prebuilt bar cells](#barcells)
 * [Docs](#docs)
 * [Examples](#examples)
 * [Animations](#animations)
@@ -88,6 +89,14 @@ let axisLabelConfig = FLAxisLabelConfig(color: .black,
 chart.config = ChartConfig(axesLabels: axisLabelConfig)
 ```
 
+## Prebuilt bar cells <a name="barcells"></a>
+- `FLPlainChartBar`
+- `FLMultipleValuesChartBar`
+- `FLHorizontalMultipleValuesChartBar`
+
+Use this bars when you configure your chart.
+
+Eg. `FLChart(data: ..., type: .bar(bar: FLMultipleValuesChartBar.self))`
 
 ## Docs <a name="docs"></a>
 
@@ -105,6 +114,10 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
  - **Multivalue Bar Chart**
 
  ![multivalue bar chart](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/multiple_value_chart.jpg)
+
+ - **Multivalue Horizontal Bar Chart**
+
+ ![multivalue horizontal bar chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/horizontal_stacked_bars.jpeg)
 
  - **Highlighted Bar**
 
