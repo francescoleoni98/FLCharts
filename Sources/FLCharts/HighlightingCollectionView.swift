@@ -154,8 +154,10 @@ open class HighlightingCollectionView: UnclippedTopCollectionView {
                     highlightedView.frame.origin.x = self.mockView.frame.width - highlightedView.intrinsicWidth
                 }
                 
+                let lineIndicatorHeight = self.collectionView.frame.height - self.config.margin.bottom + 5 - cell.barView.frame.height
+                
                 lineIndicatorView.center.x = cellFrame.midX
-                lineIndicatorView.frame.size.height = self.collectionView.frame.height - self.config.margin.bottom - cell.barView.frame.height
+                lineIndicatorView.frame.size.height = lineIndicatorHeight < 0 ? 0 : lineIndicatorHeight
             }
             
             self.lastHighlightedIndexPath = indexPath
