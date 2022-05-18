@@ -80,7 +80,7 @@ class ViewController: UIViewController {
         radarChart.showXAxisLabels = true
         radarChart.showYAxisLabels = true
         
-        let lineChart = FLChart(data: barChartData, type: .bar(bar: FLHorizontalMultipleValuesChartBar.self, config: FLBarConfig(radius: .capsule, width: 30, spacing: 15)))
+        let lineChart = FLChart(data: barChartData, type: .bar(bar: FLHorizontalMultipleValuesChartBar.self, highlightView: BarHighlightedView(), config: FLBarConfig(radius: .capsule, width: 30, spacing: 15)))
         lineChart.showAverageLine = true
         lineChart.config = FLChartConfig(granularityY: 20)
 

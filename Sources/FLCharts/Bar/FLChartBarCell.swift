@@ -80,7 +80,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         barView.configureViews()
         barView.clipsToBounds = true
         barView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let halfSpacing = barConfig.spacing.half
         
         NSLayoutConstraint.activate([
@@ -97,11 +97,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         self.barData = barData
         self.xAxisLabel.text = barData.name
 
-        var barHeight = frame.height - spaceXLineFromBottom
-
-        if !horizontalRepresentedValues {
-            barHeight *= constant
-        }
+        let barHeight = (frame.height - spaceXLineFromBottom) * constant
         
         let minVal = min(barHeight, frame.width - barConfig.spacing)
         

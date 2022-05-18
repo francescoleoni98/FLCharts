@@ -35,7 +35,24 @@ public final class FLHorizontalMultipleValuesChartBar: UIView, ChartBar {
         let maxChartValue = chartData.maxIndividualValue() ?? 0
         let maxBarValue = barData.maxValue
 
-        for (index, value) in barData.values.enumerated() {
+        var barPercentages: [CGFloat] = []
+        
+        for value in barData.values {
+            let percentageOfTotal = maxBarValue == 0 ? 0 : value / maxChartValue
+            let barHeight = barHeight * percentageOfTotal
+            barPercentages.append(barHeight)
+        }
+        
+        // Normalizes bars percentages to bar height.
+        
+        let maxN = barPercentages.max()!
+        let maxIncrement = 1 - maxN
+        let percentage = (maxIncrement / maxN) * 100
+        let normalizedNumbers = barPercentages.map { number in
+            (((number / 100) * percentage) + number) * barHeight
+        }
+
+        for index in barData.values.indices {
             precondition(legendKeys.count - 1 >= index, "Not enough keys in legendKeys. The number of legendKeys must be equal or greater then the max number of values in one single bar.")
 
             let barContainerView = UIView()
@@ -48,8 +65,7 @@ public final class FLHorizontalMultipleValuesChartBar: UIView, ChartBar {
 
             barConfig?.radius.apply(to: bar, shorterEdge: (frame.width - ((keysCount - 1) * barsStackView.spacing)) / keysCount)
             
-            let percentageOfTotal = maxBarValue == 0 ? 0 : value / maxChartValue
-            let barHeight = barHeight * percentageOfTotal
+            let barHeight = normalizedNumbers[index]
 
             barContainerView.addSubview(bar)
             
