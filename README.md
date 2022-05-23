@@ -173,9 +173,7 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
 ## Author
 
-Francesco Leoni | leoni.francesco98@gmail.it 
-</br>
-francescoleoni98 | https://github.com/francescoleoni98
+Francesco Leoni | [@franceleonidev](https://twitter.com/franceleonidev) | leoni.francesco98@gmail.it
 
 
 ## License <a name="license"></a>
