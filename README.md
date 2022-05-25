@@ -21,6 +21,7 @@ Embed effortlessly your chart in a `FLCard` alogside with a title, an average vl
 * [Configurations](#configurations)
 * [Prebuilt bar cells](#barcells)
 * [Docs](#docs)
+* [Chart types](#charttypes)
 * [Examples](#examples)
 * [Animations](#animations)
 * [License](#license)
@@ -104,56 +105,36 @@ You can build FLCharts documentation directly in XCode.
 </br>
 In XCode go to `Product -> Build Documentation`, once XCode has finished building, the documentation will appear.
 
+## Chart types <a name="charttypes"></a>
+
+|  |  |  |
+| ----------- | ----------- | ----------- |
+| **Plain Bar Chart** | **Multi Value Bar Chart** | **Horizontal Multi Value Bar Chart** |
+| Bar class: `FLPlainChartBar` | Bar class: `FLMultipleValuesChartBar` | Bar class: `FLHorizontalMultipleValuesChartBar` |  
+| Data type: `SinglePlotable` | Data type: `MultiPlotable` | Data type: `MultiPlotable` |
+| ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1143.jpg?raw=true) | ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1144.jpg?raw=true) | ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1145.jpg?raw=true) |
+| <img width=0 height=40 /> |  |  |
+| **Line Chart** | **Multi Value Line Chart** | **Scatter Chart** |
+| Data type: `SinglePlotable` | Data type: `MultiPlotable` | Data type: `ScatterPlotable` |
+| ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1148.jpg?raw=true) | ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1146.jpg?raw=true) | ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1149.jpg?raw=true) |
+| <img width=0 height=40 /> |  |  |
+| **Radar Chart** | **Pie Chart** |
+| Data type: `FLDataSet` | Data type: `FLPiePlotable` |
+| ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1150.jpg?raw=true) | ![](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/ChartTypes/IMG_1151.jpg?raw=true) |
+
 
 ## Examples <a name="examples"></a>
 
- - **Bar Chart**
-
- ![bar chart](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/base_chart.jpg)
-
- - **Multivalue Bar Chart**
-
- ![multivalue bar chart](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/multiple_value_chart.jpg)
-
- - **Multivalue Horizontal Bar Chart**
-
- ![multivalue horizontal bar chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/horizontal_stacked_bars.jpeg)
-
- - **Highlighted Bar**
-
- ![highlighted bar](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg)
-
- - **Average view**
-
- ![average view](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/average_line.jpg)
-
- - **Bar chart embedded in FLCard**
-
- ![bar chart embedded in FLCard](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCard.jpg)
-
- - **Dark mode**
-
- ![dark mode](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/dark_mode.jpg)
-
- - **Line Chart X and Y Segments**
-
- ![x y segments](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/x_y_segments_line_chart.jpg)
-
-- **Line Chart**
-
- ![line chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/line_chart.jpg)
- 
-- **Scatter Chart**
-
- ![scatter chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/scatter_chart.png)
- 
-- **Pie Chart**
-
- ![pie chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/pie_chart.png)
-
- - **Radar Chart**
-
- ![radar chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLChart_radar_chart.png)
+|  |  |  |
+| ----------- | ----------- | ----------- |
+| **Highlighted Bar** | **Average view** | **Bar chart embedded in FLCard** |
+| Highlight View: `BarHighlightedView` | `showAverage = true` |  |
+| ![highlighted bar](https://github.com/francescoleoni98/FLCharts/blob/main/Screenshots/highlightedview_chart.jpg) | ![average view](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/average_line.jpg) | ![bar chart embedded in FLCard](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/FLCard.jpg) |
+| <img width=0 height=40 /> |  |  |
+| **Dark Mode** | **Line Chart X and Y Segments** | **Pie Chart** |
+|  | X Segments: `Key(key: String, xColors: [UIColor])` |  |
+|  | Y Segments: `Key(key: String, yThresholds: [CGFloat : UIColor], data: [PlotableData])` |  |
+| ![dark mode](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/dark_mode.jpg) | ![x y segments](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/x_y_segments_line_chart.jpg) | ![pie chart](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/pie_chart.png) |
 
 
 ## Animations <a name="animations"></a>
