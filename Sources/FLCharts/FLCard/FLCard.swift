@@ -150,6 +150,7 @@ final public class FLCard: UIView {
             guard let averageLabel = averageLabel else { return }
             
             headerStackView.addArrangedSubview(averageLabel)
+            averageLabel.textAlignment = .right
             averageLabel.minimumScaleFactor = 0.7
             averageLabel.adjustsFontSizeToFitWidth = true
 

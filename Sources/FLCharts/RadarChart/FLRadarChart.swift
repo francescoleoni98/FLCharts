@@ -148,7 +148,7 @@ public final class FLRadarChart: UIView, MutableCardableChart {
         for dataSet in data {
             context.addPath(dataPath(in: internalRect, data: dataSet.data).cgPath)
             context.setStrokeColor(dataSet.key.color.mainColor.cgColor)
-            context.setFillColor(dataSet.key.color.mainColor.withAlphaComponent(0.4).cgColor)
+            context.setFillColor(dataSet.key.color.mainColor.withAlphaComponent(0.1).cgColor)
             context.setLineWidth(2)
             context.setLineJoin(.round)
             

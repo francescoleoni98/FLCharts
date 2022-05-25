@@ -64,7 +64,7 @@ internal final class FLLinePlotView: UIView, FLPlotView {
             self.halfLineWidth = lineWidth.half
             
             self.chartWidth = frame.width
-            self.chartHeight = frame.height - config.margin.bottom - halfLineWidth
+            self.chartHeight = frame.height - 25 - halfLineWidth
             
             drawChartFillIfNeeded()
             drawChartLines()

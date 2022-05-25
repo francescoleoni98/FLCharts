@@ -11,3 +11,7 @@ target 'FLCharts_Example' do
     
   end
 end
+
+target 'SwiftUI Example' do
+  pod 'FLCharts', :path => '../'
+end

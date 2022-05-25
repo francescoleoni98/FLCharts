@@ -102,7 +102,7 @@ public final class FLPieChart: UIView, MutableCardableChart {
     /// Updates the pie chart data with new data.
     public func updateData(_ data: [FLPiePlotable], animated: Bool) {
         self.chartData = data
-        
+
         let internalSum = sum
         var startPercentage: Double = 0
         var notCurrentlyDisplayed: [FLPiePlotable] = data

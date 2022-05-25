@@ -34,8 +34,10 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
     /// - note: This property can be enabled only while using bar charts.
     public var shouldScroll: Bool = true {
         didSet {
+            if oldValue != shouldScroll {
             if let barPlotView = plotView as? FLBarPlotView {
                 barPlotView.shouldScroll = shouldScroll
+            }
             }
         }
     }
@@ -45,21 +47,25 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
     /// - note: This option will be disabled for line chart with ``MultiPlotable`` data, since is not fair to calculate an average between multiple lines.
     public var showAverageLine: Bool = false {
         didSet {
-            cartesianPlane.showAverageLine = showAverageLine
-        }
-    }
-
-    /// Whether to show the axes ticks.
-    public var showTicks: Bool = true {
-        didSet {
-            cartesianPlane.showTicks = showTicks
-            
-            if let barPlotView = plotView as? FLBarPlotView {
-                barPlotView.showTicks = showTicks
+            if oldValue != showAverageLine {
+                cartesianPlane.showAverageLine = showAverageLine
             }
         }
     }
-
+    
+    /// Whether to show the axes ticks.
+    public var showTicks: Bool = true {
+        didSet {
+            if oldValue != showTicks {
+                cartesianPlane.showTicks = showTicks
+                
+                if let barPlotView = plotView as? FLBarPlotView {
+                    barPlotView.showTicks = showTicks
+                }
+            }
+        }
+    }
+    
     public var config: FLChartConfig {
         didSet {
             cartesianPlane.config = config

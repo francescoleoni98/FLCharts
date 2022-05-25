@@ -9,14 +9,33 @@
 import UIKit
 import Foundation
 
+//#if canImport(Combine)
+//import Combine
+//#endif
+
 public class FLChartData {
     
     /// The title of the chart.
     public var title: String
     
+//    #if targetEnvironment(simulator)
+//    @available(iOS 13.0, *)
+//    @Published public var dataEntries: [PlotableData]
+//    #else
     /// The entries of the chart.
     public var dataEntries: [PlotableData]
+    {
+        willSet {
+            if #available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *) {
+                self.objectWillChange.send()
+            }
+        }
+    }
+//    #endif
     
+//    @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+//    public lazy var objectWillChange = ObservableObjectPublisher()
+
     /// The keys of the legend. On multi-value bars the first key corresponds to the lower part of the bar.
     public var legendKeys: [Key]
     
@@ -127,8 +146,11 @@ public class FLChartData {
             return maxValue
             
         case .scatter:
-            if let dataEntries = dataEntries as? [ScatterPlotable],
-               let maxYValue = dataEntries.maxFor(\.yValue) {
+            guard let dataEntries = dataEntries as? [ScatterPlotable] else {
+                fatalError("Trying to instanciate a ScatterPlotView but the chart data passed are not 'ScatterPlotable'.")
+            }
+
+            if let maxYValue = dataEntries.maxFor(\.yValue) {
                 return maxYValue + (maxYValue * 0.1)
             }
             return nil
@@ -139,4 +161,9 @@ public class FLChartData {
     internal func defaultYGranularity(forType type: FLChart.PlotType, horizontalRepresentedValues: Bool) -> CGFloat {
         floor(((horizontalRepresentedValues ? maxIndividualValue() : maxYValue(forType: type)) ?? 100) / 3)
     }
+}
+
+@available(iOS 13.0, *)
+extension FLChartData: ObservableObject {
+    
 }

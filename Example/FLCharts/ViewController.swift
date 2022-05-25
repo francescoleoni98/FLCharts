@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         chartView.config.dashedLines.color = .red
         
         let barChartData = FLChartData(title: "Consumptions",
-                                       data: monthsData,
+                                       data: scatterData,
                                        legendKeys: [
                                         Key(key: "1", color: .red),
                                         Key(key: "2", color: .blue),
@@ -80,9 +80,23 @@ class ViewController: UIViewController {
         radarChart.showXAxisLabels = true
         radarChart.showYAxisLabels = true
         
-        let lineChart = FLChart(data: barChartData, type: .bar(bar: FLHorizontalMultipleValuesChartBar.self, highlightView: BarHighlightedView(), config: FLBarConfig(radius: .capsule, width: 30, spacing: 15)))
-        lineChart.showAverageLine = true
-        lineChart.config = FLChartConfig(granularityY: 20)
+        let radar = [FLDataSet(data: [5, 4.5, 4, 3.5], key: Key(key: "Graham", color: FLColor(.systemPink))),
+                     FLDataSet(data: [3, 4, 5, 5], key: Key(key: "Barbara", color: .seaBlue)),
+                     FLDataSet(data: [2, 3.5, 2, 5], key: Key(key: "Keith", color: FLColor(.systemGreen)))]
+        
+//        let lineChart = FLChart(data: barChartData, type: .scatter())
+        let lineChart = FLPieChart(title: "Platforms",
+                                   data: [FLPiePlotable(value: 51.7, key: Key(key: "Desktop", color: FLColor(hex: "138CFD"))),
+                                          FLPiePlotable(value: 25.2, key: Key(key: "Mobile", color: FLColor(hex: "4DA8FF"))),
+                                          FLPiePlotable(value: 14.7, key: Key(key: "Table", color: FLColor(hex: "A7CBF6"))),
+                                          FLPiePlotable(value: 10.8, key: Key(key: "Other", color: FLColor(hex: "F0F4FA")))],
+                                   border: .width(60),
+                                   formatter: .percent)
+//        lineChart.showAverageLine = true
+//        lineChart.shouldScroll = false
+//        lineChart.showTicks = false
+////        lineChart.cartesianPlane.showUnitsOfMeasure = false
+//        lineChart.config = FLChartConfig(granularityX: 1, granularityY: 15, axesLabels: FLAxesLabelConfig(color: .lightGray), axesLines: FLAxesLineConfig(color: .lightGray), dashedLines: FLDashedLineConfig(dashWidth: 2))
 
         let card = FLCard(chart: lineChart, style: .rounded)
         card.showAverage = false
@@ -110,32 +124,45 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
-    var monthsData: [MultiPlotable] {
-        [MultiPlotable(name: "jan", values: [30, 24, 53]),
-         MultiPlotable(name: "feb", values: [55, 44, 24]),
-         MultiPlotable(name: "mar", values: [70, 15, 44]),
-         MultiPlotable(name: "apr", values: [45, 68, 34]),
-         MultiPlotable(name: "may", values: [85, 46, 12]),
-         MultiPlotable(name: "jun", values: [46, 73, 32]),
-         MultiPlotable(name: "jul", values: [75, 46, 53]),
-         MultiPlotable(name: "aug", values: [10, 24, 24]),
-         MultiPlotable(name: "set", values: [60, 74, 44]),
-         MultiPlotable(name: "oct", values: [75, 72, 34]),
-         MultiPlotable(name: "nov", values: [85, 10, 15]),
-         MultiPlotable(name: "dec", values: [55, 66, 32])]
+    var monthsData: [SinglePlotable] {
+        [SinglePlotable(name: "jan", value: 15),
+         SinglePlotable(name: "feb", value: 45 - 20),
+         SinglePlotable(name: "mar", value: 67 - 20),
+         SinglePlotable(name: "apr", value: 55 - 20),
+         SinglePlotable(name: "may", value: 34 - 20),
+         SinglePlotable(name: "jun", value: 24 - 20)]
     }
     
     var scatterData: [ScatterPlotable] {
-        [ScatterPlotable(x: 3, y: 38.587106591224336),
-         ScatterPlotable(x: 3, y: 38.552766707227285),
-         ScatterPlotable(x: 3, y: 36.49894052036733),
-         ScatterPlotable(x: 6, y: 31.31575103102955),
-         ScatterPlotable(x: 4, y: 46.52775961525811),
-         ScatterPlotable(x: 6, y: 61.78378326561926),
-         ScatterPlotable(x: 6, y: 96.53751839181793),
-         ScatterPlotable(x: 7, y: 92.89349217706958),
-         ScatterPlotable(x: 8, y: 79.22327631312078),
-         ScatterPlotable(x: 2, y: 17.049959556070704),
-         ScatterPlotable(x: 4, y: 78.14597672470192)]
+        var data: [ScatterPlotable] = []
+        
+        for _ in 0...300 {
+            data.append(ScatterPlotable(x: CGFloat.random(in: 0...8), y: CGFloat.random(in: 0...50)))
+        }
+
+        return data
     }
 }
+
+
+// FLChartData(title: "Consumptions", data: [SinglePlotable], legendKeys: [Key], unitOfMeasure: "kWh")
+// FLChart(data: barChartData, type: .bar(bar: FLPlainChartBar.self))
+
+// FLChartData(title: "Consumptions", data: [MultiPlotable], legendKeys: [Key], unitOfMeasure: "kWh")
+// FLChart(data: barChartData, type: .bar(bar: FLMultipleValuesChartBar.self))
+
+// FLChartData(title: "Consumptions", data: [MultiPlotable], legendKeys: [Key], unitOfMeasure: "kWh")
+// FLChart(data: barChartData, type: .bar(bar: FLHorizontalMultipleValuesChartBar.self))
+
+// FLChartData(title: "Consumptions", data: [SinglePlotable], legendKeys: [Key], unitOfMeasure: "kWh")
+// FLChart(data: barChartData, type: .line())
+
+// FLChartData(title: "Consumptions", data: [MultiPlotable], legendKeys: [Key], unitOfMeasure: "kWh")
+// FLChart(data: barChartData, type: .line())
+
+// FLChartData(title: "Consumptions", data: [ScatterPlotable], legendKeys: [Key], unitOfMeasure: "kWh")
+// FLChart(data: barChartData, type: .scatter())
+
+// FLRadarChart(title: "Skills", categories: ["Knowledge", ...], data: [FLDataSet], isFilled: true)
+
+// FLPieChart(title: "Platforms", data: [FLPiePlotable], border: .width(60), formatter: .percent)

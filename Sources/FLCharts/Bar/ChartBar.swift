@@ -12,7 +12,7 @@ public protocol ChartBar: UIView {
     var config: FLChartConfig? { get set }
     var barConfig: FLBarConfig? { get set }
     
-    /// Whether the values of each bar are represented side by side or stack one on top of the other.
+    /// For multiple values bars, whether the values of each bar are represented side by side or stack one on top of the other.
     var horizontalRepresentedValues: Bool { get set }
 
     func prepareForReuse()

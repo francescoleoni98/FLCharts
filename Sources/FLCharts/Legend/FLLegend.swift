@@ -33,7 +33,7 @@ public class FLLegend: FLIntrinsicCollectionView {
         translatesAutoresizingMaskIntoConstraints = false
         register(FLLegendKeyCell.self, forCellWithReuseIdentifier: FLLegendKeyCell.identifier)
     }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
