@@ -9,9 +9,11 @@ import UIKit
 import Foundation
 
 /// Defines a horizontal position.
+/// If set to .none, the y-axis is hidden.
 public enum YPosition {
     case left
     case right
+    case none
 }
 
 /// The cartesian plane on which the chart is plotted.
@@ -141,8 +143,11 @@ public class FLCartesianPlane: UIView, FLStylable {
             return
         }
         
-        if showUnitsOfMeasure {
+        if showUnitsOfMeasure && yAxisPosition != .none{
             drawYAxisUnitOfMeasure()
+        }
+        
+        if showUnitsOfMeasure {
             drawXAxisUnitOfMeasure()
         }
         
@@ -247,10 +252,13 @@ public class FLCartesianPlane: UIView, FLStylable {
             axesLines.addLines(between: [chartTopLeft,
                                          chartBottomLeft,
                                          chartBottomRight])
-        } else {
+        } else if yAxisPosition == .right {
             axesLines.addLines(between: [chartTopRight,
                                          chartBottomRight,
                                          chartBottomLeft])
+        } else {
+            axesLines.addLines(between: [chartBottomLeft,
+                                         chartBottomRight])
         }
     }
     
@@ -387,6 +395,10 @@ public class FLCartesianPlane: UIView, FLStylable {
         case .right:
             leadingConstant = showAverageLine ? marginForAverageView + margin.left : margin.left
             trailingConstant = margin.right + config.axesLines.lineWidth
+                
+        case .none:
+            leadingConstant = showAverageLine ? marginForAverageView + margin.left : margin.left
+            trailingConstant = showAverageLine ? marginForAverageView + margin.right : margin.right
         }
         
         var labelHeight: CGFloat = 0

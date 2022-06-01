@@ -59,6 +59,13 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
             }
         }
     }
+    
+    /// Whether to show the y-axis.
+    public var showYAxis: Bool = true {
+        didSet {
+            cartesianPlane.yAxisPosition = showYAxis ? .left : .none
+        }
+    }
 
     public var config: FLChartConfig {
         didSet {
