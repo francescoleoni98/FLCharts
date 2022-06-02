@@ -35,6 +35,10 @@ class LineXAxis: XAxisProvider {
                 continue
             }
 
+            if index >= entriesCount, case .none = yAxisPosition {
+                continue
+            }
+            
             // Removes first x axes label when y axes if on the right.
             if x == 0, case .right = yAxisPosition {
                 continue

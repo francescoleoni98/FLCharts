@@ -101,6 +101,10 @@ public class FLChartConfig {
         case .right:
             margin.left = 0
             margin.right = horizontalMargin
+                
+        case .none:
+            margin.left = 0
+            margin.right = 0
         }
     }
     
