@@ -449,7 +449,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     private func xPositionForAverageLabel(_ label: UILabel) -> CGFloat {
-        if yAxisPosition == .left {
+        if yAxisPosition == .left || yAxisPosition == .none {
             return chartRight - label.intrinsicWidth - 5
         } else {
             return chartLeft + 5
