@@ -31,6 +31,10 @@ internal final class FLBarPlotView: UIView, FLPlotView {
     /// Whether the chart should scroll horizontally.
     internal var shouldScroll: Bool = true
     
+    internal var minPlotYValue: CGFloat = 0
+    
+    internal var maxPlotYValue: CGFloat?
+
     /// The data to show in the chart.
     internal private(set) var chartData: FLChartData
     
@@ -106,12 +110,13 @@ extension FLBarPlotView: UICollectionViewDataSource {
         let barData = chartData.dataEntries[indexPath.item]
         
         if bar.horizontalRepresentedValues {
-            let max = chartData.maxIndividualValue() ?? 0
-            let ratio = max == 0 ? 0 : barData.maxValue / max
+            let max = maxPlotYValue ?? chartData.maxIndividualValue() ?? 0
+            let ratio = max == 0 ? 0 : (barData.maxValue - minPlotYValue) / (max - minPlotYValue)
             cell.setBarHeight(ratio, chartData: chartData, barData: barData, legendKeys: chartData.legendKeys, animated: animated, horizontalRepresentedValues: bar.horizontalRepresentedValues)
         } else {
-            if let max = chartData.maxYValue(forType: .bar()) {
-                let ratio = max == 0 ? 0 : barData.total / max
+            if let chartDataMax = chartData.maxYValue(forType: .bar()) {
+                let max = maxPlotYValue ?? chartDataMax
+                let ratio = max == 0 ? 0 : (barData.total - minPlotYValue) / (max - minPlotYValue)
                 cell.setBarHeight(ratio, chartData: chartData, barData: barData, legendKeys: chartData.legendKeys, animated: animated, horizontalRepresentedValues: bar.horizontalRepresentedValues)
             }
         }

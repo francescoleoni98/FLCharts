@@ -60,6 +60,22 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
         }
     }
 
+    /// The minimum value of the y axis.
+    public var yMinValue: CGFloat = 0 {
+        didSet {
+            cartesianPlane.dataMinValue = yMinValue
+            plotView.minPlotYValue = yMinValue
+        }
+    }
+  
+    /// The maximum value of the y axis.
+    public var yMaxValue: CGFloat? {
+        didSet {
+            cartesianPlane.dataMaxValue = yMaxValue
+            plotView.maxPlotYValue = yMaxValue
+        }
+    }
+
     public var config: FLChartConfig {
         didSet {
             cartesianPlane.config = config

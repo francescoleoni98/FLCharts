@@ -15,6 +15,10 @@ internal final class FLLinePlotView: UIView, FLPlotView {
     
     internal var lineConfig: FLLineConfig = FLLineConfig()
     
+    internal var minPlotYValue: CGFloat = 0
+    
+    internal var maxPlotYValue: CGFloat?
+
     internal weak var highlightingDelegate: ChartHighlightingDelegate?
     
     // MARK: - Drawing properties
@@ -109,7 +113,9 @@ internal final class FLLinePlotView: UIView, FLPlotView {
             
             for (index, entry) in setOfPoints.enumerated() {
                 let x = (dotSpacing * CGFloat(index)) + halfLineWidth
-                let y = chartHeight - (chartHeight * (entry / maxEntry)) + halfLineWidth
+                
+                let percentageOfTotal = (entry - minPlotYValue) / ((maxPlotYValue ?? maxEntry) - minPlotYValue)
+                let y = chartHeight - (chartHeight * percentageOfTotal) + halfLineWidth
                 points.append(CGPoint(x: x, y: y))
             }
             
@@ -123,6 +129,11 @@ internal final class FLLinePlotView: UIView, FLPlotView {
             
             let key = chartData.legendKeys[i]
             let color = key.color
+          
+            // Revert charts bounds to its original values
+            chartWidth += lineWidth
+            chartHeight += halfLineWidth
+
             drawGradient(path: linePath.cgPath, colors: color.colors, locations: color.locations, isVertical: key.isVertical, isStroke: true)
             drawCirclesIfNeeded(for: points)
         }
@@ -151,7 +162,9 @@ internal final class FLLinePlotView: UIView, FLPlotView {
         
         for (index, entry) in chartData.dataEntries.enumerated() {
             let x = (dotSpacing * CGFloat(index)) + offset.horizontal
-            let y = size.height - (size.height * (entry.total / maxEntry)) + offset.vertical
+
+            let percentageOfTotal =  ((entry.total - minPlotYValue) / ((maxPlotYValue ?? maxEntry) - minPlotYValue))
+            let y = size.height - (size.height * percentageOfTotal) + offset.vertical
             points.append(CGPoint(x: x, y: y))
         }
         
@@ -163,12 +176,15 @@ internal final class FLLinePlotView: UIView, FLPlotView {
     }
     
     func drawGradient(path: CGPath, colors: [UIColor], locations: [CGFloat]? = nil, isVertical: Bool, isStroke: Bool) {
+        chartHeight += halfLineWidth
+
         context.addPath(path)
         if isStroke {
             context.replacePathWithStrokedPath()
         }
         context.clip()
-        
+        context.clip(to: CGRect(x: 0, y: 0, width: chartWidth, height: chartHeight))
+
         var colorComponents: [CGFloat] = []
         
         for color in colors {

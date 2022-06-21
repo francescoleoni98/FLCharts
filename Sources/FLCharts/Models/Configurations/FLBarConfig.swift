@@ -50,9 +50,15 @@ public struct FLBarConfig {
     /// The space between each chart bar.
     public var spacing: CGFloat
     
-    /// Limits the with of the bar if ``FLBarPlotView/shouldScroll`` is set to `false`
+    /// Limits the with of the bar if ``FLBarPlotView/shouldScroll`` is set to `false`.
     public var limitWidth: Bool
-    
+  
+    /// Creates a bar configuration.
+    /// - Parameters:
+    ///   - radius: The style of the bars corners.
+    ///   - width: The width of the bar. If ``FLBarPlotView/shouldScroll`` is set to `true` this value will be used as absolute value for the bar width. Else the width of the bar will be calculated based on the width of the chart but If ``limitWidth`` is set to `true` this value will be used as the maximum width for the bar.
+    ///   - spacing: The space between each chart bar.
+    ///   - limitWidth: Limits the with of the bar if ``FLBarPlotView/shouldScroll`` is set to `false`.
     public init(radius: Radius = .corners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], 3),
                 width: CGFloat = 12,
                 spacing: CGFloat = 7,
