@@ -24,6 +24,7 @@ Embed effortlessly your chart in a `FLCard` alogside with a title, an average vl
 * [Chart types](#charttypes)
 * [Examples](#examples)
 * [Animations](#animations)
+* [Apps that uses FLCharts](#apps)
 * [License](#license)
 
 
@@ -151,6 +152,9 @@ In XCode go to `Product -> Build Documentation`, once XCode has finished buildin
 
  ![alt tag](https://raw.githubusercontent.com/francescoleoni98/FLCharts/main/Screenshots/GIFs/scrolling_behaviour.gif)
 
+
+## Apps that uses FLCharts <a name="apps"></a>
+- [Aware - Daily Bullet Journal](https://apps.apple.com/it/app/aware-daily-bullet-journal/id1560309401)
 
 ## Author
 
