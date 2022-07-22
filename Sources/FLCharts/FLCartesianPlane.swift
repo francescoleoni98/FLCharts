@@ -408,9 +408,8 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     private func updateConfigGranularityY() {
-        if config.granularityY == 0 {
             config.granularityY = chartData.defaultYGranularity(forType: chartType, horizontalRepresentedValues: horizontalRepresentedValues)
-        }
+    
     }
     
     // MARK: - Helpers
