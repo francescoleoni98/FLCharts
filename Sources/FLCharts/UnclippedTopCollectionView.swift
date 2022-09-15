@@ -35,8 +35,6 @@ open class UnclippedTopCollectionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        clipMask.backgroundColor = UIColor.black.cgColor
-        layer.mask = clipMask
         
         addSubview(collectionView)
         collectionView.clipsToBounds = false
@@ -49,10 +47,5 @@ open class UnclippedTopCollectionView: UIView {
         
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        clipMask.frame = bounds.insetBy(dx: 0, dy: -50)
     }
 }

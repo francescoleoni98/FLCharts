@@ -12,6 +12,7 @@ import Foundation
 public enum YPosition {
     case left
     case right
+    case none
 }
 
 /// The cartesian plane on which the chart is plotted.
@@ -60,6 +61,8 @@ public class FLCartesianPlane: UIView, FLStylable {
             }
         }
     }
+    
+    public var showNoDataText: Bool = true
     
     // MARK: - Internal Properties
     
@@ -137,8 +140,8 @@ public class FLCartesianPlane: UIView, FLStylable {
         ticksLines = CGMutablePath()
         dashedLines = CGMutablePath()
         config.resetDefaultMargins()
-
-        guard chartDataMaxValue > 0 else {
+        
+        if chartDataMaxValue > 0 && !showNoDataText {
             drawNoDataLabel()
             return
         }
@@ -153,10 +156,10 @@ public class FLCartesianPlane: UIView, FLStylable {
         labels.editLabels(types: .yLabel, .topYLabel) { label in
             var labelXPosition: CGFloat = 0
             
-            if yAxisPosition == .left {
+            if yAxisPosition == .left || yAxisPosition == .none {
                 labelXPosition = chartLeft - config.tick.lineLength - tickLabelSpacing - label.size.width
-            } else {
-                labelXPosition = chartRight + config.tick.lineLength + tickLabelSpacing
+            } else if yAxisPosition == .right {
+                labelXPosition = chartRight +  config.tick.lineLength + tickLabelSpacing
             }
             
             label.point = CGPoint(x: labelXPosition, y: label.point.y - (label.size.height.half))
@@ -168,7 +171,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         labels.editLabels(types: .xUnitOfMeasure) { label in
             let xPosition = ((chartWidth - marginForAverageView).half) - (label.size.width.half)
             
-            if yAxisPosition == .left {
+            if yAxisPosition == .left || yAxisPosition == .none{
                 label.point.x = xPosition + margin.left
             } else {
                 label.point.x = xPosition + marginForAverageView
@@ -249,10 +252,12 @@ public class FLCartesianPlane: UIView, FLStylable {
             axesLines.addLines(between: [chartTopLeft,
                                          chartBottomLeft,
                                          chartBottomRight])
-        } else {
+        } else if yAxisPosition == .none {
             axesLines.addLines(between: [chartTopRight,
                                          chartBottomRight,
                                          chartBottomLeft])
+        } else {
+            axesLines.addLines(between: [chartBottomLeft, chartBottomRight])
         }
     }
     
@@ -298,8 +303,9 @@ public class FLCartesianPlane: UIView, FLStylable {
             let (text, size) = textSizeFrom(value: (dataMaxValue ?? chartDataMaxValue), maxYLabelWidth: &maxYLabelWidth)
             labels.add(Label(text: text, size: size, point: CGPoint(x: 0, y: chartTop), type: .topYLabel))
         }
-        
-        config.setMargin(for: yAxisPosition, horizontalMargin: maxYLabelWidth + config.tick.lineLength + tickLabelSpacing)
+        if yAxisPosition == .none {
+            config.setMargin(for: yAxisPosition, horizontalMargin: maxYLabelWidth + config.tick.lineLength + tickLabelSpacing)
+        }
     }
     
     private func drawNoDataLabel() {
@@ -347,7 +353,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
         
     private func drawYTick(at position: CGFloat) {
-        if yAxisPosition == .left {
+        if yAxisPosition == .left || yAxisPosition == .none {
             drawTick(at: [CGPoint(x: chartLeft - config.tick.lineLength, y: position),
                           CGPoint(x: chartLeft, y: position)])
         } else {
@@ -389,6 +395,9 @@ public class FLCartesianPlane: UIView, FLStylable {
         case .right:
             leadingConstant = showAverageLine ? marginForAverageView + margin.left : margin.left
             trailingConstant = margin.right + config.axesLines.lineWidth
+        case .none:
+            leadingConstant = 0
+            trailingConstant = 0
         }
         
         var labelHeight: CGFloat = 0
@@ -438,7 +447,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     private func xPositionForAverageLabel(_ label: UILabel) -> CGFloat {
-        if yAxisPosition == .left {
+        if yAxisPosition == .left || yAxisPosition == .none {
             return chartRight - label.intrinsicWidth - 5
         } else {
             return chartLeft + 5
