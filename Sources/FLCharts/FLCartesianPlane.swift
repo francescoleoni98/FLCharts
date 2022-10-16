@@ -312,7 +312,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     private func drawNoDataLabel() {
-        let text = "No data available"
+      let text = Translation.noDataAvailable
         let size = sizeForText(text)
         
         drawLabel(text: text, inPoint: CGPoint(x: rect.width.half - size.width.half, y: rect.height.half))
@@ -336,7 +336,7 @@ public class FLCartesianPlane: UIView, FLStylable {
             addSubview(averageLabel)
             
             let unitOfMeasureLabel = UILabel()
-            unitOfMeasureLabel.text = "avg. \(chartData.yAxisUnitOfMeasure)"
+          unitOfMeasureLabel.text = "\(Translation.averageAbbreviated) \(chartData.yAxisUnitOfMeasure)"
             unitOfMeasureLabel.font = config.averageView.secondaryFont
             unitOfMeasureLabel.textColor = config.averageView.secondaryColor
             let unitOfMeasureLabelSize = unitOfMeasureLabel.intrinsicContentSize

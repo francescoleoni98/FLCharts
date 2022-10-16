@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Pods
+
+  Created by Francesco Leoni on 16/10/22.
+  
+*/
+
+"no_data_available" = "数据不可用";
+"average_abbreviated" = "平均 ";
