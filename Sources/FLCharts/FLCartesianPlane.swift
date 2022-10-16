@@ -9,9 +9,11 @@ import UIKit
 import Foundation
 
 /// Defines a horizontal position.
+/// If set to .none, the y-axis is hidden.
 public enum YPosition {
     case left
     case right
+    case none
 }
 
 /// The cartesian plane on which the chart is plotted.
@@ -51,7 +53,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     
     /// Whether to show the axes unit of measure.
     public var showUnitsOfMeasure: Bool = true
-
+    
     /// Whether to show the average line.
     public var showAverageLine: Bool = false {
         didSet {
@@ -124,7 +126,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     // MARK: - Overrides
-        
+    
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         guard let context = UIGraphicsGetCurrentContext() else { return }
@@ -138,13 +140,16 @@ public class FLCartesianPlane: UIView, FLStylable {
         dashedLines = CGMutablePath()
         config.resetDefaultMargins()
 
-        guard chartDataMaxValue > 0 else {
+        guard dataMaxValue ?? chartDataMaxValue > 0 else {
             drawNoDataLabel()
             return
         }
         
-        if showUnitsOfMeasure {
+        if showUnitsOfMeasure && yAxisPosition != .none{
             drawYAxisUnitOfMeasure()
+        }
+        
+        if showUnitsOfMeasure {
             drawXAxisUnitOfMeasure()
         }
         
@@ -164,7 +169,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         
         drawAverageLineIfNeeded()
         drawAxesLines()
-
+        
         labels.editLabels(types: .xUnitOfMeasure) { label in
             let xPosition = ((chartWidth - marginForAverageView).half) - (label.size.width.half)
             
@@ -174,23 +179,23 @@ public class FLCartesianPlane: UIView, FLStylable {
                 label.point.x = xPosition + marginForAverageView
             }
         }
-                
+        
         let xAxisProvider: XAxisProvider? = {
             let chartRect = CGRect(x: chartLeft, y: chartTop, width: chartWidth, height: chartHeight)
             
             switch chartType {
-            case .bar: return nil
-                
-            case .line:
-                let usefulChartWidth = showAverageLine ? (chartWidth - marginForAverageView) : chartWidth
-                let startXPosition = showAverageLine ? (yAxisPosition == .left ? 0 : marginForAverageView) : 0
-                
-                let lineDraw = LineXAxis(data: chartData, config: config, chartRect: chartRect, yAxisPosition: yAxisPosition)
-                lineDraw.configureLines(startXPosition: startXPosition, usefulChartWidth: usefulChartWidth)
-                return lineDraw
-                
-            case .scatter:
-                return ScatterXAxis(data: chartData, config: config, chartRect: chartRect, yAxisPosition: yAxisPosition)
+                case .bar: return nil
+                    
+                case .line:
+                    let usefulChartWidth = showAverageLine ? (chartWidth - marginForAverageView) : chartWidth
+                    let startXPosition = showAverageLine ? ((yAxisPosition == .left || yAxisPosition == .none) ? 0 : marginForAverageView) : 0
+                    
+                    let lineDraw = LineXAxis(data: chartData, config: config, chartRect: chartRect, yAxisPosition: yAxisPosition)
+                    lineDraw.configureLines(startXPosition: startXPosition, usefulChartWidth: usefulChartWidth)
+                    return lineDraw
+                    
+                case .scatter:
+                    return ScatterXAxis(data: chartData, config: config, chartRect: chartRect, yAxisPosition: yAxisPosition)
             }
         }()
         
@@ -245,14 +250,18 @@ public class FLCartesianPlane: UIView, FLStylable {
     // MARK: - Draw methods
     
     private func drawAxesLines() {
-        if yAxisPosition == .left {
+        switch yAxisPosition {
+        case .left:
             axesLines.addLines(between: [chartTopLeft,
                                          chartBottomLeft,
                                          chartBottomRight])
-        } else {
+        case .right:
             axesLines.addLines(between: [chartTopRight,
                                          chartBottomRight,
                                          chartBottomLeft])
+        case .none:
+            axesLines.addLines(between: [chartBottomLeft,
+                                         chartBottomRight])
         }
     }
     
@@ -260,7 +269,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         if let xUnitOfMeasure = chartData.xAxisUnitOfMeasure {
             let text = xUnitOfMeasure
             let size = sizeForText(text)
-
+            
             config.setMarginBottom(to: size.height + xUnitLabelSpacing)
             
             let point = CGPoint(x: ((chartWidth - marginForAverageView).half) - (size.width.half) + margin.left,
@@ -312,7 +321,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     private func drawAverageLineIfNeeded() {
         if showAverageLine {
             let averageLineY = yPosition(forValue: chartData.average)
-
+            
             let spacingFromLine: CGFloat = 2
             
             let averageLabel = UILabel()
@@ -345,7 +354,7 @@ public class FLCartesianPlane: UIView, FLStylable {
             marginForAverageView = max(averageLabelSize.width, unitOfMeasureLabelSize.width) + 15
         }
     }
-        
+    
     private func drawYTick(at position: CGFloat) {
         if yAxisPosition == .left {
             drawTick(at: [CGPoint(x: chartLeft - config.tick.lineLength, y: position),
@@ -376,19 +385,23 @@ public class FLCartesianPlane: UIView, FLStylable {
         
         return (text, size)
     }
-
+    
     private func updateChartLayoutGuide() {
         var leadingConstant: CGFloat = 0
         var trailingConstant: CGFloat = 0
         
         switch yAxisPosition {
-        case .left:
-            leadingConstant = margin.left + config.axesLines.lineWidth
-            trailingConstant = showAverageLine ? marginForAverageView + margin.right : margin.right
-            
-        case .right:
-            leadingConstant = showAverageLine ? marginForAverageView + margin.left : margin.left
-            trailingConstant = margin.right + config.axesLines.lineWidth
+            case .left:
+                leadingConstant = margin.left + config.axesLines.lineWidth
+                trailingConstant = showAverageLine ? marginForAverageView + margin.right : margin.right
+                
+            case .right:
+                leadingConstant = showAverageLine ? marginForAverageView + margin.left : margin.left
+                trailingConstant = margin.right + config.axesLines.lineWidth
+                
+            case .none:
+                leadingConstant = margin.left
+                trailingConstant = showAverageLine ? marginForAverageView + margin.right : margin.right
         }
         
         var labelHeight: CGFloat = 0
@@ -396,7 +409,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         if let xUnitOfMeasure = labels.find(type: .xUnitOfMeasure).first {
             labelHeight = xUnitOfMeasure.size.height + xUnitLabelSpacing
         }
-                
+        
         NSLayoutConstraint.activate([
             chartLayoutGuide.topAnchor.constraint(equalTo: topAnchor, constant: margin.top),
             chartLayoutGuide.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingConstant),
@@ -426,7 +439,7 @@ public class FLCartesianPlane: UIView, FLStylable {
             dashedLines.addLines(between: points)
         }
     }
-
+    
     private func sizeForText(_ text: String) -> CGSize {
         text.size(withSystemFontSize: config.axesLabels.font.pointSize)
     }
@@ -438,7 +451,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     private func xPositionForAverageLabel(_ label: UILabel) -> CGFloat {
-        if yAxisPosition == .left {
+        if yAxisPosition == .left || yAxisPosition == .none {
             return chartRight - label.intrinsicWidth - 5
         } else {
             return chartLeft + 5
