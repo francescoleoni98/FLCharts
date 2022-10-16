@@ -1,3 +1,9 @@
+## 1.8.0
+* **FEATURE:** Added `yMinValue` and `yMaxValue` on `FLChart` to clip the chart y axis.
+* **FIX:** Bar animation.
+* **IMPROVEMENT:** `limitWidth` behaviour.
+
+
 ## 1.7.0
 * **FEATURE:** Added `FLHorizontalMultipleValuesChartBar` to display multiple values with single bars side by side.
 * **IMPROVEMENT:** Added method to update average value in `FLCard`.

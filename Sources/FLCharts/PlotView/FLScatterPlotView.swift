@@ -31,6 +31,10 @@ internal final class FLScatterPlotView: UIView, FLPlotView {
     
     internal var dotDiameter: CGFloat = 6
     
+    internal var minPlotYValue: CGFloat = 0
+    
+    internal var maxPlotYValue: CGFloat?
+
     internal weak var highlightingDelegate: ChartHighlightingDelegate?
     
     internal init(data: FLChartData) {
@@ -61,20 +65,23 @@ internal final class FLScatterPlotView: UIView, FLPlotView {
         }
         
         guard let context = UIGraphicsGetCurrentContext(),
-              let maxYValue = chartData.maxYValue(forType: .scatter()),
+              let maxYValue = maxPlotYValue ?? chartData.maxYValue(forType: .scatter()),
               let maxXValue = data.maxFor(\.xValue) else { return }
-                        
+                  
+      print(minPlotYValue, maxYValue)
         let chartWidth = frame.width
-        let chartHeight = frame.height - config.margin.bottom
+        let chartHeight = frame.height - 25
         
         let maxX = maxXValue + (maxXValue * 0.1)
-        let maxY = maxYValue + (maxYValue * 0.1)
+        let maxY = maxYValue + (maxYValue * 0)
         
         context.setFillColor(chartData.legendKeys.first?.color.mainColor.cgColor ?? UIColor.blue.cgColor)
         
         let points = data.map { entry -> CGPoint in
             let x = chartWidth * (entry.xValue / maxX)
-            let y = chartHeight - (chartHeight * (entry.yValue / maxY))
+                        
+            let percentageOfTotal = (entry.yValue - minPlotYValue) / (maxY - minPlotYValue)
+            let y = chartHeight - (chartHeight * percentageOfTotal)
             return CGPoint(x: x, y: y)
         }
         

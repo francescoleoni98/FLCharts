@@ -103,6 +103,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         
         if !horizontalRepresentedValues, minVal > 0 {
             barConfig.radius.apply(to: barView, shorterEdge: minVal)
+            barView.backgroundColor = legendKeys.first?.color.mainColor
         }
                 
         if animated {

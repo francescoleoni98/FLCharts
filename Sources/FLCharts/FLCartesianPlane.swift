@@ -87,8 +87,10 @@ public class FLCartesianPlane: UIView, FLStylable {
     private let xUnitLabelSpacing: CGFloat = -5
     private let yUnitLabelSpacing: CGFloat = 5
     private let tickLabelSpacing: CGFloat = 4
-    private let dataMinValue: CGFloat = 0
-    private var dataMaxValue: CGFloat {
+    internal var dataMinValue: CGFloat = 0 { didSet { setNeedsDisplay() } }
+    internal var dataMaxValue: CGFloat? { didSet { setNeedsDisplay() } }
+
+    private var chartDataMaxValue: CGFloat {
         if horizontalRepresentedValues {
             return chartData.maxIndividualValue() ?? 0
         } else {
@@ -101,7 +103,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     // MARK: - Inits
     
     /// Creates a cartesian plane with the provided chart data.
-    internal init(data: FLChartData, type: FLChart.PlotType, horizontalRepresentedValues: Bool) {
+  internal init(data: FLChartData, type: FLChart.PlotType, horizontalRepresentedValues: Bool, yScale: ClosedRange<CGFloat>? = nil) {
         self.chartData = data
         self.chartType = type
         self.horizontalRepresentedValues = horizontalRepresentedValues
@@ -137,8 +139,8 @@ public class FLCartesianPlane: UIView, FLStylable {
         ticksLines = CGMutablePath()
         dashedLines = CGMutablePath()
         config.resetDefaultMargins()
-        
-        guard dataMaxValue > 0 else {
+
+        guard dataMaxValue ?? chartDataMaxValue > 0 else {
             drawNoDataLabel()
             return
         }
@@ -291,7 +293,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         var maxYLabelWidth: CGFloat = 0
         
         if step > 0 {
-            for value in stride(from: dataMinValue, through: dataMaxValue, by: step) {
+            for value in stride(from: dataMinValue, through: (dataMaxValue ?? chartDataMaxValue), by: step) {
                 guard value > 0 else { continue }
                 
                 let chartTickY = yPosition(forValue: value)
@@ -302,7 +304,7 @@ public class FLCartesianPlane: UIView, FLStylable {
         
         // This prevents the last label to overlap the max label.
         if let lastLabel = labels.find(type: .yLabel).last, lastLabel.point.y - chartTop > 15 {
-            let (text, size) = textSizeFrom(value: dataMaxValue, maxYLabelWidth: &maxYLabelWidth)
+            let (text, size) = textSizeFrom(value: (dataMaxValue ?? chartDataMaxValue), maxYLabelWidth: &maxYLabelWidth)
             labels.add(Label(text: text, size: size, point: CGPoint(x: 0, y: chartTop), type: .topYLabel))
         }
         
@@ -443,7 +445,7 @@ public class FLCartesianPlane: UIView, FLStylable {
     }
     
     private func yPosition(forValue value: CGFloat) -> CGFloat {
-        let percentageOfTotal = value / dataMaxValue * 100
+        let percentageOfTotal = (value - dataMinValue) / ((dataMaxValue ?? chartDataMaxValue) - dataMinValue) * 100
         let viewHeight = chartHeight * percentageOfTotal / 100
         return chartHeight - viewHeight + chartTop
     }
