@@ -28,6 +28,13 @@ internal final class FLBarPlotView: UIView, FLPlotView {
     /// Whether to show the axes ticks.
     internal var showTicks: Bool = true
     
+    /// Whether to show the x-axis.
+    internal var showXAxis: Bool = true {
+      didSet {
+        collectionView.reloadData()
+      }
+    }
+
     /// Whether the chart should scroll horizontally.
     internal var shouldScroll: Bool = true
     
@@ -104,6 +111,7 @@ extension FLBarPlotView: UICollectionViewDataSource {
         cell.config = config
         cell.barConfig = barConfig
         cell.shouldShowTicks = showTicks
+        cell.showXAxis = showXAxis
         let bar = bar.init()
         cell.configure(withBar: bar)
         

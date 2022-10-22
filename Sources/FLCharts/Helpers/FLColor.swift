@@ -133,6 +133,14 @@ public extension FLColor {
     static let seaBlue = FLColor(hex: "4266E8")
     static let darkBlue = FLColor(hex: "1B205E")
 
+    static func uiColor(_ uicolor: UIColor) -> FLColor {
+        FLColor(uicolor)
+    }
+  
+    static func white(_ white: CGFloat, alpha: CGFloat = 1) -> FLColor {
+      FLColor(UIColor(white: white, alpha: alpha))
+    }
+
     enum Gradient {
         
         public static let green = FLColor(startColor: UIColor(hex: "0BCDF7"), endColor: UIColor(hex: "A2FEAE"))

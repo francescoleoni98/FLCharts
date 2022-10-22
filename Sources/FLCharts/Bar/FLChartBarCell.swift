@@ -20,6 +20,7 @@ final public class FLChartBarCell: UICollectionViewCell {
     public var shouldShowTicks: Bool = true
     
     internal var barView: ChartBar!
+    internal var showXAxis: Bool = true
     private let xAxisLine = UIView()
     private let spaceXLineFromBottom: CGFloat = 25
     let xAxisLabel = UILabel()
@@ -39,7 +40,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         self.barView = bar
 
         addSubview(xAxisLine)
-        xAxisLine.backgroundColor = config.axesLines.color
+        xAxisLine.backgroundColor = showXAxis ? config.axesLines.color : .clear
         xAxisLine.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -52,7 +53,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         addSubview(xAxisLabel)
         xAxisLabel.textAlignment = .center
         xAxisLabel.font = config.axesLabels.font
-        xAxisLabel.textColor = config.axesLabels.color
+      xAxisLabel.textColor = showXAxis ? config.axesLabels.color : .clear
         xAxisLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -63,7 +64,7 @@ final public class FLChartBarCell: UICollectionViewCell {
         if shouldShowTicks {
             let xAxisTick = UIView()
             addSubview(xAxisTick)
-            xAxisTick.backgroundColor = config.tick.color
+            xAxisTick.backgroundColor = showXAxis ? config.tick.color : .clear
             xAxisTick.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([

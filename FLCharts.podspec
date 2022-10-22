@@ -5,7 +5,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FLCharts'
-  s.version          = '1.8.0'
+  s.version          = '1.9.0'
   s.summary          = 'Customizable iOS Charts built in Swift.'
 
   s.description      = <<-DESC

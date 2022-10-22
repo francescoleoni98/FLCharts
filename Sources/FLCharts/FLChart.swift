@@ -49,6 +49,20 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
         }
     }
 
+    /// Whether the average line overlaps the chart.
+    public var averageLineOverlapsChart: Bool = true {
+        didSet {
+            cartesianPlane.averageLineOverlapsChart = averageLineOverlapsChart
+        }
+    }
+
+    /// Whether to show the dash lines.
+    public var showDashedLines: Bool = false {
+        didSet {
+            cartesianPlane.showDashedLines = showDashedLines
+        }
+    }
+
     /// Whether to show the axes ticks.
     public var showTicks: Bool = true {
         didSet {
@@ -64,6 +78,14 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
     public var showYAxis: Bool = true {
         didSet {
             cartesianPlane.yAxisPosition = showYAxis ? .left : .none
+        }
+    }
+
+    /// Whether to show the x-axis.
+    public var showXAxis: Bool = true {
+        didSet {
+            cartesianPlane.showXAxis = showXAxis
+          (self.plotView as? FLBarPlotView)?.showXAxis = showXAxis
         }
     }
 
@@ -175,14 +197,13 @@ public final class FLChart: UIView, FLStylable, MutableCardableChart {
     }
     
     private func commonInit() {
-        self.cartesianPlane.didUpdateChartLayoutGuide = { layoutGuide in
-            self.plotView.constraints(equalTo: layoutGuide, directions: .all)
-        }
+      self.cartesianPlane.plotView = plotView
+      self.cartesianPlane.didUpdateChartLayoutGuide = { layoutGuide in
+        self.plotView.constraints(equalTo: layoutGuide, directions: .all)
+      }
         
-        addSubview(cartesianPlane)
-        cartesianPlane.constraints(equalTo: self, directions: .all)
-        
-        addSubview(plotView)
+      addSubview(cartesianPlane)
+      cartesianPlane.constraints(equalTo: self, directions: .all)
     }
     
     // MARK: - Methods

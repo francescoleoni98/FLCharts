@@ -1,3 +1,11 @@
+## 1.9.0
+* **FEATURE:** Added `averageLineOverlapsChart` on `FLChart` to let the chart overlaps the average line.
+* **FEATURE:** Added possibility to hide x and y axes.
+* **FEATURE:** Added `showDashedLines` in `FLChart`.
+* **IMPROVEMENT:** Added `uiColor(_:)` and `white(_:alpha:)` `FLColor` inits.
+* **FIX:** Orientation changes redraw.
+
+
 ## 1.8.0
 * **FEATURE:** Added `yMinValue` and `yMaxValue` on `FLChart` to clip the chart y axis.
 * **FIX:** Bar animation.

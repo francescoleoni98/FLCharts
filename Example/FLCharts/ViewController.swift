@@ -11,7 +11,7 @@ import FLCharts
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var chartView: FLChart!
+  @IBOutlet weak var chartView: FLChart!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +30,9 @@ class ViewController: UIViewController {
         let barChartData = FLChartData(title: "Consumptions",
                                        data: monthsData,
                                        legendKeys: [
-                                        Key(key: "1", color: .red),
-                                        Key(key: "2", color: .blue),
-                                        Key(key: "3", color: .green)
+                                        Key(key: "1", color: .white(0.9)),
+                                        Key(key: "2", color: .white(0.9)),
+                                        Key(key: "3", color: .white(0.9))
 
 
 //                                        Key(key: "F1", yThresholds: [40 : .red,
@@ -80,10 +80,16 @@ class ViewController: UIViewController {
         radarChart.showXAxisLabels = true
         radarChart.showYAxisLabels = true
         
-        let lineChart = FLChart(data: barChartData, type: .bar(bar: FLMultipleValuesChartBar.self, highlightView: BarHighlightedView(), config: FLBarConfig(radius: .capsule, width: 30, spacing: 15)))
+        let lineChart = FLChart(data: barChartData, type: .bar(highlightView: BarHighlightedView(), config: FLBarConfig(radius: .corners(corners: [.layerMaxXMinYCorner, .layerMinXMaxYCorner], 3), width: 30)))
+//      lineChart.showXAxis = false
+//      lineChart.showYAxis = false
+        lineChart.averageLineOverlapsChart = true
         lineChart.showAverageLine = true
-        lineChart.config = FLChartConfig(granularityY: 20)
-
+        lineChart.showDashedLines = false
+        lineChart.config = FLChartConfig(granularityY: 40, averageView: FLAverageViewConfig(lineWidth: 5, primaryFont: .systemFont(ofSize: 14, weight: .heavy), secondaryFont: .systemFont(ofSize: 13, weight: .bold), primaryColor: .orange, secondaryColor: .orange, lineColor: .orange.withAlphaComponent(0.9)))
+        lineChart.cartesianPlane.yAxisPosition = .none
+        lineChart.shouldScroll = false
+      
         let card = FLCard(chart: lineChart, style: .rounded)
         card.showAverage = false
         card.showLegend = false
@@ -93,8 +99,10 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             card.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             card.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            card.heightAnchor.constraint(equalToConstant: 290),
-            card.widthAnchor.constraint(equalToConstant: 300)
+            card.heightAnchor.constraint(equalToConstant: 200),
+            card.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            card.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+//            card.widthAnchor.constraint(equalToConstant: 300)
         ])
         
 //        view.addSubview(radarChart)
@@ -112,6 +120,18 @@ extension ViewController {
     
     var monthsData: [MultiPlotable] {
         [MultiPlotable(name: "jan", values: [30, 24, 53]),
+         MultiPlotable(name: "feb", values: [55, 44, 24]),
+         MultiPlotable(name: "mar", values: [70, 15, 44]),
+         MultiPlotable(name: "apr", values: [45, 68, 34]),
+         MultiPlotable(name: "may", values: [85, 46, 12]),
+         MultiPlotable(name: "jun", values: [46, 73, 32]),
+         MultiPlotable(name: "jul", values: [75, 46, 53]),
+         MultiPlotable(name: "aug", values: [10, 24, 24]),
+         MultiPlotable(name: "set", values: [60, 74, 44]),
+         MultiPlotable(name: "oct", values: [75, 72, 34]),
+         MultiPlotable(name: "nov", values: [85, 10, 15]),
+         MultiPlotable(name: "dec", values: [55, 66, 32]),
+         MultiPlotable(name: "jan", values: [30, 24, 53]),
          MultiPlotable(name: "feb", values: [55, 44, 24]),
          MultiPlotable(name: "mar", values: [70, 15, 44]),
          MultiPlotable(name: "apr", values: [45, 68, 34]),
