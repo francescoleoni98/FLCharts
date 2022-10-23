@@ -2,6 +2,7 @@
 * **FEATURE:** Added `averageLineOverlapsChart` on `FLChart` to let the chart overlaps the average line.
 * **FEATURE:** Added possibility to hide x and y axes.
 * **FEATURE:** Added `showDashedLines` in `FLChart`.
+* **FEATURE:** Added localization.
 * **IMPROVEMENT:** Added `uiColor(_:)` and `white(_:alpha:)` `FLColor` inits.
 * **FIX:** Orientation changes redraw.
 
