@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "FLCharts",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v11)
     ],
