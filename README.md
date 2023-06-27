@@ -67,8 +67,9 @@ Run Script > Input file window > add `$(SRCROOT)/Carthage/Build/iOS/FLCharts.fra
 Then, go to `$project_dir/Carthage/Build/iOS` and drag the folder `FLCharts.framework` into your `Xcode Project > Your Target > Frameworks, Libraries and Embedded Content`.
 
 ### Example
-Here you can find a guide about how to setup a bar chart using FLCharts: <br>
-https://medium.com/@leonifrancesco/set-up-a-basic-bar-chart-using-flcharts-swift-d2f615a10d0b
+Here you can find a guide about how to setup a bar chart using FLCharts:
+
+[FLCharts: Create Bar Chart easily](https://blog.leonifrancesco.com/articles/flcharts)
 
 ## Features <a name="features"></a>
 
@@ -164,6 +165,3 @@ Francesco Leoni | [@franceleonidev](https://twitter.com/franceleonidev) | leoni.
 ## License <a name="license"></a>
 
 FLCharts is available under the MIT license. See the LICENSE file for more info.
-
-### My Apps
-[Linkboard - Bookmarks Manager](https://apps.apple.com/app/linkboard-websites-manager/id1612805234)
